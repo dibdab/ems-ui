@@ -79,3 +79,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# to ignore the .css files node-sass-chokidar creates for builds
+src/**/*.css
