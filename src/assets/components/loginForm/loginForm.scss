@@ -1,0 +1,78 @@
+@import '../../styles/mixin.scss';
+
+.card-component {
+    @include elevation(2);
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    display: block;
+    .card-component-header {
+      padding: 16px;
+      height: 40px;
+      display: block;
+    }
+    .card-component-title {
+      font-size: 18px;
+      font-weight: bold;
+      display: block;
+    }
+    .card-component-subtitle {
+      font-weight: bold;
+      display: block;
+    }
+    .card-component-image {
+      max-width: 100%;
+    }
+    .card-component-description {
+      padding: 16px;
+      display: block;
+    }
+    .card-component-actions {
+      display: flex;
+      justify-content: space-evenly;
+      button {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+    .card-component-footer {
+      padding: 8px;
+      min-height: 40px;
+      display: block;
+    }
+  }
+  
+.login-container {
+    background: white;
+    border: 1px black solid;
+    width: 320px;
+    height: 400px;
+    position: relative;
+    margin: 40% auto 0;
+    
+    form {
+        width: 100%;
+        height: 100%;
+
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+
+            .input-container {
+                margin: auto;
+                flex-grow: 1;
+                text-align: center;
+
+                .login-header {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+
+
+

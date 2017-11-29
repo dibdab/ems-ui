@@ -1,0 +1,18 @@
+@import '../styles/mixin.scss';
+
+@mixin app-theme($theme) {
+    $primary-text-colour: map-get($theme, primary-text-colour);
+    $background-colour:  map-get($theme, background-colour)
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    background: #fafafa;
+    color: $primary-text-colour;
+    font-family: 'RobotoDraft', 'Roboto', sans-serif;
+    font-size: 14px;
+}

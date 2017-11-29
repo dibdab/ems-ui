@@ -1,0 +1,4 @@
+{
+    "editor.snippetSuggestions": "inline",
+    "jshint.options": {"esversion":6}
+}
