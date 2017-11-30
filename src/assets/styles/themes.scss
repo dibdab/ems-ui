@@ -1,4 +1,6 @@
 // Import components
+@import 'src/assets/components/app.scss';
+@import 'src/assets/components/shared/card/card.scss';
 
 // Function to pass colour to each theme
 @function theme-setter($primary-colour-dark, $primary-colour, $primary-colour-light, $primary-colour-text, $accent-colour, $primary-text-colour, $secondary-text-colour, $divider-colour, $background-colour) {
@@ -19,7 +21,8 @@ $light-theme: theme-setter( #00796B, #009688, #B2DFDB, #FFFFFF, #FFC107, #212121
 
 // Pass theme to each imported component
 @mixin theme-applier($theme) {
-    
+    @include app-theme($theme);
+    @include card-theme($theme);   
 }
 
 // Create class for theme that passes theme variable from import to applier

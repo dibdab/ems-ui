@@ -1,4 +1,4 @@
-@import '../../styles/mixins.scss';
+@import 'src/assets/styles/mixins.scss';
 
 .card-component {
     @include elevation(2);
@@ -42,18 +42,15 @@
     }
   }
   
-.login-container {
+.card-container {
     background: white;
     border: 1px black solid;
-    width: 320px;
-    height: 400px;
+    width: 520px;
+    height: 320px;
     position: relative;
     margin: 40% auto 0;
     
     form {
-        width: 100%;
-        height: 100%;
-
         .row {
             display: flex;
             justify-content: center;

@@ -1,0 +1,22 @@
+.form {
+    .form-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .form-input-container {
+            margin: auto;
+            flex-grow: 1;
+            text-align: center;
+
+            .form-title {
+                text-align: center;
+            }
+
+            .form-input {
+                
+            }
+        }
+    }
+}

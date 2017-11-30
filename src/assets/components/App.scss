@@ -1,4 +1,4 @@
-@import '../styles/mixins.scss';
+@import 'src/assets/styles/mixins.scss';
 
 @mixin app-theme($theme) {
     $primary-text-colour: map-get($theme, primary-text-colour);

@@ -1,0 +1,35 @@
+@import 'src/assets/styles/mixins.scss';
+
+@mixin card-theme($theme) {
+    $primary-text-colour: map-get($theme, primary-text-colour);
+    $secondary-text-colour:  map-get($theme, secondary-text-colour);
+
+    .card-component-title {
+        color: $primary-text-colour;
+      }
+      .card-component-subtitle {
+        color: $secondary-text-colour;
+      }
+}
+
+.card-component {
+    @include elevation(2);
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    display: block;
+    .card-component-header {
+      padding: 16px;
+      height: 40px;
+      display: block;
+      .card-component-title {
+        font-size: 18px;
+        font-weight: bold;
+        display: block;
+      }
+      .card-component-subtitle {
+        font-weight: bold;
+        display: block;
+      }
+    }
+  }

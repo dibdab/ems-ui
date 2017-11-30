@@ -1,14 +1,13 @@
 import * as React from 'react';
 import './App.css';
-import LoginForm from './loginForm/loginForm';
+import Login from './Login/Login';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <LoginForm/>
+        <Login />
       </div>
-      
     );
   }
 }
