@@ -1,0 +1,57 @@
+@import 'src/assets/styles/mixins.scss';
+@import 'src/assets/styles/variables.scss';
+@mixin topbar-theme ($theme) {
+  $primary-colour: map-get($theme, primary-colour);
+  $primary-text-colour: map-get($theme, primary-text-colour);
+  .topbar-wrapper {
+    background-color: mat-color($primary-colour);
+    color: $primary-text-colour;
+  }
+}
+
+@mixin isVisible ($isVisible) {
+  @if $isVisible {
+    visibility: visible;
+  } @else {
+    visibility: hidden;
+  }
+}
+
+$visisbility: false;
+
+.topbar-wrapper {
+  transition: $theme-change-transistion;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  display: flex;
+  margin: 0;
+  min-height: $topbar-height;
+  height: $topbar-height;
+  z-index: 2;
+  .topbar-search {
+    width: 100%;
+    height: 100%;
+    font-size: $topbar-height;
+    border: 0;
+    padding: 0 10px;
+
+    &:focus + .topbar-search-dropdown {
+      $visisbility: true;
+      visibility: visible;
+    }
+  }
+  .topbar-search-dropdown {
+    &:focus {
+      @include isVisible($visisbility);
+    }
+
+    position: fixed;
+    font-size: $topbar-height;
+    top: $topbar-height;
+    min-height: $topbar-height;
+    height: $topbar-height;
+    width: 100%;
+    transition: visibility 200ms $mat-anim-curve;
+  }
+}

@@ -1,4 +1,10 @@
 {
     "editor.snippetSuggestions": "inline",
-    "jshint.options": {"esversion":6}
+    "jshint.options": {
+        "esversion": 6
+    },
+    "cSpell.words": [
+        "Searchlist",
+        "Topbar"
+    ]
 }

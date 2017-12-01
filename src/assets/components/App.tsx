@@ -1,17 +1,25 @@
 import * as React from 'react';
-import { BrowserRouter } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import './App.css';
 import Login from './Login/Login';
+import Dashboard from './Dashboard/Dashboard';
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Login />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Redirect exact={true} from="/" to="/login" />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route component={NoRoute} />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+function NoRoute(): JSX.Element {
+  return <div>404 - Route not found</div>;
+}
