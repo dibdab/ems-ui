@@ -7,7 +7,7 @@ export { ICardProps } from './ICardProps';
 
 export default function CardComponent (props: {children?: {}}): JSX.Element  {
     return(
-        <div className="card-component">
+        <div className="card-component elevation-2">
             {props.children}
         </div>
     );

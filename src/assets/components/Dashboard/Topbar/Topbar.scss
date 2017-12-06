@@ -4,20 +4,19 @@
   $primary-colour: map-get($theme, primary-colour);
   $primary-text-colour: map-get($theme, primary-text-colour);
   .topbar-wrapper {
-    background-color: mat-color($primary-colour);
+    background-color: $primary-colour;
+    color: $primary-text-colour;
+  }
+
+  .topbar-header {
     color: $primary-text-colour;
   }
 }
-
-@mixin isVisible ($isVisible) {
-  @if $isVisible {
-    visibility: visible;
-  } @else {
-    visibility: hidden;
-  }
+.topbar-header {
+  width: $sidebar-width;
+  text-align: center;
+  margin: auto 0;
 }
-
-$visisbility: false;
 
 .topbar-wrapper {
   transition: $theme-change-transistion;
@@ -29,29 +28,4 @@ $visisbility: false;
   min-height: $topbar-height;
   height: $topbar-height;
   z-index: 2;
-  .topbar-search {
-    width: 100%;
-    height: 100%;
-    font-size: $topbar-height;
-    border: 0;
-    padding: 0 10px;
-
-    &:focus + .topbar-search-dropdown {
-      $visisbility: true;
-      visibility: visible;
-    }
-  }
-  .topbar-search-dropdown {
-    &:focus {
-      @include isVisible($visisbility);
-    }
-
-    position: fixed;
-    font-size: $topbar-height;
-    top: $topbar-height;
-    min-height: $topbar-height;
-    height: $topbar-height;
-    width: 100%;
-    transition: visibility 200ms $mat-anim-curve;
-  }
 }

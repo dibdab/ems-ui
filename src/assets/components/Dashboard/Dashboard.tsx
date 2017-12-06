@@ -3,12 +3,13 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Topbar from './Topbar/Topbar';
 import Sidebar from './Sidebar/Sidebar';
+import { DashboardProps } from './DashboardProps';
 
-export default class Dashboard extends React.Component {
-  render() {
+export default function Dashboard ({currentDatabase, databaseArray, onSetCurrentDatabase}: DashboardProps) {
+  {
     return (
       <div>
-        <Topbar />
+        <Topbar databaseArray={databaseArray}/>
         <Sidebar />
       </div>
     );

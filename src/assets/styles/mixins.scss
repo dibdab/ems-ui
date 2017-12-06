@@ -1,4 +1,3 @@
-@import './elevation-mixin.scss';
 
 @mixin breakpoint-xs-media {
     @media (max-width: #{$breakpoint-xs}) {

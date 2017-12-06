@@ -8,7 +8,7 @@ import Dashboard from './Dashboard/Dashboard';
 export default class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="light-theme">
         <Switch>
           <Route path="/login" component={Login} />
           <Redirect exact={true} from="/" to="/login" />

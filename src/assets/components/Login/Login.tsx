@@ -21,7 +21,7 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div className="card-container">
+      <div className="card-container elevation-2">
         <CardComponent>
           <Form formAction={'submit'}>
             <FormRow>

@@ -1,21 +1,59 @@
-@import 'src/assets/styles/mixins.scss';
+@import "src/assets/styles/elevation-mixin.scss";
+@import "src/assets/styles/mixins.scss";
 
 @mixin app-theme($theme) {
-    $primary-text-colour: map-get($theme, primary-text-colour);
-    $background-colour:  map-get($theme, background-colour);
+  $primary-text-colour: map-get($theme, primary-text-colour);
+  $background-colour: map-get($theme, background-colour);
+  $background-colour-dark: map-get($theme, background-colour-dark);
+  $accent-colour: map-get($theme, accent-colour);
 
-    body {
-        background: $background-colour;
-        color: $primary-text-colour;
+  body {
+    background: $background-colour;
+    color: $primary-text-colour;
+  }
+
+  .button {
+    &:hover {
+      color: $accent-colour;
+      background-color: $background-colour-dark;
     }
+    &:active {
+      background-color: $background-colour-dark;
+    }
+  }
 }
 
 body {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    margin: 0;
-    padding: 0;
-    font-family: 'RobotoDraft', 'Roboto', sans-serif;
-    font-size: 14px;
-};
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  font-family: "RobotoDraft", "Roboto", sans-serif;
+  font-size: 14px;
+}
+
+.button {
+  box-sizing: border-box;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0;
+  min-width: 88px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 2px;
+  &:hover {
+  }
+}

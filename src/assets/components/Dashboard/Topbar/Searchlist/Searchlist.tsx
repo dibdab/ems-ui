@@ -1,13 +1,22 @@
 import * as React from 'react';
 
+import './Searchlist.css';
 import { ISearchlistProps } from './ISearlistProps';
 
-export default function SearchList(props: ISearchlistProps): JSX.Element {
-  const names = props.databaseNames;
+export default function SearchList({
+  databaseNames
+}: ISearchlistProps): JSX.Element {
+  const names = ['DB1', 'DB2', 'DB3'];
   const nameslist = names.map((name, index) => (
-    <button tabIndex={(index + 2) / -1} key={name} value={name}>
+    <option key={name} value={name}>
       {name}
-    </button> 
+    </option>
   ));
-  return <div>{nameslist}</div>;
+
+  return (
+    <div className="topbar-search">
+      <input list="databases" className="datalist" placeholder="Enter Database Name" />
+      <datalist id="databases">{nameslist}</datalist>
+    </div>
+  );
 }

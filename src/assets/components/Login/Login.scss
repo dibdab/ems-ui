@@ -1,7 +1,6 @@
 @import 'src/assets/styles/mixins.scss';
 
 .card-component {
-    @include elevation(2);
     width: 100%;
     height: 100%;
     border-radius: 2px;
