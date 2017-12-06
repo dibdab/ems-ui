@@ -2,6 +2,8 @@
 $fa-font-path: '~font-awesome/fonts';
 $topbar-height: 69px;
 $sidebar-width: 200px;
+$document-view-height: calc(100% - #{$topbar-height});
+$document-view-width: calc(100% - #{$sidebar-width});
 $breakpoint-xl: 1340px;
 $breakpoint-l: 960px;
 $breakpoint-m: 720px;

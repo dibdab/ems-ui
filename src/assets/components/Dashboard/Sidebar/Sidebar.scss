@@ -1,20 +1,20 @@
-@import "src/assets/styles/variables.scss";
-@import "src/assets/styles/mixins.scss";
+@import 'src/assets/styles/variables.scss';
+@import 'src/assets/styles/mixins.scss';
 @mixin sidebar-theme ($theme) {
   $background-colour: map-get($theme, background-colour);
   $primary-colour: map-get($theme, primary-colour);
   $accent-colour: map-get($theme, accent-colour);
-  $primary-text-colour: map-get($theme, primary-text-colour);
+  $text-colour-dark: map-get($theme, text-colour-dark);
   $divider-colour: map-get($theme, divider-colour);
   $primary-colour-dark: map-get($theme, primary-colour-dark);
   .sidebar {
     background-color: $background-colour;
-    color: $primary-text-colour;
-    border-right: 1px solid $divider-colour;
+    color: $text-colour-dark;
+    border-right: 0.5px solid $divider-colour;
     nav {
       .active {
         background-color: $primary-colour-dark;
-        color: $primary-text-colour;
+        color: $text-colour-dark;
         font-weight: bold;
       }
     }
@@ -30,17 +30,20 @@
   left: 0;
   position: fixed;
   z-index: 4;
+  overflow-y: auto;
+  overflow-x: none;
   nav {
     height: 80%;
-    margin: 8px 16px;
+    margin: 8px 16px 8px 0;
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     text-transform: uppercase;
     align-items: flex-start;
     position: relative;
     a {
       margin: 8px 0;
       text-align: left;
+      border-radius: 0 2px 2px 0;
     }
   }
 }

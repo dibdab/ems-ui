@@ -1,11 +1,11 @@
 @import 'src/assets/styles/mixins.scss';
 
 @mixin card-theme($theme) {
-    $primary-text-colour: map-get($theme, primary-text-colour);
+    $text-colour-dark: map-get($theme, text-colour-dark);
     $secondary-text-colour:  map-get($theme, secondary-text-colour);
 
     .card-component-title {
-        color: $primary-text-colour;
+        color: $text-colour-dark;
       }
       .card-component-subtitle {
         color: $secondary-text-colour;
