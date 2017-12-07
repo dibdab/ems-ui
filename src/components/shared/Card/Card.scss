@@ -1,4 +1,4 @@
-@import 'src/assets/styles/mixins.scss';
+@import 'src/styles/mixins.scss';
 
 @mixin card-theme($theme) {
     $text-colour-dark: map-get($theme, text-colour-dark);

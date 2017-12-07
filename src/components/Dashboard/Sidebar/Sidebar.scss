@@ -1,5 +1,5 @@
-@import 'src/assets/styles/variables.scss';
-@import 'src/assets/styles/mixins.scss';
+@import 'src/styles/variables.scss';
+@import 'src/styles/mixins.scss';
 @mixin sidebar-theme ($theme) {
   $background-colour: map-get($theme, background-colour);
   $primary-colour: map-get($theme, primary-colour);

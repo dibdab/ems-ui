@@ -1,5 +1,5 @@
-@import 'src/assets/styles/elevation-mixin.scss';
-@import 'src/assets/styles/mixins.scss';
+@import 'src/styles/elevation-mixin.scss';
+@import 'src/styles/mixins.scss';
 
 @mixin app-theme($theme) {
   $text-colour-dark: map-get($theme, text-colour-dark);

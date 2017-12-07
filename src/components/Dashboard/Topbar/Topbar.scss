@@ -1,5 +1,5 @@
-@import 'src/assets/styles/mixins.scss';
-@import 'src/assets/styles/variables.scss';
+@import 'src/styles/mixins.scss';
+@import 'src/styles/variables.scss';
 @mixin topbar-theme ($theme) {
   $primary-colour: map-get($theme, primary-colour);
   $text-colour-dark: map-get($theme, text-colour-dark);

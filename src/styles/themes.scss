@@ -1,8 +1,8 @@
 // Import components
-@import "src/assets/components/App.scss";
-@import "src/assets/components/shared/Card/Card.scss";
-@import "src/assets/components/Dashboard/Topbar/Topbar.scss";
-@import "src/assets/components/Dashboard/Sidebar/Sidebar.scss";
+@import "src/components/App.scss";
+@import "src/components/shared/Card/Card.scss";
+@import "src/components/Dashboard/Topbar/Topbar.scss";
+@import "src/components/Dashboard/Sidebar/Sidebar.scss";
 
 // Function to pass colour to each theme
 @function theme-setter($primary-colour-dark, $primary-colour, $primary-colour-light, $text-colour-light, $accent-colour, $text-colour-dark, $text-colour-secondary, $divider-colour, $background-colour-light, $background-colour, $background-colour-dark) {
