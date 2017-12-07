@@ -10,7 +10,7 @@ export default function Topbar({ databaseArray }: ITopbarProps) {
       <div className="topbar-header">
         <h1>ems-ui</h1>
       </div>
-      <Searchlist databaseNames={databaseArray} />
+      {/* <Searchlist databaseNames={databaseArray} /> */}
     </div>
   );
 }
