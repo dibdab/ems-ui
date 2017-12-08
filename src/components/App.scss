@@ -18,23 +18,17 @@
     &:hover {
       color: $accent-colour;
       background-color: $background-colour-dark;
+      font-weight: bold;
     }
     &:active {
       background-color: $background-colour-dark;
+      font-weight: bold;
     }
   }
 
   .button-group {
     .button {
       background-color: $background-colour-light;
-
-      &:hover {
-        color: $accent-colour;
-        background-color: $background-colour;
-      }
-      &:active {
-        background-color: $background-colour;
-      }
     }
 
     .button:not(:last-child) {

@@ -28,5 +28,5 @@ export default function Dashboard({
 }
 
 function NoTableRoute(): JSX.Element {
-  return <div>Select a database to view a table</div>;
+  return <div>Select a event type to view events</div>;
 }

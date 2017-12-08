@@ -3,7 +3,7 @@ import * as React from 'react';
 import './Sidebar.css';
 
 export default function Sidebar(): JSX.Element {
-  const tables = ['DB1-table1', 'DB1-table2', 'DB1-table3'];
+  const tables = ['eventtype1', 'eventtype2', 'eventtype3'];
   const tablelist = tables.map((table, index) => (
     <a key={table} className="button">
       {table}
@@ -11,6 +11,7 @@ export default function Sidebar(): JSX.Element {
   ));
   return (
     <div className="sidebar">
+      <input placeholder="Search Events"  />
       <nav >
         {tablelist}
       </nav>

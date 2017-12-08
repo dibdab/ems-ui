@@ -4,24 +4,24 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import App from './assets/components/App';
+import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-import { database } from './reducers/';
-import { StoreState } from './types/';
+// import { database } from './reducers/';
+// import { State } from './types/';
 
-const store = createStore<StoreState>(database, {
-  databaseArray: ['DB1', 'DB2', 'DB3'],
-  currentDatabase: ''
-});
+// const store = createStore<State>(database, {
+//   databaseArray: ['DB1', 'DB2', 'DB3'],
+//   currentDatabase: ''
+// });
 
 ReactDOM.render(
   <BrowserRouter>
-    <Provider store={store}>
+    {/* <Provider store={store}> */}
       <div className="light-theme">
         <App />
       </div>
-    </Provider>
+    {/* </Provider> */}
   </BrowserRouter>,
   document.getElementById('root')
 );

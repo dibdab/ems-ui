@@ -21,7 +21,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts-ts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-scripts-ts build",
+    "build-js": "react-scripts-ts --strict build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
@@ -31,6 +31,7 @@
     "@types/node": "^8.0.53",
     "@types/react": "^16.0.25",
     "@types/react-dom": "^16.0.3",
+    "@types/react-redux": "^5.0.14",
     "babel-eslint": "^8.0.2",
     "eslint": "^4.12.1",
     "eslint-config-react-app": "^2.0.1",
