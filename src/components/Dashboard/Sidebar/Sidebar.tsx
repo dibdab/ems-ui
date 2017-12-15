@@ -1,20 +1,19 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import './Sidebar.css';
 
 export default function Sidebar(): JSX.Element {
-  const tables = ['eventtype1', 'eventtype2', 'eventtype3'];
+  const tables = ['Subscribers'];
   const tablelist = tables.map((table, index) => (
-    <a key={table} className="button">
+    <Link to="/subscribers" key={table} className="button button-simplelink">
       {table}
-    </a>
+    </Link>
   ));
   return (
     <div className="sidebar">
-      <input placeholder="Search Events"  />
-      <nav >
-        {tablelist}
-      </nav>
+      <input placeholder="Search Events" />
+      <nav>{tablelist}</nav>
     </div>
   );
 }

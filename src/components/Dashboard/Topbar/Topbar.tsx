@@ -4,7 +4,7 @@ import './Topbar.css';
 import { ITopbarProps } from './ITopbarProps';
 import Searchlist from './Searchlist/Searchlist';
 
-export default function Topbar({ databaseArray }: ITopbarProps) {
+export default function Topbar() {
   return (
     <div className="topbar-wrapper elevation-4">
       <div className="topbar-header">

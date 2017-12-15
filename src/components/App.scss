@@ -1,6 +1,5 @@
 @import 'src/styles/elevation-mixin.scss';
 @import 'src/styles/mixins.scss';
-
 @mixin app-theme($theme) {
   $text-colour-dark: map-get($theme, text-colour-dark);
   $background-colour: map-get($theme, background-colour);
@@ -8,13 +7,12 @@
   $background-colour-light: map-get($theme, background-colour-light);
   $accent-colour: map-get($theme, accent-colour);
   $divider-colour: map-get($theme, divider-colour);
-
-  .light-theme  {
+  .light-theme {
     background: $background-colour;
     color: $text-colour-dark;
   }
-  
   .button {
+    color: $text-colour-dark;
     &:hover {
       color: $accent-colour;
       background-color: $background-colour-dark;
@@ -25,16 +23,13 @@
       font-weight: bold;
     }
   }
-
   .button-group {
     .button {
       background-color: $background-colour-light;
     }
-
     .button:not(:last-child) {
       border-right: 1px solid $divider-colour;
     }
-    
   }
 }
 
@@ -46,7 +41,7 @@
   top: 0;
   margin: 0;
   padding: 0;
-  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  font-family: 'Roboto', 'Noto Sans', sans-serif;
   font-size: 14px;
 }
 
@@ -68,6 +63,7 @@
   line-height: 36px;
   padding: 0 16px;
   border-radius: 2px;
+  font-size: 16px;
 }
 
 .button-group {
@@ -78,11 +74,9 @@
     float: left;
     border-radius: 0;
   }
-
   .button:first-child {
     border-radius: 2px 0 0 2px;
   }
-
   .button:last-child {
     border-radius: 0 2px 2px 0;
   }

@@ -6,23 +6,17 @@ import { Provider } from 'react-redux';
 
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
+import store from './store';
 import './index.css';
-// import { database } from './reducers/';
-// import { State } from './types/';
-
-// const store = createStore<State>(database, {
-//   databaseArray: ['DB1', 'DB2', 'DB3'],
-//   currentDatabase: ''
-// });
 
 ReactDOM.render(
   <BrowserRouter>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       <div className="light-theme">
         <App />
       </div>
-    {/* </Provider> */}
+    </Provider>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 registerServiceWorker();

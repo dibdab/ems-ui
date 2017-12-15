@@ -9,7 +9,7 @@ import Form, {
   FormInputContainer,
   FormRow,
   FormTitle,
-  IFormProps
+  IFormProps,
 } from '../shared/Forms/Form';
 
 export default class Login extends React.Component {

@@ -2,10 +2,16 @@
 @import 'src/styles/variables.scss';
 
 .document-viewer {
-    position: fixed;
-    padding: 16px;
-    height: $document-view-height;
-    width: $document-view-width;
-    top: $topbar-height;
-    left: $sidebar-width;
+  position: fixed;
+  padding: 16px;
+  height: $document-view-height;
+  width: $document-view-width;
+  top: $topbar-height;
+  left: $sidebar-width;
+}
+
+.row {
+  margin: 24px;
+  border: 1px solid black;
+  font-size: 24px;
 }
