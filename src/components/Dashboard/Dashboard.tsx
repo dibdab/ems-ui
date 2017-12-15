@@ -7,16 +7,13 @@ import Topbar from './Topbar/Topbar';
 import Sidebar from './Sidebar/Sidebar';
 import TableView from './TableView/TableView';
 import { IDashboardProps } from './IDashboardProps';
-import { getAllSubscribers } from 'services/subscribers';
-import { IRootState } from 'redux_/index';
-import { actionCreators } from 'redux_/subscribers/index';
-import store from 'store';
+import { SubscriberService } from 'services';
+import { IRootState } from 'redux_';
+import { SubscriberActionCreators } from 'redux_';
 
 class Dashboard extends React.Component<IDashboardProps, IRootState> {
   componentDidMount() {
-    getAllSubscribers();
-    console.log('1');
-    store.dispatch(actionCreators.subscribersHasErrored(true));
+    SubscriberService.getAll;
   }
 
   render() {
@@ -55,5 +52,5 @@ const mapStateToProps = (state: IRootState) => {
 };
 
 export default connect(mapStateToProps, {
-  getAllSubscribers: actionCreators.subscribersFetchSuccess,
+  getAllSubscribers: SubscriberActionCreators.subscribersFetchSuccess,
 })(Dashboard);

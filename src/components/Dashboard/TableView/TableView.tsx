@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import './TableView.css';
 import { ITableViewProps } from './ITableViewProps';
 import SubscribersTableRow from './SubscribersTableRow/SubscribersTableRow';
+import TestTableRow from './TestTableRow/TestTableRow';
 
 export default function TableView({  }: ITableViewProps): JSX.Element {
   {
@@ -15,7 +16,11 @@ export default function TableView({  }: ITableViewProps): JSX.Element {
           <button className="button">Delete</button>
         </div>
         <Switch>
-          <Route path="/dashboard/:tableName" component={SubscribersTableRow} />
+          <Route
+            path="/dashboard/subscribers"
+            component={SubscribersTableRow}
+          />
+          <Route path="/dashboard/test" component={TestTableRow} />
         </Switch>
       </div>
     );

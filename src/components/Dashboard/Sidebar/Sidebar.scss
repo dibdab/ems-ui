@@ -2,6 +2,7 @@
 @import 'src/styles/mixins.scss';
 @mixin sidebar-theme ($theme) {
   $background-colour: map-get($theme, background-colour);
+  $background-colour-dark: map-get($theme, background-colour-dark);
   $primary-colour: map-get($theme, primary-colour);
   $accent-colour: map-get($theme, accent-colour);
   $text-colour-dark: map-get($theme, text-colour-dark);
@@ -12,10 +13,11 @@
     color: $text-colour-dark;
     border-right: 0.5px solid $divider-colour;
     nav {
-      .active {
-        background-color: $primary-colour-dark;
-        color: $text-colour-dark;
-        font-weight: bold;
+      a {
+        &.active {
+          background-color: $background-colour-dark;
+          color: $text-colour-dark;
+        }
       }
     }
   }
@@ -45,18 +47,4 @@
       border-radius: 0 2px 2px 0;
     }
   }
-  input {
-    margin: 8px 0 8px 16px;
-    font-size: 14px;
-    border-radius: 2px;
-    height: 20px;
-    width: 160px;
-  }
-}
-
-.active {
-  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.12) inset;
-  transform: translate3d(0, 0, 0);
-  transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }

@@ -1,9 +1,9 @@
 import config from 'config';
 import store from 'store';
-import { actionCreators } from 'redux_/subscribers/index';
+import { SubscriberActionCreators } from 'redux_';
 
-export function getAllSubscribers() {
-  store.dispatch(actionCreators.subscribersIsLoading(true));
+function getAll(): void {
+  store.dispatch(SubscriberActionCreators.subscribersIsLoading(true));
   const headers = new Headers();
   headers.append(
     'Ocp-Apim-Subscription-Key',
@@ -17,7 +17,19 @@ export function getAllSubscribers() {
     .then(response => response.json())
     .then(subscribers => {
       console.log(`fetchCallResult`, subscribers);
-      store.dispatch(actionCreators.subscribersFetchSuccess(subscribers));
+      store.dispatch(
+        SubscriberActionCreators.subscribersFetchSuccess(subscribers),
+      );
     })
-    .catch(() => store.dispatch(actionCreators.subscribersHasErrored(true)));
+    .catch(() =>
+      store.dispatch(SubscriberActionCreators.subscribersHasErrored(true)),
+    );
 }
+
+interface ISubscriberService {
+  getAll: void;
+}
+
+export const SubscriberService: ISubscriberService = {
+  getAll: getAll(),
+};

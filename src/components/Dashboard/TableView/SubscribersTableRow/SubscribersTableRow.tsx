@@ -9,6 +9,6 @@ export default class SubscribersTableRow extends React.Component<
   IRootState
 > {
   render() {
-    return <div />;
+    return <div>subscribers</div>;
   }
 }

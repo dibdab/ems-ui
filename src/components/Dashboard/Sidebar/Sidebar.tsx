@@ -1,18 +1,22 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './Sidebar.css';
 
 export default function Sidebar(): JSX.Element {
-  const tables = ['Subscribers'];
+  const tables = [
+    { sidebarName: 'Subscribers', urlName: 'subscribers' },
+    { sidebarName: 'Test', urlName: 'test' },
+  ];
   const tablelist = tables.map((table, index) => (
-    <Link
-      to="/dashboard/subscribers"
-      key={table}
+    <NavLink
+      to={`/dashboard/${table.urlName}`}
+      key={table.urlName}
       className="button button-simplelink"
+      activeClassName="active"
     >
-      {table}
-    </Link>
+      {table.sidebarName}
+    </NavLink>
   ));
   return (
     <div className="sidebar">
