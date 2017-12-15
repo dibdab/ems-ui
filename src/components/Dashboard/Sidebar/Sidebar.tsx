@@ -6,7 +6,11 @@ import './Sidebar.css';
 export default function Sidebar(): JSX.Element {
   const tables = ['Subscribers'];
   const tablelist = tables.map((table, index) => (
-    <Link to="/subscribers" key={table} className="button button-simplelink">
+    <Link
+      to="/dashboard/subscribers"
+      key={table}
+      className="button button-simplelink"
+    >
       {table}
     </Link>
   ));

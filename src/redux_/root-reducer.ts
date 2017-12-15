@@ -11,7 +11,6 @@ export interface IRootState extends IStoreEnhancerState {
   subscribers: SubscriberState;
 }
 
-import { RootAction } from './';
 export const rootReducer = combineReducers<IRootState>({
   subscribers,
 });

@@ -1,9 +1,6 @@
-import { Dispatch } from 'redux';
-import config from '../config';
-import { Subscriber } from '../types/Subscriber';
-import { IRootState } from '../redux/';
-import store from '../store';
-import { actionCreators } from '../redux/subscribers/index';
+import config from 'config';
+import store from 'store';
+import { actionCreators } from 'redux_/subscribers/index';
 
 export function getAllSubscribers() {
   store.dispatch(actionCreators.subscribersIsLoading(true));
@@ -12,7 +9,7 @@ export function getAllSubscribers() {
     'Ocp-Apim-Subscription-Key',
     'c91b8409ed674a5eaf84ca423cd072c3',
   );
-  fetch('https://canecsamapm01test.azure-api.net/ems/subscribers', {
+  fetch(config.SUBSCRIBER_API_URL, {
     method: 'POST',
     headers: headers,
     body: '',

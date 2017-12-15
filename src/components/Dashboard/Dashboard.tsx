@@ -2,16 +2,15 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Subscriber } from '../../types/Subscriber';
-
 import './Dashboard.css';
 import Topbar from './Topbar/Topbar';
 import Sidebar from './Sidebar/Sidebar';
+import TableView from './TableView/TableView';
 import { IDashboardProps } from './IDashboardProps';
-import { getAllSubscribers } from '../../services/subscribers';
-import { IRootState } from '../../redux/index';
-import { actionCreators } from '../../redux/subscribers/index';
-import store from '../../store';
+import { getAllSubscribers } from 'services/subscribers';
+import { IRootState } from 'redux_/index';
+import { actionCreators } from 'redux_/subscribers/index';
+import store from 'store';
 
 class Dashboard extends React.Component<IDashboardProps, IRootState> {
   componentDidMount() {
@@ -22,11 +21,11 @@ class Dashboard extends React.Component<IDashboardProps, IRootState> {
 
   render() {
     console.log(this.props.subscribers);
-    const subscribers = this.props.subscribers.map(subscriber => (
-      <div className="row" key={subscriber._id.counter}>
-        {subscriber.event}
-      </div>
-    ));
+    // const subscribers = this.props.subscribers.map(subscriber => (
+    //   <div className="row" key={subscriber._id.counter}>
+    //     {subscriber.event}
+    //   </div>
+    // ));
 
     return (
       <div>
@@ -34,10 +33,9 @@ class Dashboard extends React.Component<IDashboardProps, IRootState> {
         <Sidebar />
         <div className="document-viewer">
           <Switch>
-            <Route path="dashboard/:tableName" component={NoTableRoute} />
+            <Route path="/dashboard/:tableName" component={TableView} />
             <Route component={NoTableRoute} />
           </Switch>
-          <div>{subscribers}</div>
         </div>
       </div>
     );

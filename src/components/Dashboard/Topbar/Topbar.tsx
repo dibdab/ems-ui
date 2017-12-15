@@ -1,8 +1,6 @@
 import * as React from 'react';
 
 import './Topbar.css';
-import { ITopbarProps } from './ITopbarProps';
-import Searchlist from './Searchlist/Searchlist';
 
 export default function Topbar() {
   return (

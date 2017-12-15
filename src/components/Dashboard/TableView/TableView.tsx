@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import './TableView.css';
-import { TableViewProps } from './ITableViewProps';
+import { ITableViewProps } from './ITableViewProps';
+import SubscribersTableRow from './SubscribersTableRow/SubscribersTableRow';
 
-export default function TableView({  }: TableViewProps): JSX.Element {
+export default function TableView({  }: ITableViewProps): JSX.Element {
   {
     return (
       <div>
@@ -13,6 +14,9 @@ export default function TableView({  }: TableViewProps): JSX.Element {
           <button className="button">Add</button>
           <button className="button">Delete</button>
         </div>
+        <Switch>
+          <Route path="/dashboard/:tableName" component={SubscribersTableRow} />
+        </Switch>
       </div>
     );
   }
