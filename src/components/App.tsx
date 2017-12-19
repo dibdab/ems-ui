@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
+import './App.css';
 import '../styles/themes.css';
 import Login from './Login/Login';
 import Dashboard from './Dashboard/Dashboard';

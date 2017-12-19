@@ -9,6 +9,12 @@ export default class TestTableRow extends React.Component<
   IRootState
 > {
   render() {
-    return <div>test</div>;
+    return (
+      <tbody>
+        <tr>
+          <td>test</td>
+        </tr>
+      </tbody>
+    );
   }
 }

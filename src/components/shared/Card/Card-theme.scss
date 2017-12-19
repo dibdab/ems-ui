@@ -1,0 +1,11 @@
+@mixin card-theme($theme) {
+  $text-colour-dark: map-get($theme, text-colour-dark);
+  $secondary-text-colour: map-get($theme, secondary-text-colour);
+
+  .card-component-title {
+    color: $text-colour-dark;
+  }
+  .card-component-subtitle {
+    color: $secondary-text-colour;
+  }
+}

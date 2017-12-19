@@ -1,35 +1,5 @@
 @import 'src/styles/elevation-mixin.scss';
 @import 'src/styles/mixins.scss';
-@mixin app-theme($theme) {
-  $text-colour-dark: map-get($theme, text-colour-dark);
-  $background-colour: map-get($theme, background-colour);
-  $background-colour-dark: map-get($theme, background-colour-dark);
-  $background-colour-light: map-get($theme, background-colour-light);
-  $accent-colour: map-get($theme, accent-colour);
-  $divider-colour: map-get($theme, divider-colour);
-  .light-theme {
-    background: $background-colour;
-    color: $text-colour-dark;
-  }
-  .button {
-    color: $text-colour-dark;
-    &:hover {
-      color: $accent-colour;
-      background-color: $background-colour-dark;
-    }
-    &.active {
-      background-color: $background-colour-dark;
-    }
-  }
-  .button-group {
-    .button {
-      background-color: $background-colour-light;
-    }
-    .button:not(:last-child) {
-      border-right: 1px solid $divider-colour;
-    }
-  }
-}
 
 .light-theme {
   height: 100%;
