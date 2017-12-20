@@ -1,40 +1,49 @@
 interface filter {
-    name: string,
-    value: string | boolean | filterArray
+  name: string;
+  value: string | boolean | filterArray;
 }
 
 interface filterArray {
-    [key: string]: string[]
+  [key: string]: string[];
 }
 
-interface REST {
-    host: string,
-    port: string,
-    path: string,
-    method: string
+interface connector {
+  host: string;
+  port: string;
 }
 
-interface JMS{
-    host: string,
-    port: string,
-    queue: string
+interface REST extends connector {
+  path: string;
+  method: string;
+}
+
+interface JMS extends connector {
+  queue: string;
+}
+
+export interface RESTConnector {
+  REST: REST;
+}
+
+export interface JMSConnector {
+  JMS: JMS;
 }
 
 export interface Subscriber {
-    _id: {
-        timestamp: number,
-        machineIdentifier: number,
-        processIdentifier: number,
-        counter: number,
-        time: number,
-        date: number,
-        timeSecond: number
-    },
-    event: string,
-    listenerSystem: string,
-    options: {
-        payloadcontent: string[]
-    },
-    filter: filter[],
-    connector: REST | JMS
+  _id: {
+    timestamp: number;
+    machineIdentifier: number;
+    processIdentifier: number;
+    counter: number;
+    time: number;
+    date: number;
+    timeSecond: number;
+  };
+  event: string;
+  listenerSystem: string;
+  options: {
+    payloadcontent: string[];
+  };
+  filter: filter[];
+  connector: RESTConnector | JMSConnector;
 }

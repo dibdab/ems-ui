@@ -1,6 +1,7 @@
 import config from 'config';
 import store from 'store';
 import { SubscriberActionCreators } from 'redux_';
+import { Subscriber } from 'types';
 
 function getAll(): void {
   store.dispatch(SubscriberActionCreators.subscribersIsLoading(true));
@@ -15,8 +16,7 @@ function getAll(): void {
     body: '',
   })
     .then(response => response.json())
-    .then(subscribers => {
-      console.log(`fetchCallResult`, subscribers);
+    .then((subscribers: Subscriber[]) => {
       store.dispatch(
         SubscriberActionCreators.subscribersFetchSuccess(subscribers),
       );
@@ -27,9 +27,9 @@ function getAll(): void {
 }
 
 interface ISubscriberService {
-  getAll: void;
+  getAll(): void;
 }
 
 export const SubscriberService: ISubscriberService = {
-  getAll: getAll(),
+  getAll: () => getAll(),
 };
