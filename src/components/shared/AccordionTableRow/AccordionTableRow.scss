@@ -1,0 +1,17 @@
+@import 'styles/variables.scss';
+
+tr.accordionTableRow {
+  width: 100%;
+  transition: height 400ms $mat-anim-curve,
+    border-bottom 400ms $mat-anim-curve 400ms;
+  height: 0;
+  &.hidden {
+    border-bottom: transparent !important;
+    td.accordionTd {
+      padding: 0;
+    }
+  }
+  &.visible {
+    height: 100px;
+  }
+}

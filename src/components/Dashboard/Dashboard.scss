@@ -1,11 +1,13 @@
 @import 'src/styles/mixins.scss';
 @import 'src/styles/variables.scss';
 
+$doc-viwer-padding: 16px;
+
 .document-viewer {
   position: fixed;
-  padding: 16px;
+  padding: $doc-viwer-padding;
   height: $document-view-height;
-  width: $document-view-width;
+  width: calc(#{$document-view-width} - (#{$doc-viwer-padding}*2));
   top: $topbar-height;
   left: $sidebar-width;
 }

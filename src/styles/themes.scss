@@ -1,10 +1,9 @@
 // Import components
-@import 'src/components/App-theme.scss';
-@import 'src/components/shared/Card/Card-theme.scss';
-@import 'src/components/Dashboard/Topbar/Topbar-theme.scss';
-@import 'src/components/Dashboard/Sidebar/Sidebar-theme.scss';
-
-// Function to pass colour to each theme
+@import 'src/components/App.scss';
+@import 'src/components/shared/Card/Card.scss';
+@import 'src/components/Dashboard/Topbar/Topbar.scss';
+@import 'src/components/Dashboard/Sidebar/Sidebar.scss';
+@import 'src/components/Dashboard/Tableview/TableView.scss';
 @function theme-setter($primary-colour-dark, $primary-colour, $primary-colour-light, $text-colour-light, $accent-colour, $text-colour-dark, $text-colour-secondary, $divider-colour, $background-colour-light, $background-colour, $background-colour-dark) {
   @return (primary-colour-dark: $primary-colour-dark,
     primary-colour:           $primary-colour,
@@ -12,7 +11,7 @@
     text-colour-light:        $text-colour-light,
     accent-colour:            $accent-colour,
     text-colour-dark:         $text-colour-dark,
-    secondary-text-colour:    $text-colour-secondary,
+    text-colour-secondary:    $text-colour-secondary,
     divider-colour:           $divider-colour,
     background-colour-light:  $background-colour-light,
     background-colour:        $background-colour,
@@ -37,6 +36,7 @@ $light-theme: theme-setter(
   @include card-theme($theme);
   @include topbar-theme($theme);
   @include sidebar-theme($theme);
+  @include tableView-theme($theme);
 }
 // Create class for theme that passes theme variable from import to applier
 .light-theme {

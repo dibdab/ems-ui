@@ -3,10 +3,12 @@ import { NavLink } from 'react-router-dom';
 
 import './Sidebar.css';
 
+import { sidebarPaths } from 'enums';
+
 export default function Sidebar(): JSX.Element {
   const tables = [
-    { sidebarName: 'Subscribers', urlName: 'subscribers' },
-    { sidebarName: 'Test', urlName: 'test' },
+    { sidebarName: 'Subscribers', urlName: sidebarPaths.Subscribers },
+    { sidebarName: 'Test', urlName: sidebarPaths.Test },
   ];
   const tablelist = tables.map((table, index) => (
     <NavLink

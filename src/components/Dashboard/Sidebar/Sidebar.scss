@@ -1,27 +1,44 @@
 @import 'src/styles/variables.scss';
+@import 'src/styles/mixins.scss';
+@mixin sidebar-theme ($theme) {
+  $background-colour: map-get($theme, background-colour);
+  $background-colour-dark: map-get($theme, background-colour-dark);
+  $primary-colour: map-get($theme, primary-colour);
+  $accent-colour: map-get($theme, accent-colour);
+  $text-colour-dark: map-get($theme, text-colour-dark);
+  $divider-colour: map-get($theme, divider-colour);
+  $primary-colour-dark: map-get($theme, primary-colour-dark);
 
-.sidebar {
-  transition: $theme-change-transistion;
-  min-width: $sidebar-width;
-  max-width: $sidebar-width;
-  height: calc(100% - #{$topbar-height});
-  top: $topbar-height;
-  left: 0;
-  position: fixed;
-  z-index: 4;
-  overflow-y: auto;
-  overflow-x: none;
-  nav {
-    height: 80%;
-    margin: 8px 16px 8px 0;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: flex-start;
-    position: relative;
-    a {
-      margin: 8px 0;
-      text-align: left;
-      border-radius: 0 2px 2px 0;
+  .sidebar {
+    transition: $theme-change-transistion;
+    min-width: $sidebar-width;
+    max-width: $sidebar-width;
+    height: calc(100% - #{$topbar-height});
+    top: $topbar-height;
+    left: 0;
+    position: fixed;
+    z-index: 4;
+    overflow-y: auto;
+    overflow-x: none;
+    background-color: $background-colour;
+    color: $text-colour-dark;
+    border-right: 0.5px solid $divider-colour;
+    nav {
+      height: 80%;
+      margin: 8px 16px 8px 0;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: flex-start;
+      position: relative;
+      a {
+        margin: 8px 0;
+        text-align: left;
+        border-radius: 0 2px 2px 0;
+        &.active {
+          background-color: $background-colour-dark;
+          color: $text-colour-dark;
+        }
+      }
     }
   }
 }

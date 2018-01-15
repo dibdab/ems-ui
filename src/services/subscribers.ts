@@ -11,9 +11,10 @@ function getAll(): void {
     'c91b8409ed674a5eaf84ca423cd072c3',
   );
   fetch(config.SUBSCRIBER_API_URL, {
-    method: 'POST',
+    method: 'GET',
+    cache: 'force-cache',
     headers: headers,
-    body: '',
+    body: '{"listenerSystem": "Simulcast"}',
   })
     .then(response => response.json())
     .then((subscribers: Subscriber[]) => {
