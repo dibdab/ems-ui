@@ -1,12 +1,11 @@
 @import 'styles/variables.scss';
-
 tr.accordionTableRow {
   width: 100%;
-  transition: height 400ms $mat-anim-curve,
-    border-bottom 400ms $mat-anim-curve 400ms;
+  transition: height 400ms $mat-anim-curve;
   height: 0;
   &.hidden {
-    border-bottom: transparent !important;
+    transition: height 400ms $mat-anim-curve, border-bottom-color linear 400ms;
+    border-bottom: solid 1px transparent !important;
     td.accordionTd {
       padding: 0;
     }

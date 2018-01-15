@@ -11,8 +11,7 @@ function getAll(): void {
     'c91b8409ed674a5eaf84ca423cd072c3',
   );
   fetch(config.SUBSCRIBER_API_URL, {
-    method: 'GET',
-    cache: 'force-cache',
+    method: 'POST',
     headers: headers,
     body: '{"listenerSystem": "Simulcast"}',
   })
@@ -24,7 +23,7 @@ function getAll(): void {
     })
     .catch(() =>
       store.dispatch(SubscriberActionCreators.subscribersHasErrored(true)),
-    );
+  );
 }
 
 interface ISubscriberService {
