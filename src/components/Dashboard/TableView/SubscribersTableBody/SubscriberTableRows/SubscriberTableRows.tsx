@@ -14,7 +14,7 @@ import { AccordionTableRow } from 'components/shared/AccordionTableRow/Accordion
 export default class SubscriberTableRows extends React.Component<
   ISubscriberTableRowsProps,
   ISubscriberTableRowsState
-> {
+  > {
   constructor(props: ISubscriberTableRowsProps) {
     super(props);
     this.state = {
@@ -83,7 +83,6 @@ function isJMS(connector: any): connector is JMSConnector {
 
 const ConnectorTdComponent = (props: IConnectorTdComponentProps) => {
   const connector = props.connector;
-  console.log(connector);
   if (isJMS(connector)) {
     const connectorContents = connector.JMS;
     const connectorUrl = `${connectorContents.host}:${connectorContents.port}`;

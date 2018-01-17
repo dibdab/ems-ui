@@ -17,6 +17,7 @@ function getAll(): void {
   })
     .then(response => response.json())
     .then((subscribers: Subscriber[]) => {
+      console.log(subscribers, 'subservice')
       store.dispatch(
         SubscriberActionCreators.subscribersFetchSuccess(subscribers),
       );

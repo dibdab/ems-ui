@@ -8,11 +8,13 @@ import { SubscriberService } from 'services';
 import { IRootState } from 'redux_';
 import { SubscriberActionCreators } from 'redux_';
 import SubscriberTableRows from './SubscriberTableRows/SubscriberTableRows';
+import ReactJson from 'react-json-view';
+// import { JsonViewer } from 'components/shared/JsonViewer/JsonVeiwer'
 
 class SubscribersTableBody extends React.Component<
   ISubscribersTableBodyProps,
   IRootState
-> {
+  > {
   componentDidMount() {
     // TODO: Force reload of data to skip cache button
     // TODO: Implment isLoading and hasErroed bools
@@ -21,9 +23,14 @@ class SubscribersTableBody extends React.Component<
 
   render() {
     return (
-      <tbody className="subscriberTableBody">
-        <SubscriberTableRows subscribers={this.props.subscribers} />
-      </tbody>
+      <React.Fragment>
+        <tbody className="subscriberTableBody">
+          <SubscriberTableRows subscribers={this.props.subscribers} />
+          {console.log(this.props.subscribers[0])}
+          {/* <JsonViewer data={this.props.subscribers[0]} /> */}
+        </tbody>
+        <ReactJson src={this.props.subscribers} />
+      </React.Fragment>
     );
   }
 }

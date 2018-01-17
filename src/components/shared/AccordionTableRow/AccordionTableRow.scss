@@ -4,7 +4,7 @@ tr.accordionTableRow {
   transition: height 400ms $mat-anim-curve;
   height: 0;
   &.hidden {
-    transition: height 400ms $mat-anim-curve, border-bottom-color linear 400ms;
+    transition: height 400ms $mat-anim-curve, border-bottom-color 1ms linear 400ms;
     border-bottom: solid 1px transparent !important;
     td.accordionTd {
       padding: 0;
