@@ -1,5 +1,5 @@
-import { Subscriber } from 'types';
+import { ISubscriber } from 'types';
 
 export interface ISubscriberTableRowsProps {
-  subscribers: Subscriber[];
+  subscribers: ISubscriber[];
 }

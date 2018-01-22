@@ -1,3 +1,5 @@
+// Test component kept encase react-json-view custom module is no longer used
+
 import * as React from 'react';
 import { isNullOrUndefined } from 'util';
 

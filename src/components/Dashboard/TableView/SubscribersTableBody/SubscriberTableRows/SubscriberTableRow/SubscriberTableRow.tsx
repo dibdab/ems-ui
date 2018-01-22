@@ -3,7 +3,7 @@ import * as React from 'react';
 import './SubscriberTableRow.css';
 import { ISubscriberTableRowProps } from './ISubscriberTableRowProps';
 
-import { RESTConnector, JMSConnector } from 'types';
+import { IRESTConnector, IJMSConnector } from 'types';
 
 export const SubscriberTableRow = (props: ISubscriberTableRowProps) => {
   return (
@@ -17,10 +17,10 @@ export const SubscriberTableRow = (props: ISubscriberTableRowProps) => {
 };
 
 interface IConnectorTdComponentProps {
-  connector: RESTConnector | JMSConnector;
+  connector: IRESTConnector | IJMSConnector;
 }
 
-function isJMS(connector: any): connector is JMSConnector {
+function isJMS(connector: any): connector is IJMSConnector {
   return connector.REST === undefined;
 }
 

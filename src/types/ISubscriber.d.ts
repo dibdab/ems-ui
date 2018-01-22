@@ -21,15 +21,15 @@ interface JMS extends connector {
   queue: string;
 }
 
-export interface RESTConnector {
+export interface IRESTConnector {
   REST: REST;
 }
 
-export interface JMSConnector {
+export interface IJMSConnector {
   JMS: JMS;
 }
 
-export interface Subscriber {
+export interface ISubscriber {
   _id: {
     timestamp: number;
     machineIdentifier: number;
@@ -45,5 +45,5 @@ export interface Subscriber {
     payloadcontent: string[];
   };
   filter: filter[];
-  connector: RESTConnector | JMSConnector;
+  connector: IRESTConnector | IJMSConnector;
 }

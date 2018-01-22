@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import './Dashboard.css';
 import Topbar from './Topbar/Topbar';
@@ -7,20 +7,52 @@ import Sidebar from './Sidebar/Sidebar';
 import TableView from './TableView/TableView';
 import { IDashboardProps } from './IDashboardProps';
 import { IRootState } from 'redux_';
+import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes'
+import { IRoute } from 'types';
+import TestTableRow from './TableView/TestTableRow/TestTableRow';
+import { sidebarPaths } from 'enums';
 
 export default class Dashboard extends React.Component<
   IDashboardProps,
   IRootState
-> {
+  > {
   render() {
+    const routes: IRoute[] = [
+      {
+        component: TableView,
+        path: '/dashboard/subscribers',
+        routeProps: {
+          columnHeadings: [
+            'Event Type',
+            'Subscriber',
+            'Connector Type',
+            'Connector Url',
+            'Connector Method/Queue',
+          ],
+          columnKeyNames: [
+            "",
+          ],
+          tableName: sidebarPaths.Subscribers
+        }
+      },
+      {
+        component: TestTableRow,
+        path: '/dashboard/test'
+      },
+      {
+        component: NoTableRoute
+      }
+    ]
+
     return (
       <div>
         <Topbar />
         <Sidebar />
         <div className="document-viewer">
           <Switch>
-            <Route path="/dashboard/:tableName" component={TableView} />
-            <Route component={NoTableRoute} />
+            {routes.map((route, i) => (
+              <RouteWithSubRoutes {...route} />
+            ))}
           </Switch>
         </div>
       </div>

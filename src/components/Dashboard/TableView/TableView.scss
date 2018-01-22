@@ -18,7 +18,7 @@
     tbody {
       tr {
         border-bottom: solid 1px $divider-colour;
-        &:hover {
+        &.dashboardTr:hover {
           background-color: $background-colour-dark;
           cursor: pointer;
         }

@@ -5,10 +5,9 @@ import './SubscriberTableRows.css';
 import { ISubscriberTableRowsProps } from './ISubscriberTableRowsProps';
 import { ISubscriberTableRowsState } from './ISubscriberTableRowsState';
 
-import { Subscriber } from 'types';
+import { ISubscriber, IRESTConnector, IJMSConnector } from 'types';
 // import { SubscriberTableRow } from './SubscriberTableRow/SubscriberTableRow';
 // import { SubscriberAccordionTableRow } from './SubscriberAccordionTableRow/SubscriberAccordionTableRow';
-import { RESTConnector, JMSConnector } from 'types';
 import { AccordionTableRow } from 'components/shared/AccordionTableRow/AccordionTableRow';
 
 export default class SubscriberTableRows extends React.Component<
@@ -49,7 +48,7 @@ export default class SubscriberTableRows extends React.Component<
   }
 
   render() {
-    const subscribers = this.props.subscribers.map((subscriber: Subscriber) => (
+    const subscribers = this.props.subscribers.map((subscriber: ISubscriber) => (
       <React.Fragment key={subscriber._id.counter}>
         <tr onClick={this.toggleAccordion} id={`${subscriber._id.counter}`}>
           <td>
@@ -61,6 +60,7 @@ export default class SubscriberTableRows extends React.Component<
         </tr>
         <AccordionTableRow
           accordionId={`${subscriber._id.counter}`}
+          jsonData={subscriber}
           isAccordionVisible={
             this.state.visibleAccordion[`${subscriber._id.counter}`]
           }
@@ -74,10 +74,10 @@ export default class SubscriberTableRows extends React.Component<
 }
 
 interface IConnectorTdComponentProps {
-  connector: RESTConnector | JMSConnector;
+  connector: IRESTConnector | IJMSConnector;
 }
 
-function isJMS(connector: any): connector is JMSConnector {
+function isJMS(connector: any): connector is IJMSConnector {
   return connector.REST === undefined;
 }
 

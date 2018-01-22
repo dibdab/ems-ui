@@ -1,6 +1,6 @@
-import { Subscriber } from 'types';
+import { ISubscriber } from 'types';
 
 export interface ISubscriberTableRowProps {
-  subscriber: Subscriber;
+  subscriber: ISubscriber;
   onClick: () => void;
 }
