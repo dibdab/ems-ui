@@ -4,8 +4,7 @@ import {
   reducer as subscribers,
   State as SubscriberState,
 } from './subscribers';
-
-interface IStoreEnhancerState {}
+interface IStoreEnhancerState { }
 
 export interface IRootState extends IStoreEnhancerState {
   subscribers: SubscriberState;

@@ -2,26 +2,36 @@
 tr.accordionTableRow {
   width: 100%;
   &.hidden {
-    transition: max-height 400ms $mat-anim-curve, border-bottom-color 1ms linear 400ms;
+    transition: height 200ms $mat-anim-curve, border-bottom-color 1ms linear 200ms;
     border-bottom: solid 1px transparent !important;
-    max-height: 0;
+    height: 0;
     td.accordionTd {
-      transition: padding-bottom 400ms $mat-anim-curve, padding-top 400ms $mat-anim-curve;
+      transition: padding-bottom 200ms $mat-anim-curve, padding-top 200ms $mat-anim-curve;
       padding-top: 0;
       padding-bottom: 0;
+      div:first-of-type {
+        transition: max-height 200ms $mat-anim-curve;
+        max-height: 0;
+      }
       div.react-json-view {
-        transition: max-height 400ms $mat-anim-curve;
+        transition: max-height 200ms $mat-anim-curve;
         max-height: 0;
         white-space: pre;
       }
     }
   }
   &.visible {
-    max-height: 400px;
+    transition: height 200ms $mat-anim-curve;
+    height: 400px;
     td.accordionTd {
       overflow-y: auto;
+      div.json-view-container {
+        height: 400px;
+        transition: max-height 200ms $mat-anim-curve;
+        max-height: 400px;
+      }
       div.react-json-view {
-        transition: max-height 400ms $mat-anim-curve;
+        transition: max-height 200ms $mat-anim-curve;
         max-height: 400px;
         max-width: 1656px;
         white-space: pre;

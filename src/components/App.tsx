@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import '../styles/themes.css';
+import './App.css';
 import Login from './Login/Login';
 import Dashboard from './Dashboard/Dashboard';
 

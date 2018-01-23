@@ -1,6 +1,6 @@
 import { ISubscriber } from 'types';
 
 export interface ITableRowsProps {
-    subscribers: ISubscriber[];
+    tableData: ISubscriber[];
     columnKeyNames: string[];
 }

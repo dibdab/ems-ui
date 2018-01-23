@@ -1,4 +1,4 @@
-export enum sidebarPaths {
+export enum tableDataTypes {
   Subscribers = 'subscribers',
   Test = 'test',
 } // Used by sidebar to determine path names and should be imported anywhere that needs to use those names in logic

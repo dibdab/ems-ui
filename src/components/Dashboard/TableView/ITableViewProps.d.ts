@@ -1,13 +1,15 @@
 import * as router from 'react-router-dom';
-import { sidebarPaths } from 'enums';
+import { tableDataTypes } from 'enums';
 import { IRoute } from 'types';
+import { ISubscriber } from 'types/';
 
 export interface ITableViewProps {
-  match: router.match<urlParams>;
-  routes: IRoute[]
   columnHeadings: string[];
   columnKeyNames: string[];
   tableName: string;
+  subscribers: ISubscriber[];
+  hasErrored: boolean;
+  isLoading: boolean;
 }
 
-type urlParams = { tableName: sidebarPaths };
+type urlParams = { tableName: tableDataTypes };

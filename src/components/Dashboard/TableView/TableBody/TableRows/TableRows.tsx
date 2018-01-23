@@ -25,7 +25,6 @@ export default class TableRows extends React.Component<
 
     toggleAccordion(event: MouseEvent<HTMLTableRowElement>) {
         event.persist();
-        console.log(event.currentTarget, 'current target');
         if (event.currentTarget.id in this.state.visibleAccordion) {
             this.setState({
                 visibleAccordion: {
@@ -48,10 +47,10 @@ export default class TableRows extends React.Component<
     }
 
     render() {
-        // const filteredSubsribers = this.props.subscribers.filter((obj: any) => Object.keys(obj).some((key: any) => obj[key].includes("1509643438")));
-        this.props.subscribers.forEach(obj => console.log(Object.keys(obj)), "keysss");
-        console.log(this.props.subscribers.filter(obj => Object.keys(obj)), "keysss");
-        const subscribers = this.props.subscribers.map((subscriber: ISubscriber) => (
+        // // const filteredSubsribers = this.props.subscribers.filter((obj: any) => Object.keys(obj).some((key: any) => obj[key].includes("1509643438")));
+        // this.props.tableData.forEach(obj => console.log(Object.keys(obj)), "keysss");
+        // console.log(this.props.tableData.filter(obj => Object.keys(obj)), "keysss");
+        const subscribers = this.props.tableData.map((subscriber: ISubscriber) => (
             <React.Fragment key={subscriber._id.counter}>
                 <tr className="dashboardTr" onClick={this.toggleAccordion} id={`${subscriber._id.counter}`}>
                     <td>

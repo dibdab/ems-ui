@@ -1,35 +1,14 @@
 // Import components
-@import 'src/components/App.scss';
-@import 'src/components/shared/Card/Card.scss';
-@import 'src/components/Dashboard/Topbar/Topbar.scss';
-@import 'src/components/Dashboard/Sidebar/Sidebar.scss';
-@import 'src/components/Dashboard/Tableview/TableView.scss';
+@import 'src/components/App-theme.scss';
+@import 'src/components/shared/Card/Card-theme.scss';
+@import 'src/components/Dashboard/Topbar/Topbar-theme.scss';
+@import 'src/components/Dashboard/Sidebar/Sidebar-theme.scss';
+@import 'src/components/Dashboard/Tableview/TableView-theme.scss';
 @function theme-setter($primary-colour-dark, $primary-colour, $primary-colour-light, $text-colour-light, $accent-colour, $text-colour-dark, $text-colour-secondary, $divider-colour, $background-colour-light, $background-colour, $background-colour-dark) {
-  @return (primary-colour-dark: $primary-colour-dark,
-    primary-colour:           $primary-colour,
-    primary-colour-light:     $primary-colour-light,
-    text-colour-light:        $text-colour-light,
-    accent-colour:            $accent-colour,
-    text-colour-dark:         $text-colour-dark,
-    text-colour-secondary:    $text-colour-secondary,
-    divider-colour:           $divider-colour,
-    background-colour-light:  $background-colour-light,
-    background-colour:        $background-colour,
-    background-colour-dark:   $background-colour-dark);
+  @return (primary-colour-dark: $primary-colour-dark, primary-colour: $primary-colour, primary-colour-light: $primary-colour-light, text-colour-light: $text-colour-light, accent-colour: $accent-colour, text-colour-dark: $text-colour-dark, text-colour-secondary: $text-colour-secondary, divider-colour: $divider-colour, background-colour-light: $background-colour-light, background-colour: $background-colour, background-colour-dark: $background-colour-dark);
 }
-$light-theme: theme-setter(
-  $primary-colour-dark: #303f9f,
-  $primary-colour: #3f51b5,
-  $primary-colour-light: #c5cae9,
-  $text-colour-light: #fff,
-  $accent-colour: #ffc107,
-  $text-colour-dark: rgba(0, 0, 0, 0.87),
-  $text-colour-secondary: #757575,
-  $divider-colour: #bdbdbd,
-  $background-colour-light: #fff,
-  $background-colour: #fafafa,
-  $background-colour-dark: #e0e0e0
-);
+
+$light-theme: theme-setter( $primary-colour-dark: #303f9f, $primary-colour: #3f51b5, $primary-colour-light: #c5cae9, $text-colour-light: #fff, $accent-colour: #ffc107, $text-colour-dark: rgba(0, 0, 0, 0.87), $text-colour-secondary: #757575, $divider-colour: #bdbdbd, $background-colour-light: #fff, $background-colour: #fafafa, $background-colour-dark: #e0e0e0);
 // Pass theme to each imported component
 @mixin theme-applier($theme) {
   @include app-theme($theme);
@@ -38,6 +17,7 @@ $light-theme: theme-setter(
   @include sidebar-theme($theme);
   @include tableView-theme($theme);
 }
+
 // Create class for theme that passes theme variable from import to applier
 .light-theme {
   @include theme-applier($light-theme);

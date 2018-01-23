@@ -1,80 +1,60 @@
-@import 'src/styles/elevation-mixin.scss';
-@import 'src/styles/mixins.scss';
+@import 'src/styles/elevation-mixin';
+@import 'src/styles/mixins';
+.main-body {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Noto Sans', sans-serif;
+  font-size: 14px;
+}
 
-@mixin app-theme($theme) {
-  $text-colour-dark: map-get($theme, text-colour-dark);
-  $background-colour: map-get($theme, background-colour);
-  $background-colour-dark: map-get($theme, background-colour-dark);
-  $background-colour-light: map-get($theme, background-colour-light);
-  $accent-colour: map-get($theme, accent-colour);
-  $divider-colour: map-get($theme, divider-colour);
-  .main-body {
-    background: $background-colour;
-    color: $text-colour-dark;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', 'Noto Sans', sans-serif;
-    font-size: 14px;
+.button {
+  box-sizing: border-box;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0;
+  min-width: 88px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 2px;
+  font-size: 16px;
+  &.active {
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.12) inset;
+    transform: translate3d(0, 0, 0);
+    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: bold;
   }
+}
+
+.button-group {
+  display: table;
+  border-radius: 2px;
   .button {
-    color: $text-colour-dark;
-    box-sizing: border-box;
-    position: relative;
-    user-select: none;
     cursor: pointer;
-    outline: 0;
-    border: none;
-    -webkit-tap-highlight-color: transparent;
-    display: inline-block;
-    white-space: nowrap;
-    text-decoration: none;
-    vertical-align: baseline;
-    text-align: center;
-    margin: 0;
-    min-width: 88px;
-    line-height: 36px;
-    padding: 0 16px;
-    border-radius: 2px;
-    font-size: 16px;
-    &:hover {
-      color: $accent-colour;
-      background-color: $background-colour-dark;
-    }
-    &.active {
-      background-color: $background-colour-dark;
-      box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.12) inset;
-      transform: translate3d(0, 0, 0);
-      transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-        box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
-      font-weight: bold;
-    }
+    float: left;
+    border-radius: 0;
   }
-  .button-group {
-    display: table;
-    border-radius: 2px;
-    .button {
-      background-color: $background-colour-light;
-      cursor: pointer;
-      float: left;
-      border-radius: 0;
-    }
-    .button:first-child {
-      border-radius: 2px 0 0 2px;
-    }
-    .button:last-child {
-      border-radius: 0 2px 2px 0;
-    }
-    .button:not(:last-child) {
-      border-right: 1px solid $divider-colour;
-    }
+  .button:first-child {
+    border-radius: 2px 0 0 2px;
   }
+  .button:last-child {
+    border-radius: 0 2px 2px 0;
+  }
+}
 
-  input[type='checkbox'] {
-    cursor: pointer;
-  }
+input[type='checkbox'] {
+  cursor: pointer;
 }

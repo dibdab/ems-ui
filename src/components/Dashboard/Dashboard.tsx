@@ -9,8 +9,7 @@ import { IDashboardProps } from './IDashboardProps';
 import { IRootState } from 'redux_';
 import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes'
 import { IRoute } from 'types';
-import TestTableRow from './TableView/TestTableRow/TestTableRow';
-import { sidebarPaths } from 'enums';
+import { tableDataTypes } from 'enums';
 
 export default class Dashboard extends React.Component<
   IDashboardProps,
@@ -32,11 +31,11 @@ export default class Dashboard extends React.Component<
           columnKeyNames: [
             "",
           ],
-          tableName: sidebarPaths.Subscribers
+          tableName: tableDataTypes.Subscribers
         }
       },
       {
-        component: TestTableRow,
+        component: TableView,
         path: '/dashboard/test'
       },
       {
@@ -51,7 +50,7 @@ export default class Dashboard extends React.Component<
         <div className="document-viewer">
           <Switch>
             {routes.map((route, i) => (
-              <RouteWithSubRoutes {...route} />
+              <RouteWithSubRoutes key={i} {...route} />
             ))}
           </Switch>
         </div>

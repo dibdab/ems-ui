@@ -1,4 +1,4 @@
-import { Subscriber } from '../../types/Subscriber';
+import { ISubscriber } from 'types/ISubscriber';
 
 // Define constants for actions names
 export const SUBSCRIBERS_IS_LOADING = 'SUBSCRIBERS_IS_LOADING';
@@ -17,7 +17,7 @@ export type Actions = {
   };
   SUBSCRIBERS_FETCH_SUCCESS: {
     type: typeof SUBSCRIBERS_FETCH_SUCCESS;
-    payload: Subscriber[];
+    payload: ISubscriber[];
   };
 };
 
@@ -36,7 +36,7 @@ export const actionCreators = {
     payload,
   }),
   subscribersFetchSuccess: (
-    payload: Subscriber[],
+    payload: ISubscriber[],
   ): Actions[typeof SUBSCRIBERS_FETCH_SUCCESS] => ({
     type: SUBSCRIBERS_FETCH_SUCCESS,
     payload,

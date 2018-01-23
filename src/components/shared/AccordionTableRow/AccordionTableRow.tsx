@@ -16,8 +16,27 @@ export const AccordionTableRow = (props: IAccordionTableRowProps) => {
     >
       {props.children}
       <td className="accordionTd" colSpan={6}>
-        <ReactJson src={props.jsonData} collapseStringsAfterLength={100} />
+        <div className="json-view-container">
+          <ReactJsonViewer isAccordionVisible={props.isAccordionVisible} src={props.jsonData} collapseStringsAfterLength={100}>
+          </ReactJsonViewer>
+        </div>
       </td>
     </tr>
   );
 };
+
+interface ipropsses {
+  isAccordionVisible: boolean;
+  src: object | object[];
+  collapseStringsAfterLength: number;
+}
+
+const ReactJsonViewer = (props: ipropsses) => {
+  if (!props.isAccordionVisible) {
+    return null;
+  }
+  return (
+
+    <ReactJson src={props.src} collapseStringsAfterLength={100} />
+  )
+}

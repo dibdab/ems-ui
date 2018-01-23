@@ -1,42 +1,37 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 
 import { ITableViewProps } from './ITableViewProps';
-// import { sidebarPaths } from 'enums';
+import './TableView.css';
 
 import { TableHeader } from './TableHeader/TableHeader';
-import TableBody from './TableBody/TableBody';
+import { TableBody } from './TableBody/TableBody';
+import TableSearchForm from './TableSearchForm/TableSearchForm';
 
-export default function TableView(props: ITableViewProps) {
-  {
-    // Define headers for table
-    // let tableHeadings: string[] = [];
-    // switch (props.match.params.tableName) {
-    //   case sidebarPaths.Subscribers:
-    //     tableHeadings = [
-    //       'Event Type',
-    //       'Subscriber',
-    //       'Connector Type',
-    //       'Connector Url',
-    //       'Connector Method/Queue',
-    //     ];
-    //     break;
-    //   case sidebarPaths.Test:
-    //     tableHeadings = ['testHeader'];
-    //     break;
-    //   default:
-    //     tableHeadings = [
-    //       'You should not be here, guess you broke the website... You should probably leave now.',
-    //     ];
-    //     break;
-    // }
-    console.log(props, "tableview")
+import { IRootState } from 'redux_';
+
+export class TableView extends React.Component<ITableViewProps, IRootState> {
+  render() {
     return (
-      <div>
-        <table className="dashboardTable">
-          <TableHeader columnHeadings={props.columnHeadings} />
-          <TableBody columnKeyNames={props.columnKeyNames} tableName={props.tableName} />
-        </table>
-      </div>
+      <React.Fragment>
+        <TableSearchForm tableName={this.props.tableName} />
+        <div className="dashboardTable-container">
+          <table className="dashboardTable">
+            <TableHeader columnHeadings={this.props.columnHeadings} />
+            <TableBody columnKeyNames={this.props.columnKeyNames} tableName={this.props.tableName} subscribers={this.props.subscribers} />
+          </table>
+        </div>
+      </React.Fragment>
     );
   }
 }
+
+const mapStateToProps = (state: IRootState) => {
+  return {
+    subscribers: state.subscribers.subscribers,
+    hasErrored: state.subscribers.subscribersHasErrored,
+    isLoading: state.subscribers.subscribersIsLoading,
+  };
+};
+
+export default connect(mapStateToProps, {})(TableView);

@@ -1,6 +1,6 @@
 export interface IAccordionTableRowProps {
   children: {};
-  isAccordionVisible: Boolean;
+  isAccordionVisible: boolean;
   accordionId: string;
   jsonData: object | object[];
 }

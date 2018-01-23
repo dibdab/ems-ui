@@ -1,1 +1,1 @@
-export { SubscriberService } from './subscribers';
+export { tableDataService } from './tableData';

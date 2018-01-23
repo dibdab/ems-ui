@@ -1,4 +1,4 @@
-import { Subscriber } from '../../types/Subscriber';
+import { ISubscriber } from 'types/ISubscriber';
 
 import {
   SUBSCRIBERS_IS_LOADING,
@@ -9,7 +9,7 @@ import { combineReducers } from 'redux';
 
 // Set as Readonly to achieve immutability on nested types same with ReadonlyArray
 export type State = Readonly<{
-  subscribers: Subscriber[];
+  subscribers: ISubscriber[];
   subscribersIsLoading: boolean;
   subscribersHasErrored: boolean;
 }>;
