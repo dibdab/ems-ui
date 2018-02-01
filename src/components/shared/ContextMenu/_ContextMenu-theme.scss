@@ -1,0 +1,16 @@
+@mixin contextMenu-theme($theme) {
+    $divider-colour: map-get($theme, divider-colour);
+    $text-colour-secondary: map-get($theme, text-colour-secondary);
+    $background-colour: map-get($theme, background-colour);
+    $background-colour-dark: map-get($theme, background-colour-dark);
+    tbody>tr.contextMenu {
+        border-color: $divider-colour;
+    }
+    .contextMenu:first-child {
+        background-color: $background-colour;
+        border-color: $divider-colour;
+        td:not(:last-child) {
+            border-color: $divider-colour;
+        }
+    }
+}

@@ -22,40 +22,38 @@
   }
 }
 
-.dashboardTable-container {
-  max-height: 800px;
-  overflow-y: auto;
-  .dashboardTable {
-    border-collapse: collapse;
+.dashboardTable {
+  border-collapse: collapse;
+  width: 100%;
+  th.dashboardTable-checkbox-td,
+  td.dashboardTable-checkbox-td {
+    cursor: default;
+    width: 19px;
+  }
+  tr {
     width: 100%;
-    thead {
-      width: 100%;
-      tr {
-        width: 100%;
-        max-height: 35px;
-        th {
-          text-align: left;
-          max-width: 240px;
-          padding: 8px;
-        }
-      }
+    max-height: 35px;
+  }
+  thead {
+    width: 100%;
+    th {
+      text-align: left;
+      max-width: 240px;
+      padding: 8px;
     }
-    tbody {
-      overflow-y: auto;
-      width: 100%;
-      tr {
-        width: 100%;
-        max-height: 35px;
-        &.dashboardTr:hover {
-          cursor: pointer;
-        }
-        td {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          padding: 8px;
-          white-space: nowrap;
-        }
-      }
+  }
+  tbody {
+    width: 100%;
+    tr {
+      border-bottom: solid 1px;
+    }
+    & tr:hover {
+      cursor: pointer;
+    }
+    td {
+      padding: 8px;
+      white-space: nowrap;
+      cursor: pointer;
     }
   }
 }

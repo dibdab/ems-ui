@@ -2,15 +2,19 @@
     $divider-colour: map-get($theme, divider-colour);
     $text-colour-secondary: map-get($theme, text-colour-secondary);
     $background-colour-dark: map-get($theme, background-colour-dark);
+    $background-colour-darker: map-get($theme, background-colour-darker);
     .dashboardTable {
         thead {
             color: $text-colour-secondary;
         }
         tbody {
             tr {
-                border-bottom: solid 1px $divider-colour;
-                &.dashboardTr:hover {
+                border-bottom-color: $divider-colour;
+                &:hover {
                     background-color: $background-colour-dark;
+                }
+                td:not(.dashboardTable-checkbox-td):hover {
+                    background-color: $background-colour-darker;
                 }
             }
         }

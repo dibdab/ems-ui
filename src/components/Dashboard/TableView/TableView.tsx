@@ -12,17 +12,24 @@ import { IRootState } from 'redux_';
 
 export class TableView extends React.Component<ITableViewProps, IRootState> {
   render() {
-    return (
-      <React.Fragment>
+    if (this.props.subscribers.length <= 0) {
+      return (
         <TableSearchForm tableName={this.props.tableName} />
-        <div className="dashboardTable-container">
+      )
+    }
+    else {
+      return (
+        <React.Fragment>
+          {/* style returned amount */}
+          {this.props.subscribers.length}
+          <TableSearchForm tableName={this.props.tableName} />
           <table className="dashboardTable">
             <TableHeader columnHeadings={this.props.columnHeadings} />
             <TableBody columnKeyNames={this.props.columnKeyNames} tableName={this.props.tableName} subscribers={this.props.subscribers} />
           </table>
-        </div>
-      </React.Fragment>
-    );
+        </React.Fragment>
+      );
+    }
   }
 }
 

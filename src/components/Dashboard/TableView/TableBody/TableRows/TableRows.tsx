@@ -6,6 +6,8 @@ import { ITableRowsState } from './ITableRowsState';
 
 import { ISubscriber, IRESTConnector, IJMSConnector } from 'types';
 import { AccordionTableRow } from 'components/shared/AccordionTableRow/AccordionTableRow';
+import ContextMenu from 'components/shared/ContextMenu/ContextMenu'
+// import { TableCellWithContextMenu } from './TableCellWithContextMenu/TableCellWithContextMenu';
 
 
 // TODO: Create a index of all properties and values to search complex objects
@@ -14,16 +16,17 @@ export default class TableRows extends React.Component<
     ITableRowsProps,
     ITableRowsState
     > {
+    private contextMenu: ContextMenu;
     constructor(props: ITableRowsProps) {
         super(props);
         this.state = {
-            visibleAccordion: {},
+            visibleAccordion: {}
         };
 
         this.toggleAccordion = this.toggleAccordion.bind(this);
     }
 
-    toggleAccordion(event: MouseEvent<HTMLTableRowElement>) {
+    toggleAccordion = (event: MouseEvent<HTMLTableRowElement>) => {
         event.persist();
         if (event.currentTarget.id in this.state.visibleAccordion) {
             this.setState({
@@ -42,35 +45,52 @@ export default class TableRows extends React.Component<
         }
     }
 
-    inputStopPropagation(event: MouseEvent<HTMLInputElement>) {
+    createContextMenu(e: MouseEvent<HTMLTableRowElement>) {
+        if ((e.target as HTMLTableCellElement).className !== 'dashboardTable-checkbox-td') {
+            const menuContents = (<React.Fragment>
+                <td>{`Filter on ${(e.target as HTMLTableCellElement).innerText}`}</td>
+            </React.Fragment>);
+            this.contextMenu.showContextMenu(e, menuContents);
+        }
+    }
+
+    inputStopPropagation(event: MouseEvent<HTMLElement>) {
         event.stopPropagation();
     }
 
     render() {
-        // // const filteredSubsribers = this.props.subscribers.filter((obj: any) => Object.keys(obj).some((key: any) => obj[key].includes("1509643438")));
-        // this.props.tableData.forEach(obj => console.log(Object.keys(obj)), "keysss");
-        // console.log(this.props.tableData.filter(obj => Object.keys(obj)), "keysss");
-        const subscribers = this.props.tableData.map((subscriber: ISubscriber) => (
-            <React.Fragment key={subscriber._id.counter}>
-                <tr className="dashboardTr" onClick={this.toggleAccordion} id={`${subscriber._id.counter}`}>
-                    <td>
-                        <input type="checkbox" onClick={this.inputStopPropagation} />
-                    </td>
-                    <td>{subscriber.event}</td>
-                    <td>{subscriber.listenerSystem}</td>
-                    <ConnectorTdComponent connector={subscriber.connector} />
-                </tr>
-                <AccordionTableRow
-                    accordionId={`${subscriber._id.counter}`}
-                    jsonData={subscriber}
-                    isAccordionVisible={
-                        this.state.visibleAccordion[`${subscriber._id.counter}`]
-                    }
-                >
-                </AccordionTableRow>
-            </React.Fragment>
-        ));
-        return <React.Fragment>{subscribers}</React.Fragment>;
+        let subscribers: JSX.Element[] = [];
+        this.props.tableData.map((subscriber: ISubscriber, index) => {
+            let subscriberWithoutId = Object.assign({}, subscriber);
+            delete subscriberWithoutId._id;
+            subscribers.push(
+                <React.Fragment key={subscriber._id.counter}>
+                    <tr className="dashboardTr" onContextMenu={(e: any) => this.createContextMenu(e)} onClick={this.toggleAccordion} id={`${subscriber._id.counter}`}>
+                        <td className="dashboardTable-checkbox-td">
+                            <input type="checkbox" onClick={this.inputStopPropagation} />
+                        </td>
+                        <td>{subscriber.event}</td>
+                        <td>{subscriber.listenerSystem}</td>
+                        <td>{Object.keys(subscriber.connector)}</td>
+                        {/* <ConnectorTdComponent connector={subscriber.connector} /> */}
+                    </tr>
+                    <AccordionTableRow
+                        accordionId={`${subscriber._id.counter}`}
+                        jsonData={subscriberWithoutId}
+                        isAccordionVisible={
+                            this.state.visibleAccordion[`${subscriber._id.counter}`]
+                        }
+                    >
+                    </AccordionTableRow>
+                </React.Fragment>
+            )
+        }
+        );
+        return (
+            <React.Fragment>
+                <ContextMenu renderTag={"tr"} ref={contextMenu => { this.contextMenu = contextMenu as ContextMenu; }} />
+                {subscribers}
+            </React.Fragment>);
     }
 }
 

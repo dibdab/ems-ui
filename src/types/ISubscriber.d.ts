@@ -1,3 +1,17 @@
+interface IId {
+  timestamp: number;
+  machineIdentifier: number;
+  processIdentifier: number;
+  counter: number;
+  time: number;
+  date: number;
+  timeSecond: number;
+}
+
+interface IOptions {
+  payloadcontent: string[];
+}
+
 interface filter {
   name: string;
   value: string | boolean | filterArray;
@@ -29,21 +43,13 @@ export interface IJMSConnector {
   JMS: JMS;
 }
 
+
 export interface ISubscriber {
-  _id: {
-    timestamp: number;
-    machineIdentifier: number;
-    processIdentifier: number;
-    counter: number;
-    time: number;
-    date: number;
-    timeSecond: number;
-  };
+  [key: string]: string | filter[] | IRESTConnector | IJMSConnector | IId | IOptions
+  _id: IId;
   event: string;
   listenerSystem: string;
-  options: {
-    payloadcontent: string[];
-  };
+  options: IOptions;
   filter: filter[];
   connector: IRESTConnector | IJMSConnector;
 }

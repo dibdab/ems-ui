@@ -2,19 +2,62 @@ import store from 'store';
 import { SubscriberActionCreators } from 'redux_';
 import { ISubscriber } from 'types';
 import { tableDataTypes } from 'enums';
+import { isNullOrUndefined } from 'util';
 
-function getAll(dataType: string, endpoint: string, messageBody?: string, responseLimit?: number): void {
+function searchStringToJson(searchString: string) {
+  console.log(searchString, "searchString")
+  let jsonSearchString = '';
+  let searchStrings = searchString.split(',');
+  if (searchStrings.length > 0) {
+    searchStrings.forEach((string, index) => {
+      console.log(string, "string")
+      var strings = string.split(': ');
+      console.log(strings, "strings")
+      if (strings.length > 1) {
+        console.log(index, "index")
+        if (index > 0) {
+          console.log(index, " if")
+          jsonSearchString += `,"${strings[0].trim()}":"${strings[1].trim()}"`;
+          console.log(jsonSearchString)
+        }
+        else {
+          console.log(index, "else")
+          jsonSearchString += `"${strings[0].trim()}":"${strings[1].trim()}"`;
+          console.log(jsonSearchString)
+        }
+      }
+    })
+    console.log(`{${jsonSearchString}}`, "jsonSearchString");
+    return `{${jsonSearchString}}`;
+  }
+  else {
+    return null;
+  }
+}
+
+function getAll(dataType: string, endpoint: string, messageBody?: string, responseLimit?: number, skip?: number): void {
   setErrored(dataType, false);
   setLoading(dataType, true);
+  let fullEndpoint: string;
   const headers = new Headers();
   headers.append(
     'Ocp-Apim-Subscription-Key',
     'c91b8409ed674a5eaf84ca423cd072c3',
   );
-  fetch(`${endpoint}?limit=${responseLimit}`, {
+  const jsonMessageBody = messageBody !== '' ? searchStringToJson(messageBody as string) : messageBody;
+  if (isNullOrUndefined(jsonMessageBody)) {
+    setErrored(dataType, true);
+    return;
+  } if (skip) {
+    fullEndpoint = `${endpoint}?limit=${responseLimit}&skip=${skip}`;
+  }
+  else {
+    fullEndpoint = `${endpoint}?limit=${responseLimit}`;
+  }
+  fetch(fullEndpoint, {
     method: 'POST',
     headers: headers,
-    body: messageBody !== '' ? `{${messageBody}}` : messageBody,
+    body: jsonMessageBody,
   })
     .then(response => response.json())
     .then((responseData: ISubscriber[]) => {

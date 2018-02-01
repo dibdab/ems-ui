@@ -25,13 +25,13 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
     componentDidMount() {
         // TODO: Force reload of data to skip cache button - uneeded as post requests don't cache
         // TODO: Implment isLoading and hasErroed bools
-        this.getTableData(tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, '', 25);
+        this.getTableData(tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, '', 10);
     }
 
     getTableData(dataType: string, endpoint: string, messageBody: string, responseLimit?: number) {
         switch (this.props.tableName) {
             case (tableDataTypes.Subscribers):
-                tableDataService.getAll(dataType, endpoint, messageBody, !responseLimit ? 25 : responseLimit);
+                tableDataService.getAll(dataType, endpoint, messageBody, !responseLimit ? 10 : responseLimit);
                 break;
             default:
                 break;
@@ -47,14 +47,13 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
     }
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
-        console.log(this.state.searchValue)
         this.getTableData(tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, this.state.searchValue, parseInt(this.state.searchLimit));
         event.preventDefault();
     }
 
     render() {
         return (
-            <div className="tableView-searchbar-container">
+            <div className="tableView-searchbar-container" >
                 <form action="submit" onSubmit={this.handleSubmit}>
                     <div className="tableView-searchbar-searchIcon"></div>
                     <input className="tableView-searchbar-searchInput" type="text" value={this.state.searchValue} onChange={this.handleSearchChange} placeholder="keyName: value, event: image_event..." />

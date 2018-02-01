@@ -22,14 +22,16 @@ export default class Dashboard extends React.Component<
         path: '/dashboard/subscribers',
         routeProps: {
           columnHeadings: [
-            'Event Type',
+            'Event Name',
             'Subscriber',
             'Connector Type',
-            'Connector Url',
-            'Connector Method/Queue',
+            // 'Connector Url',
+            // 'Connector Method/Queue',
           ],
           columnKeyNames: [
-            "",
+            'event',
+            'listenerSystem',
+            'connector'
           ],
           tableName: tableDataTypes.Subscribers
         }

@@ -1,0 +1,19 @@
+tbody>tr.contextMenu {
+    border: solid 1px;
+}
+
+.contextMenu:first-child {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    width: min-content;
+    height: auto;
+    max-height: unset;
+    box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.51);
+    td {
+        width: auto;
+    }
+    td:not(:last-child) {
+        border-bottom: solid 1px;
+    }
+}
