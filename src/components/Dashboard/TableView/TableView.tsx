@@ -15,21 +15,23 @@ export class TableView extends React.Component<ITableViewProps, IRootState> {
     if (this.props.subscribers.length <= 0) {
       return (
         <TableSearchForm tableName={this.props.tableName} />
-      )
-    }
-    else {
-      return (
-        <React.Fragment>
-          {/* style returned amount */}
-          {this.props.subscribers.length}
-          <TableSearchForm tableName={this.props.tableName} />
-          <table className="dashboardTable">
-            <TableHeader columnHeadings={this.props.columnHeadings} />
-            <TableBody columnKeyNames={this.props.columnKeyNames} tableName={this.props.tableName} subscribers={this.props.subscribers} />
-          </table>
-        </React.Fragment>
       );
     }
+    return (
+      <React.Fragment>
+        {/* style returned amount */}
+        {this.props.subscribers.length}
+        <TableSearchForm tableName={this.props.tableName} />
+        <table className="dashboardTable">
+          <TableHeader columnHeadings={this.props.columnHeadings} />
+          <TableBody
+            columnKeyNames={this.props.columnKeyNames}
+            tableName={this.props.tableName}
+            subscribers={this.props.subscribers}
+          />
+        </table>
+      </React.Fragment>
+    );
   }
 }
 

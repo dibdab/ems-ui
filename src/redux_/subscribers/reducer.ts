@@ -1,4 +1,4 @@
-import { ISubscriber } from 'types/ISubscriber';
+import { ISubscriber } from 'types';
 
 import {
   SUBSCRIBERS_IS_LOADING,

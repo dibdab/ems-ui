@@ -16,7 +16,7 @@ export default class ContextMenu extends React.Component<
             style: {},
             x: 0,
             y: 0,
-            menuContents: ''
+            menuContents: '',
         };
 
         this.showContextMenu = this.showContextMenu.bind(this);
@@ -28,7 +28,7 @@ export default class ContextMenu extends React.Component<
         window.removeEventListener('mousedown', this.hideContextMenu);
         window.removeEventListener('click', this.hideContextMenu);
         window.removeEventListener('wheel', this.hideContextMenu);
-    };
+    }
 
     bindWindowEvent = () => {
         window.addEventListener('resize', this.hideContextMenu);
@@ -36,12 +36,12 @@ export default class ContextMenu extends React.Component<
         window.addEventListener('mousedown', this.hideContextMenu);
         window.addEventListener('click', this.hideContextMenu);
         window.addEventListener('wheel', this.hideContextMenu);
-    };
+    }
 
     getMousePosition = (e: any) => {
         const pos = {
             x: e.clientX,
-            y: e.clientY
+            y: e.clientY,
         };
 
         if (e.type === 'touchend' && (pos.x === null || pos.y === null)) {
@@ -72,7 +72,7 @@ export default class ContextMenu extends React.Component<
 
     showContextMenu = (e: MouseEvent<HTMLElement>, menuContents: any) => {
         console.log(e.target);
-        console.log(e.currentTarget)
+        console.log(e.currentTarget);
         e.stopPropagation();
         e.preventDefault();
         this.bindWindowEvent();
@@ -81,8 +81,8 @@ export default class ContextMenu extends React.Component<
             isVisible: true,
             x,
             y,
-            menuContents
-        })
+            menuContents,
+        });
     }
 
     hideContextMenu = (e: any) => {
@@ -90,7 +90,7 @@ export default class ContextMenu extends React.Component<
             return;
         }
         this.unBindWindowEvent();
-        this.setState({ isVisible: false })
+        this.setState({ isVisible: false });
     }
 
     render() {
@@ -100,7 +100,6 @@ export default class ContextMenu extends React.Component<
         const RenderTag = this.props.renderTag;
         return (
             <RenderTag className="contextMenu" style={this.getMenuStyle()}>{this.state.menuContents}</RenderTag>
-        )
+        );
     }
 }
-

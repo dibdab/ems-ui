@@ -1,4 +1,4 @@
-import { ISubscriber } from 'types/ISubscriber';
+import { ISubscriber } from 'types';
 
 // Define constants for actions names
 export const SUBSCRIBERS_IS_LOADING = 'SUBSCRIBERS_IS_LOADING';

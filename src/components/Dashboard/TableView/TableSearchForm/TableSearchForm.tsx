@@ -14,8 +14,8 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
         super(props);
         this.state = {
             searchValue: '',
-            searchLimit: ''
-        }
+            searchLimit: '',
+        };
 
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleLimitChange = this.handleLimitChange.bind(this);
@@ -39,15 +39,20 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
     }
 
     handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
-        this.setState({ searchValue: event.target.value })
+        this.setState({ searchValue: event.target.value });
     }
 
     handleLimitChange(event: ChangeEvent<HTMLInputElement>) {
-        this.setState({ searchLimit: event.target.value })
+        this.setState({ searchLimit: event.target.value });
     }
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
-        this.getTableData(tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, this.state.searchValue, parseInt(this.state.searchLimit));
+        this.getTableData(
+            tableDataTypes.Subscribers,
+            Config.SUBSCRIBER_API_URL,
+            this.state.searchValue,
+            parseInt(this.state.searchLimit, 10),
+        );
         event.preventDefault();
     }
 
@@ -55,16 +60,25 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
         return (
             <div className="tableView-searchbar-container" >
                 <form action="submit" onSubmit={this.handleSubmit}>
-                    <div className="tableView-searchbar-searchIcon"></div>
-                    <input className="tableView-searchbar-searchInput" type="text" value={this.state.searchValue} onChange={this.handleSearchChange} placeholder="keyName: value, event: image_event..." />
-                    <div className="tableView-searchbar-limitIcon"></div>
-                    <input className="tableView-searchbar-limitInput" type="text" value={this.state.searchLimit} onChange={this.handleLimitChange} placeholder="25-100" />
+                    <div className="tableView-searchbar-searchIcon" />
+                    <input
+                        className="tableView-searchbar-searchInput"
+                        type="text"
+                        value={this.state.searchValue}
+                        onChange={this.handleSearchChange}
+                        placeholder="keyName: value, event: image_event..."
+                    />
+                    <div className="tableView-searchbar-limitIcon" />
+                    <input
+                        className="tableView-searchbar-limitInput"
+                        type="text"
+                        value={this.state.searchLimit}
+                        onChange={this.handleLimitChange}
+                        placeholder="25-100"
+                    />
                     <button className="tableView-searchbar-button" type="submit" />
                 </form>
             </div>
-        )
-    };
+        );
+    }
 }
-
-
-

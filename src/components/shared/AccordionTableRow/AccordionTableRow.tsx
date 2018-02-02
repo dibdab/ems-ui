@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import ReactJson from 'react-json-view'
+import ReactJson from 'react-json-view';
 
 import './AccordionTableRow.css';
 import { IAccordionTableRowProps } from './IAccordionTableRowProps';
@@ -14,11 +14,9 @@ export const AccordionTableRow = (props: IAccordionTableRowProps) => {
       id={props.accordionId}
       className={`accordionTableRow ${isAccordionVisibleClass}`}
     >
-      {props.children}
       <td className="accordionTd" colSpan={6}>
         <div className="json-view-container">
-          <ReactJsonViewer isAccordionVisible={props.isAccordionVisible} src={props.jsonData}>
-          </ReactJsonViewer>
+          <ReactJsonViewer isAccordionVisible={props.isAccordionVisible} src={props.jsonData} />
         </div>
       </td>
     </tr>
@@ -36,5 +34,5 @@ const ReactJsonViewer = (props: IReactJsonViewerProps) => {
   }
   return (
     <ReactJson src={props.src} collapseStringsAfterLength={100} displayDataTypes={false} />
-  )
-}
+  );
+};

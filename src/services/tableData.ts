@@ -5,32 +5,30 @@ import { tableDataTypes } from 'enums';
 import { isNullOrUndefined } from 'util';
 
 function searchStringToJson(searchString: string) {
-  console.log(searchString, "searchString")
+  console.log(searchString, 'searchString');
   let jsonSearchString = '';
-  let searchStrings = searchString.split(',');
+  const searchStrings = searchString.split(',');
   if (searchStrings.length > 0) {
-    searchStrings.forEach((string, index) => {
-      console.log(string, "string")
-      var strings = string.split(': ');
-      console.log(strings, "strings")
-      if (strings.length > 1) {
-        console.log(index, "index")
+    searchStrings.forEach((splitSearchString, index) => {
+      console.log(splitSearchString, 'string');
+      const splitSearchStrings = splitSearchString.split(': ');
+      console.log(splitSearchStrings, 'strings');
+      if (splitSearchStrings.length > 1) {
+        console.log(index, 'index');
         if (index > 0) {
-          console.log(index, " if")
-          jsonSearchString += `,"${strings[0].trim()}":"${strings[1].trim()}"`;
-          console.log(jsonSearchString)
-        }
-        else {
-          console.log(index, "else")
-          jsonSearchString += `"${strings[0].trim()}":"${strings[1].trim()}"`;
-          console.log(jsonSearchString)
+          console.log(index, ' if');
+          jsonSearchString += `,'${splitSearchStrings[0].trim()}':'${splitSearchStrings[1].trim()}'`;
+          console.log(jsonSearchString);
+        } else {
+          console.log(index, 'else');
+          jsonSearchString += `'${splitSearchStrings[0].trim()}':'${splitSearchStrings[1].trim()}'`;
+          console.log(jsonSearchString);
         }
       }
-    })
-    console.log(`{${jsonSearchString}}`, "jsonSearchString");
+    });
+    console.log(`{${jsonSearchString}}`, 'jsonSearchString');
     return `{${jsonSearchString}}`;
-  }
-  else {
+  } else {
     return null;
   }
 }
@@ -48,10 +46,10 @@ function getAll(dataType: string, endpoint: string, messageBody?: string, respon
   if (isNullOrUndefined(jsonMessageBody)) {
     setErrored(dataType, true);
     return;
-  } if (skip) {
-    fullEndpoint = `${endpoint}?limit=${responseLimit}&skip=${skip}`;
   }
-  else {
+  if (skip) {
+    fullEndpoint = `${endpoint}?limit=${responseLimit}&skip=${skip}`;
+  } else {
     fullEndpoint = `${endpoint}?limit=${responseLimit}`;
   }
   fetch(fullEndpoint, {
@@ -67,8 +65,8 @@ function getAll(dataType: string, endpoint: string, messageBody?: string, respon
     .catch(() => {
       setErrored(dataType, true);
       setLoading(dataType, false);
-    }
-    );
+    },
+  );
 }
 
 function SetResponseSuccess(dataType: string, data: ISubscriber[]) {
@@ -97,5 +95,6 @@ interface ITableDataService {
 }
 
 export const tableDataService: ITableDataService = {
-  getAll: (dataType: string, endpoint: string, messageBody: string, responseLimit?: number) => getAll(dataType, endpoint, messageBody, responseLimit),
+  getAll: (dataType: string, endpoint: string, messageBody: string, responseLimit?: number) =>
+    getAll(dataType, endpoint, messageBody, responseLimit),
 };

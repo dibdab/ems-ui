@@ -7,7 +7,7 @@ import Sidebar from './Sidebar/Sidebar';
 import TableView from './TableView/TableView';
 import { IDashboardProps } from './IDashboardProps';
 import { IRootState } from 'redux_';
-import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes'
+import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes';
 import { IRoute } from 'types';
 import { tableDataTypes } from 'enums';
 
@@ -31,30 +31,26 @@ export default class Dashboard extends React.Component<
           columnKeyNames: [
             'event',
             'listenerSystem',
-            'connector'
+            'connector',
           ],
-          tableName: tableDataTypes.Subscribers
-        }
+          tableName: tableDataTypes.Subscribers,
+        },
       },
       {
         component: TableView,
-        path: '/dashboard/test'
+        path: '/dashboard/test',
       },
       {
-        component: NoTableRoute
-      }
-    ]
+        component: NoTableRoute,
+      },
+    ];
 
     return (
       <div>
         <Topbar />
         <Sidebar />
         <div className="document-viewer">
-          <Switch>
-            {routes.map((route, i) => (
-              <RouteWithSubRoutes key={i} {...route} />
-            ))}
-          </Switch>
+          <Switch> {routes.map((route, i) => (<RouteWithSubRoutes key={i} {...route} />))} </Switch>
         </div>
       </div>
     );
