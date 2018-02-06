@@ -54,6 +54,14 @@
       padding: 8px;
       white-space: nowrap;
       cursor: pointer;
+      .filterBold {
+        font-weight: bold;
+      }
+    }
+    td:not(.contextMenu-td) {
+      max-width: 100px;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
     }
   }
 }

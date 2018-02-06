@@ -14,11 +14,11 @@ interface IOptions {
 
 interface filter {
   name: string;
-  value: string | boolean | filterArray;
+  value: string | boolean | filterObject;
 }
 
-interface filterArray {
-  [key: string]: string[];
+interface filterObject {
+  [key: string]: any[];
 }
 
 interface connector {

@@ -3,7 +3,7 @@ tr.accordionTableRow {
   width: 100%;
   &.hidden {
     transition: height 200ms $mat-anim-curve, border-bottom-color 1ms linear 200ms;
-    border-bottom: solid 1px transparent !important;
+    border-bottom: solid 0px transparent !important;
     height: 0;
     td.accordionTd {
       transition: padding-bottom 200ms $mat-anim-curve, padding-top 200ms $mat-anim-curve;

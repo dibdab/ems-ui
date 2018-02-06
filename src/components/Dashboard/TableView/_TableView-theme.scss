@@ -3,6 +3,7 @@
     $text-colour-secondary: map-get($theme, text-colour-secondary);
     $background-colour-dark: map-get($theme, background-colour-dark);
     $background-colour-darker: map-get($theme, background-colour-darker);
+    $text-colour-secondary: map-get($theme, text-colour-secondary);
     .dashboardTable {
         thead {
             color: $text-colour-secondary;
@@ -10,8 +11,15 @@
         tbody {
             tr {
                 border-bottom-color: $divider-colour;
+            }
+            tr:not(.accordionTableRow) {
                 &:hover {
                     background-color: $background-colour-dark;
+                }
+                td {
+                    .filterBold {
+                        color: $text-colour-secondary;
+                    }
                 }
                 td:not(.dashboardTable-checkbox-td):hover {
                     background-color: $background-colour-darker;

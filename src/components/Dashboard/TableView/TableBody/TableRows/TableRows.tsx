@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import { ITableRowsProps } from './ITableRowsProps';
 import { ITableRowsState } from './ITableRowsState';
 
 // import { ISubscriber, IRESTConnector, IJMSConnector } from 'types';
+import { SubscriberTableDataCells } from './SubscriberTableDataCells/SubscriberTableDataCells';
 import { ISubscriber } from 'types';
 import { AccordionTableRow } from 'components/shared/AccordionTableRow/AccordionTableRow';
 import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
@@ -49,7 +51,7 @@ export default class TableRows extends React.Component<
         if ((e.target as HTMLTableCellElement).className !== 'dashboardTable-checkbox-td') {
             const menuContents = (
                 <React.Fragment>
-                    <td>{`Filter on ${(e.target as HTMLTableCellElement).innerText}`}</td>
+                    <td className="contextMenu-td">{`Filter on ${(e.target as HTMLTableCellElement).innerText}`}</td>
                 </React.Fragment>
             );
             this.contextMenu.showContextMenu(e, menuContents);
@@ -76,9 +78,11 @@ export default class TableRows extends React.Component<
                         <td className="dashboardTable-checkbox-td">
                             <input type="checkbox" onClick={this.inputStopPropagation} />
                         </td>
-                        <td>{subscriber.event}</td>
-                        <td>{subscriber.listenerSystem}</td>
-                        <td>{Object.keys(subscriber.connector)}</td>
+                        <Switch>
+                            <Route path="/dashboard/subscribers" render={(routeProps) => (
+                                <SubscriberTableDataCells columnKeyNames={this.props.columnKeyNames} subscriber={subscriber} />
+                            )} />
+                        </Switch>
                         {/* <ConnectorTdComponent connector={subscriber.connector} /> */}
                     </tr>
                     <AccordionTableRow

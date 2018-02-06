@@ -14,7 +14,7 @@ export const AccordionTableRow = (props: IAccordionTableRowProps) => {
       id={props.accordionId}
       className={`accordionTableRow ${isAccordionVisibleClass}`}
     >
-      <td className="accordionTd" colSpan={6}>
+      <td className="accordionTd" colSpan={8}>
         <div className="json-view-container">
           <ReactJsonViewer isAccordionVisible={props.isAccordionVisible} src={props.jsonData} />
         </div>
