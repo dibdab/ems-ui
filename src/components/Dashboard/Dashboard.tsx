@@ -32,10 +32,7 @@ export default class Dashboard extends React.Component<
             'Event Name',
             'Subscriber',
             'Connector Type',
-            'Filter One',
-            'Filter Two',
-            'Filter Three',
-            'Filter Four',
+            'Filters',
           ],
           columnKeyNames: [
             'event',

@@ -16,12 +16,15 @@
                 &:hover {
                     background-color: $background-colour-dark;
                 }
-                td {
-                    .filterBold {
+                td.filter-td {
+                    div>b {
                         color: $text-colour-secondary;
                     }
+                    div:hover {
+                        background-color: $background-colour-darker;
+                    }
                 }
-                td:not(.dashboardTable-checkbox-td):hover {
+                td:not(.dashboardTable-checkbox-td):not(.filter-td):hover {
                     background-color: $background-colour-darker;
                 }
             }

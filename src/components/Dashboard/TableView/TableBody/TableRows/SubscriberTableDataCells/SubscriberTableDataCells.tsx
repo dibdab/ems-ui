@@ -1,49 +1,71 @@
 import * as React from 'react';
 
 import ISubscriberTableDataCellsProps from './ISubscriberTableDataCellsProps';
+import { IFilter } from 'types';
 
 export const SubscriberTableDataCells = (props: ISubscriberTableDataCellsProps) => {
+    return (
+        <React.Fragment>
+            <td data-contextmenufilter={{ event: props.subscriber.event.toString }}>
+                {props.subscriber.event}
+            </td>
+            <td data-contextmenufilter={{ listenerSystem: props.subscriber.listenerSystem.toString }}>
+                {props.subscriber.listenerSystem}
+            </td>
+            <td data-contextmenufilter={{ connector: (Object.keys(props.subscriber.connector)[0]).toString }}>
+                {Object.keys(props.subscriber.connector)[0]}
+            </td>
+            <td className="filter-td">{constructFiltersCell(props.subscriber.filter)}</td>
+        </React.Fragment>
+    );
+};
+
+function constructFiltersCell(filters: IFilter[]) {
     const filterCells: JSX.Element[] = [];
     let tdText = '';
     let tdTextHead = '';
-    console.log(props.subscriber, "subscriber");
-    if (props.subscriber.filter) {
-
-
-        props.subscriber.filter.map((filter, index) => {
+    let contextMenuFilter = {};
+    if (filters) {
+        filters.map((filter, index) => {
             if (typeof filter.value === 'string' || typeof filter.value === 'boolean') {
-                tdTextHead = `${filter.name}: `
+                tdTextHead = `${filter.name}: `;
                 tdText = `${filter.value}`;
             } else if (typeof filter.value === 'object') {
                 const filterObjectKey = Object.keys(filter.value)[0];
                 if (typeof filter.value[filterObjectKey] === 'object') {
                     const filterArray = filter.value[filterObjectKey];
                     let filterValues = '';
-                    filterArray.map((value, index) => {
+                    filterArray.map((value, filterArrayIndex) => {
                         filterValues += value;
-                        if (index + 1 !== filterArray.length)
+                        if (filterArrayIndex + 1 !== filterArray.length) {
                             filterValues += ', ';
+                        }
                     });
-                    console.log(filterValues)
-                    tdTextHead = `${filter.name} (${Object.keys(filter.value)}): `
+                    tdTextHead = `${filter.name} (${Object.keys(filter.value)}): `;
                     tdText = `${filterValues}`;
+                    contextMenuFilter = { filter: { name: filter.name, value: filter.value } };
                 } else if (typeof filter.value[filterObjectKey] === 'string') {
-                    tdTextHead = `${filter.name} (${Object.keys(filter.value)}): `
+                    tdTextHead = `${filter.name} (${Object.keys(filter.value)}): `;
                     tdText = `${filter.value[filterObjectKey][0]}`;
-                }
-                else {
-                    tdText = 'filter value unhandled';
+                    contextMenuFilter = { filter: { name: filter.name, value: filter.value } };
+                } else {
+                    tdTextHead = 'Error:';
+                    tdText = `Filter type of ${typeof filter.value} unhandled.`;
                 }
             }
-            filterCells.push(<td key={`${filter.name}${index}`} data-key={filter.name} data-value={filter.name}><span className="filterBold">{tdTextHead}</span>{tdText}</td>, )
-        })
+            filterCells.push(
+                (
+                    <div
+                        data-contextmenufilter={contextMenuFilter}
+                        key={index + tdTextHead}
+                    >
+                        <b>{tdTextHead}</b>{tdText}<br />
+                    </div>
+                ),
+            );
+        });
+    } else {
+        filterCells.push(<div key="key">No Filters</div>);
     }
-    return (
-        <React.Fragment>
-            <td data-key={'event'} data-value={props.subscriber.event}>{props.subscriber.event}</td>
-            <td data-key={'listenerSystem'} data-value={props.subscriber.listenerSystem}>{props.subscriber.listenerSystem}</td>
-            <td data-key={'connector'} data-value={props.subscriber.connector}>{Object.keys(props.subscriber.connector)[0]}</td>
-            {filterCells}
-        </React.Fragment>
-    );
-};
+    return filterCells;
+}

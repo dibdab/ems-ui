@@ -27,7 +27,6 @@
   width: 100%;
   th.dashboardTable-checkbox-td,
   td.dashboardTable-checkbox-td {
-    cursor: default;
     width: 19px;
   }
   tr {
@@ -53,15 +52,16 @@
     td {
       padding: 8px;
       white-space: nowrap;
-      cursor: pointer;
-      .filterBold {
-        font-weight: bold;
-      }
     }
-    td:not(.contextMenu-td) {
-      max-width: 100px;
-      text-overflow: ellipsis;
-      overflow-x: hidden;
+    td.filter-td {
+      & div {
+        word-wrap: break-word;
+        white-space: pre-line;
+        padding: 4px;
+        b {
+          pointer-events: none;
+        }
+      }
     }
   }
 }

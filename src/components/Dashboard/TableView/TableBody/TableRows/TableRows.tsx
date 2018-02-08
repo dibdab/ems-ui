@@ -48,10 +48,11 @@ export default class TableRows extends React.Component<
     }
 
     createContextMenu(e: MouseEvent<HTMLTableRowElement>) {
-        if ((e.target as HTMLTableCellElement).className !== 'dashboardTable-checkbox-td') {
+        if ((e.target as HTMLElement).hasAttribute('data-contextmenufilter')) {
+            console.log((e.target as HTMLElement).getAttribute('data-contextmenufilter'));
             const menuContents = (
                 <React.Fragment>
-                    <td className="contextMenu-td">{`Filter on ${(e.target as HTMLTableCellElement).innerText}`}</td>
+                    <td className="contextMenu-td">{`Filter on ${(e.target as HTMLElement).innerText}`}</td>
                 </React.Fragment>
             );
             this.contextMenu.showContextMenu(e, menuContents);
@@ -70,18 +71,26 @@ export default class TableRows extends React.Component<
             subscribers.push(
                 <React.Fragment key={subscriber._id.counter}>
                     <tr
-                        className="dashboardTr"
+                        className="dashboard-tr"
+                        // tslint:disable
                         onContextMenu={(e: any) => this.createContextMenu(e)}
                         onClick={this.toggleAccordion}
                         id={`${subscriber._id.counter}`}
                     >
-                        <td className="dashboardTable-checkbox-td">
+                        <td className="dashboardTable-checkbox-td" >
                             <input type="checkbox" onClick={this.inputStopPropagation} />
                         </td>
                         <Switch>
-                            <Route path="/dashboard/subscribers" render={(routeProps) => (
-                                <SubscriberTableDataCells columnKeyNames={this.props.columnKeyNames} subscriber={subscriber} />
-                            )} />
+                            <Route
+                                path="/dashboard/subscribers"
+                                // tslint:disable
+                                render={(routeProps) => (
+                                    <SubscriberTableDataCells
+                                        columnKeyNames={this.props.columnKeyNames}
+                                        subscriber={subscriber}
+                                    />
+                                )}
+                            />
                         </Switch>
                         {/* <ConnectorTdComponent connector={subscriber.connector} /> */}
                     </tr>

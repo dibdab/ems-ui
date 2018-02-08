@@ -12,26 +12,26 @@ interface IOptions {
   payloadcontent: string[];
 }
 
-interface filter {
+export interface IFilter {
   name: string;
-  value: string | boolean | filterObject;
+  value: string | boolean | IFilterObject;
 }
 
-interface filterObject {
+interface IFilterObject {
   [key: string]: any[];
 }
 
-interface connector {
+interface IConnector {
   host: string;
   port: string;
 }
 
-interface REST extends connector {
+interface REST extends IConnector {
   path: string;
   method: string;
 }
 
-interface JMS extends connector {
+interface JMS extends IConnector {
   queue: string;
 }
 
@@ -45,11 +45,11 @@ export interface IJMSConnector {
 
 
 export interface ISubscriber {
-  [key: string]: string | filter[] | IRESTConnector | IJMSConnector | IId | IOptions
+  [key: string]: string | IFilter[] | IRESTConnector | IJMSConnector | IId | IOptions
   _id: IId;
   event: string;
   listenerSystem: string;
   options: IOptions;
-  filter: filter[];
+  filter: IFilter[];
   connector: IRESTConnector | IJMSConnector;
 }
