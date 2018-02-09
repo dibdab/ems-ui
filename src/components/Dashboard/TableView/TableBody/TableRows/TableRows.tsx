@@ -48,11 +48,12 @@ export default class TableRows extends React.Component<
     }
 
     createContextMenu(e: MouseEvent<HTMLTableRowElement>) {
-        if ((e.target as HTMLElement).hasAttribute('data-contextmenufilter')) {
-            console.log((e.target as HTMLElement).getAttribute('data-contextmenufilter'));
+        if ((e.target as HTMLElement).hasAttribute('data-filter')) {
+            console.log((e.target as HTMLElement).getAttribute('data-filter'));
             const menuContents = (
                 <React.Fragment>
-                    <td className="contextMenu-td">{`Filter on ${(e.target as HTMLElement).innerText}`}</td>
+                    <td className="contextMenu-td">{`Include on ${(e.target as HTMLElement).innerText}`}</td>
+                    <td className="contextMenu-td">{`Exclude on ${(e.target as HTMLElement).innerText}`}</td>
                 </React.Fragment>
             );
             this.contextMenu.showContextMenu(e, menuContents);

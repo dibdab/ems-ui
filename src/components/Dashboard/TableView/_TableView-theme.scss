@@ -13,7 +13,7 @@
                 border-bottom-color: $divider-colour;
             }
             tr:not(.accordionTableRow) {
-                &:hover {
+                &:not(.contextMenu):hover {
                     background-color: $background-colour-dark;
                 }
                 td.filter-td {
