@@ -22,7 +22,6 @@ export default function Sidebar(): JSX.Element {
   ));
   return (
     <div className="sidebar">
-      <input placeholder="Search Events" />
       <nav>{tablelist}</nav>
     </div>
   );

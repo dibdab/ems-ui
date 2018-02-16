@@ -2,10 +2,11 @@
     margin: 32px auto;
     width: 90%;
     .tableView-searchbar-searchIcon {
-        width: 21px;
-        height: 21px;
         padding: 4px;
-        margin-bottom: -11px;
+        margin-bottom: -14px;
+        width: 38px;
+        height: 38px;
+        border-radius: 4px;
     }
     .tableView-searchbar-searchInput {
         font-size: 18px;
@@ -17,7 +18,8 @@
         max-height: 300px;
         max-width: 80%;
         width: 80%;
-        height: 23px;
+        height: 21px;
+        line-height: 21px;
         vertical-align: bottom;
         text-align: justify;
     }

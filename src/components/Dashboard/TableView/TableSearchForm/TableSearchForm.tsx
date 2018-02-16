@@ -92,7 +92,7 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
             <div className="tableView-searchbar-container" >
                 <form action="submit" onSubmit={this.handleSubmit}>
                     <button className="tableView-searchbar-button" type="submit">
-                        <i className="fas fa-search tableView-searchbar-searchIcon"></i>
+                        <i className="fas fa-search tableView-searchbar-searchIcon button"></i>
                     </button>
                     <textarea
                         className={`tableView-searchbar-searchInput ${isAccordionVisibleClass}`}
