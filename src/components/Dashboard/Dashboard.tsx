@@ -31,7 +31,7 @@ export default class Dashboard extends React.Component<
           columnHeadings: [
             'Event Name',
             'Subscriber',
-            'Connector Type',
+            'Connector',
             'Filters',
           ],
           columnKeyNames: [

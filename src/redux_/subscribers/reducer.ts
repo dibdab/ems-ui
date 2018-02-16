@@ -1,9 +1,10 @@
-import { ISubscriber } from 'types';
+import { ISubscriber, ISubscriberFilter } from 'types';
 
 import {
   SUBSCRIBERS_IS_LOADING,
   SUBSCRIBERS_FETCH_SUCCESS,
   SUBSCRIBERS_HAS_ERRORED,
+  SUBSCRIBERS_FILTER_CHANGE,
 } from './';
 import { combineReducers } from 'redux';
 
@@ -12,6 +13,7 @@ export type State = Readonly<{
   subscribers: ISubscriber[];
   subscribersIsLoading: boolean;
   subscribersHasErrored: boolean;
+  subscribersFilter: ISubscriberFilter;
 }>;
 
 export const reducer = combineReducers<State>({
@@ -36,6 +38,15 @@ export const reducer = combineReducers<State>({
   subscribersHasErrored: (state = false, action) => {
     switch (action.type) {
       case SUBSCRIBERS_HAS_ERRORED:
+        return action.payload;
+
+      default:
+        return state;
+    }
+  },
+  subscribersFilter: (state = {}, action) => {
+    switch (action.type) {
+      case SUBSCRIBERS_FILTER_CHANGE:
         return action.payload;
 
       default:

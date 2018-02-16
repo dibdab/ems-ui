@@ -5,6 +5,10 @@ import './ContextMenu.css';
 import { IContextMenuState } from './IContextMenuState';
 import { IContextMenuProps } from './IContextMenuProps';
 
+import { ISubscriberFilter, ISubscriberFilterFilter, INegativeFilter } from 'types';
+import store from 'store';
+import { SubscriberActionCreators } from 'redux_';
+
 export default class ContextMenu extends React.Component<
     IContextMenuProps,
     IContextMenuState
@@ -16,10 +20,11 @@ export default class ContextMenu extends React.Component<
             style: {},
             x: 0,
             y: 0,
-            menuContents: '',
+            content: <div />,
+            menuTarget: undefined,
         };
 
-        this.showContextMenu = this.showContextMenu.bind(this);
+        this.handleContextMenuClick = this.handleContextMenuClick.bind(this);
     }
 
     unBindWindowEvent = () => {
@@ -37,6 +42,10 @@ export default class ContextMenu extends React.Component<
         window.addEventListener('click', this.hideContextMenu);
         window.addEventListener('wheel', this.hideContextMenu);
     }
+
+    onMouseEnter = () => window.removeEventListener('mousedown', this.hideContextMenu);
+
+    onMouseLeave = () => window.addEventListener('mousedown', this.hideContextMenu);
 
     getMousePosition = (e: any) => {
         const pos = {
@@ -70,19 +79,79 @@ export default class ContextMenu extends React.Component<
         };
     }
 
-    showContextMenu = (e: MouseEvent<HTMLElement>, menuContents: any) => {
-        console.log(e.target);
-        console.log(e.currentTarget);
-        e.stopPropagation();
-        e.preventDefault();
-        this.bindWindowEvent();
-        const { x, y } = this.getMousePosition(e);
-        this.setState({
-            isVisible: true,
-            x,
-            y,
-            menuContents,
-        });
+    handleContextMenuClick = (e: MouseEvent<HTMLTableCellElement>) => {
+        const newFilter: ISubscriberFilter = Object.assign({}, this.props.filter);
+        const contextMenuTarget = this.state.menuTarget as HTMLElement;
+        if (contextMenuTarget.hasAttribute('data-filter')) {
+            if (contextMenuTarget.hasAttribute('data-filterjsonlocation')) {
+                const targetFilterJsonLocation = contextMenuTarget.getAttribute('data-filterjsonlocation') as string;
+                if (targetFilterJsonLocation === 'filter') {
+                    let targetFilter = JSON.parse((contextMenuTarget.getAttribute('data-filter')) as string) as ISubscriberFilterFilter;
+                    if ((e.target as HTMLElement).getAttribute('data-filterispositive') === 'true') {
+                        newFilter[targetFilterJsonLocation] = targetFilter;
+                    } else {
+                        (newFilter[targetFilterJsonLocation] as INegativeFilter<ISubscriberFilterFilter>) = { $ne: targetFilter, }
+                    }
+                } else if (targetFilterJsonLocation === 'connectorJMS') {
+                    let targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
+                    if ((e.target as HTMLElement).getAttribute('data-filterispositive') === 'true') {
+                        newFilter.connector = { JMS: JSON.parse(targetFilter) };
+                    } else {
+                        newFilter.connector = { $ne: { JMS: JSON.parse(targetFilter) } }
+                    }
+                } else if (targetFilterJsonLocation === 'connectorREST') {
+                    let targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
+                    if ((e.target as HTMLElement).getAttribute('data-filterispositive') === 'true') {
+                        newFilter.connector = { REST: JSON.parse(targetFilter) };
+                    } else {
+                        newFilter.connector = { $ne: { REST: JSON.parse(targetFilter) } }
+                    }
+                } else {
+                    let targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
+                    if ((e.target as HTMLElement).getAttribute('data-filterispositive') === 'true') {
+                        newFilter[targetFilterJsonLocation] = targetFilter;
+                    } else {
+                        newFilter[targetFilterJsonLocation] = { $ne: targetFilter, }
+                    }
+                }
+            }
+        }
+        store.dispatch(SubscriberActionCreators.subscribersFilterChange(newFilter));
+    }
+
+    createContent(e: MouseEvent<HTMLElement>) {
+        const filterString = `Filter on ${(e.target as HTMLElement).innerText}`;
+        return (
+            <React.Fragment>
+                {/* // tslint:disable */}
+                <td className="contextMenu-td" data-filterispositive={true} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={this.handleContextMenuClick}>
+                    <i className="fas fa-plus"></i> {filterString}
+                </td>
+                {/* // tslint:disable */}
+                <td className="contextMenu-td" data-filterispositive={false} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={this.handleContextMenuClick}>
+                    <i className="fas fa-minus"></i> {filterString}
+                </td>
+            </React.Fragment>
+        );
+    }
+
+    showContextMenu = (e: MouseEvent<HTMLElement>) => {
+        if ((e.target as HTMLElement).hasAttribute('data-filter')) {
+            console.log((e.target as HTMLElement).getAttribute('data-filter'));
+            console.log(e.target);
+            console.log(e.currentTarget);
+            e.stopPropagation();
+            e.preventDefault();
+            this.bindWindowEvent();
+            const { x, y } = this.getMousePosition(e);
+            this.setState({
+                isVisible: true,
+                x,
+                y,
+                content: this.createContent(e),
+                menuTarget: e.target as HTMLElement,
+            });
+        }
     }
 
     hideContextMenu = (e: any) => {
@@ -99,7 +168,9 @@ export default class ContextMenu extends React.Component<
         }
         const RenderTag = this.props.renderTag;
         return (
-            <RenderTag className="contextMenu" style={this.getMenuStyle()}>{this.state.menuContents}</RenderTag>
+            <RenderTag className="contextMenu" style={this.getMenuStyle()}>
+                {this.state.content}
+            </RenderTag>
         );
     }
 }

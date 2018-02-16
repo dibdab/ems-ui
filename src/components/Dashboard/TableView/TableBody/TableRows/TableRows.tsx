@@ -47,19 +47,6 @@ export default class TableRows extends React.Component<
         }
     }
 
-    createContextMenu(e: MouseEvent<HTMLTableRowElement>) {
-        if ((e.target as HTMLElement).hasAttribute('data-filter')) {
-            console.log((e.target as HTMLElement).getAttribute('data-filter'));
-            const menuContents = (
-                <React.Fragment>
-                    <td className="contextMenu-td">{`Include on ${(e.target as HTMLElement).innerText}`}</td>
-                    <td className="contextMenu-td">{`Exclude on ${(e.target as HTMLElement).innerText}`}</td>
-                </React.Fragment>
-            );
-            this.contextMenu.showContextMenu(e, menuContents);
-        }
-    }
-
     inputStopPropagation(event: MouseEvent<HTMLElement>) {
         event.stopPropagation();
     }
@@ -74,7 +61,7 @@ export default class TableRows extends React.Component<
                     <tr
                         className="dashboard-tr"
                         // tslint:disable
-                        onContextMenu={(e: any) => this.createContextMenu(e)}
+                        onContextMenu={(e: MouseEvent<HTMLTableRowElement>) => this.contextMenu.showContextMenu(e)}
                         onClick={this.toggleAccordion}
                         id={`${subscriber._id.counter}`}
                     >
@@ -93,7 +80,6 @@ export default class TableRows extends React.Component<
                                 )}
                             />
                         </Switch>
-                        {/* <ConnectorTdComponent connector={subscriber.connector} /> */}
                     </tr>
                     <AccordionTableRow
                         accordionId={`${subscriber._id.counter}`}
@@ -106,43 +92,9 @@ export default class TableRows extends React.Component<
         );
         return (
             <React.Fragment>
-                <ContextMenu renderTag={'tr'} ref={contextMenu => { this.contextMenu = contextMenu as ContextMenu; }} />
+                <ContextMenu renderTag={'tr'} ref={contextMenu => { this.contextMenu = contextMenu as ContextMenu; }} filter={this.props.filter} />
                 {subscribers}
             </React.Fragment>
         );
     }
 }
-
-// interface IConnectorTdComponentProps {
-//     connector: IRESTConnector | IJMSConnector;
-// }
-
-// function isJMS(connector: any): connector is IJMSConnector {
-//     return connector.REST === undefined;
-// }
-
-// const ConnectorTdComponent = (props: IConnectorTdComponentProps) => {
-//     const connector = props.connector;
-//     if (isJMS(connector)) {
-//         const connectorContents = connector.JMS;
-//         const connectorUrl = `${connectorContents.host}:${connectorContents.port}`;
-//         return (
-//             <React.Fragment>
-//                 <td>{Object.keys(connector)}</td>
-//                 <td title={connectorUrl}>{connectorUrl}</td>
-//                 <td>{connectorContents.queue}</td>
-//             </React.Fragment>
-//         );
-//     } else {
-//         const connectorContents = connector.REST;
-//         const connectorUrl = `${connectorContents.host}:${connectorContents.port +
-//             connectorContents.path}`;
-//         return (
-//             <React.Fragment>
-//                 <td>{Object.keys(connector)}</td>
-//                 <td title={connectorUrl}>{connectorUrl} </td>
-//                 <td>{connectorContents.method}</td>
-//             </React.Fragment>
-//         );
-//     }
-// };

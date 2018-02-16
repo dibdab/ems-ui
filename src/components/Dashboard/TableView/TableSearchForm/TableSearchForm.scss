@@ -1,3 +1,46 @@
-.tableView-searchbar-button {
-    visibility: hidden;
+.tableView-searchbar-container {
+    margin: 32px auto;
+    width: 90%;
+    .tableView-searchbar-searchIcon {
+        width: 21px;
+        height: 21px;
+        padding: 4px;
+        margin-bottom: -11px;
+    }
+    .tableView-searchbar-searchInput {
+        font-size: 18px;
+        padding: 8px 8px 8px 4px;
+        border: none;
+        border-bottom: 1px solid #757575;
+        background-color: #fafafa;
+        margin-right: 16px;
+        max-height: 300px;
+        max-width: 80%;
+        width: 80%;
+        height: 23px;
+        vertical-align: bottom;
+        text-align: justify;
+    }
+    .tableView-searchbar-limitIcon {
+        width: 21px;
+        height: 21px;
+        padding: 4px;
+        margin-right: 4px;
+    }
+    .tableView-searchbar-limitInput {
+        width: 10%;
+        font-size: 18px;
+        padding: 8px 8px 8px 4px;
+        border: none;
+        border-bottom: 1px solid #757575;
+        background-color: #fafafa;
+    }
+    .tableView-searchbar-button {
+        width: auto;
+        height: auto;
+        margin-right: 8px;
+        padding: 0;
+        background-color: #fafafa;
+        border: none;
+    }
 }

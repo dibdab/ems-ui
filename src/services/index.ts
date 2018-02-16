@@ -1,1 +1,1 @@
-export { tableDataService } from './tableData';
+export { getTableData } from './tableData';

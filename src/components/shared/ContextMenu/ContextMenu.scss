@@ -12,6 +12,9 @@ tbody>tr.contextMenu {
     box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.51);
     td {
         width: 100%;
+        max-width: 400px;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
     }
     td:not(:last-child) {
         border-bottom: solid 1px;

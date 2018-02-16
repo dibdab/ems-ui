@@ -21,6 +21,7 @@ export default class App extends React.Component {
             href="https://fonts.googleapis.com/css?family=Roboto|Noto+Sans:300,400,500"
             rel="stylesheet"
           />
+          <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         </Helmet>
         <Switch>
           <Route path="/login" component={Login} />

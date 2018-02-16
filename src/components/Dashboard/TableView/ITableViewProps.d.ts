@@ -1,6 +1,6 @@
 import * as router from 'react-router-dom';
 import { tableDataTypes } from 'enums';
-import { IRoute } from 'types';
+import { IRoute, ISubscriberFilter } from 'types';
 import { ISubscriber } from 'types/';
 
 export interface ITableViewProps {
@@ -10,6 +10,7 @@ export interface ITableViewProps {
   subscribers: ISubscriber[];
   hasErrored: boolean;
   isLoading: boolean;
+  filter: ISubscriberFilter;
 }
 
 type urlParams = { tableName: tableDataTypes };

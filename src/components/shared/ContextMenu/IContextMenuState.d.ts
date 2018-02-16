@@ -1,7 +1,10 @@
+import { MouseEvent } from 'react';
+
 export interface IContextMenuState {
     isVisible: boolean;
     style: object;
     x: number;
     y: number;
-    menuContents: any;
+    content: JSX.Element;
+    menuTarget?: HTMLElement;
 }

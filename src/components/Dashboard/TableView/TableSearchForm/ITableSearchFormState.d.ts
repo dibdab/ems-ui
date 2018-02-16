@@ -1,4 +1,7 @@
+import { ISubscriberFilter } from 'types';
+
 export default interface ITableSearchFormProps {
-    searchValue: string;
-    searchLimit: string;
+    filter: string;
+    limit: string;
+    isFilterInvalid: boolean;
 }
