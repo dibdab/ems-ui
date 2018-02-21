@@ -5,4 +5,5 @@ export interface ITableRowsProps {
     tableData: ISubscriber[];
     columnKeyNames: string[];
     filter: ISubscriberFilter;
+    isLoading: boolean;
 }

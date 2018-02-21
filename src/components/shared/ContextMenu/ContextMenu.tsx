@@ -5,7 +5,7 @@ import './ContextMenu.css';
 import { IContextMenuState } from './IContextMenuState';
 import { IContextMenuProps } from './IContextMenuProps';
 
-import { ISubscriberFilter, ISubscriberFilterFilter, INegativeFilter } from 'types';
+import { ISubscriberFilter } from 'types';
 import store from 'store';
 import { SubscriberActionCreators } from 'redux_';
 
@@ -84,34 +84,35 @@ export default class ContextMenu extends React.Component<
         const contextMenuTarget = this.state.menuTarget as HTMLElement;
         if (contextMenuTarget.hasAttribute('data-filter')) {
             if (contextMenuTarget.hasAttribute('data-filterjsonlocation')) {
-                const targetFilterJsonLocation = contextMenuTarget.getAttribute('data-filterjsonlocation') as string;
+                const targetFilterJsonLocation =
+                    contextMenuTarget.getAttribute('data-filterjsonlocation') as string;
                 if (targetFilterJsonLocation === 'filter') {
-                    let targetFilter = JSON.parse((contextMenuTarget.getAttribute('data-filter')) as string) as ISubscriberFilterFilter;
+                    const targetFilter = JSON.parse((contextMenuTarget.getAttribute('data-filter')) as string);
                     if ((e.target as HTMLElement).getAttribute('data-filterispositive') === 'true') {
                         newFilter[targetFilterJsonLocation] = targetFilter;
                     } else {
-                        (newFilter[targetFilterJsonLocation] as INegativeFilter<ISubscriberFilterFilter>) = { $ne: targetFilter, }
+                        newFilter[targetFilterJsonLocation] = { $ne: targetFilter };
                     }
                 } else if (targetFilterJsonLocation === 'connectorJMS') {
-                    let targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
+                    const targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
                     if ((e.target as HTMLElement).getAttribute('data-filterispositive') === 'true') {
                         newFilter.connector = { JMS: JSON.parse(targetFilter) };
                     } else {
-                        newFilter.connector = { $ne: { JMS: JSON.parse(targetFilter) } }
+                        newFilter.connector = { $ne: { JMS: JSON.parse(targetFilter) } };
                     }
                 } else if (targetFilterJsonLocation === 'connectorREST') {
-                    let targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
+                    const targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
                     if ((e.target as HTMLElement).getAttribute('data-filterispositive') === 'true') {
                         newFilter.connector = { REST: JSON.parse(targetFilter) };
                     } else {
-                        newFilter.connector = { $ne: { REST: JSON.parse(targetFilter) } }
+                        newFilter.connector = { $ne: { REST: JSON.parse(targetFilter) } };
                     }
                 } else {
-                    let targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
+                    const targetFilter = contextMenuTarget.getAttribute('data-filter') as string;
                     if ((e.target as HTMLElement).getAttribute('data-filterispositive') === 'true') {
                         newFilter[targetFilterJsonLocation] = targetFilter;
                     } else {
-                        newFilter[targetFilterJsonLocation] = { $ne: targetFilter, }
+                        newFilter[targetFilterJsonLocation] = { $ne: targetFilter };
                     }
                 }
             }
@@ -123,13 +124,23 @@ export default class ContextMenu extends React.Component<
         const filterString = `Filter on ${(e.target as HTMLElement).innerText}`;
         return (
             <React.Fragment>
-                {/* // tslint:disable */}
-                <td className="contextMenu-td" data-filterispositive={true} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={this.handleContextMenuClick}>
-                    <i className="fas fa-plus"></i> {filterString}
+                <td
+                    className="contextMenu-td"
+                    data-filterispositive={true}
+                    onMouseEnter={this.onMouseEnter}
+                    onMouseLeave={this.onMouseLeave}
+                    onClick={this.handleContextMenuClick}
+                >
+                    <i className="fas fa-plus" /> {filterString}
                 </td>
-                {/* // tslint:disable */}
-                <td className="contextMenu-td" data-filterispositive={false} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={this.handleContextMenuClick}>
-                    <i className="fas fa-minus"></i> {filterString}
+                <td
+                    className="contextMenu-td"
+                    data-filterispositive={false}
+                    onMouseEnter={this.onMouseEnter}
+                    onMouseLeave={this.onMouseLeave}
+                    onClick={this.handleContextMenuClick}
+                >
+                    <i className="fas fa-minus" /> {filterString}
                 </td>
             </React.Fragment>
         );
@@ -137,9 +148,6 @@ export default class ContextMenu extends React.Component<
 
     showContextMenu = (e: MouseEvent<HTMLElement>) => {
         if ((e.target as HTMLElement).hasAttribute('data-filter')) {
-            console.log((e.target as HTMLElement).getAttribute('data-filter'));
-            console.log(e.target);
-            console.log(e.currentTarget);
             e.stopPropagation();
             e.preventDefault();
             this.bindWindowEvent();

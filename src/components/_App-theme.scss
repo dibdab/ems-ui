@@ -27,4 +27,12 @@
             border-right: 1px solid $divider-colour;
         }
     }
+    .loader,
+    .loader:before,
+    .loader:after {
+        background: $accent-colour;
+    }
+    .loader {
+        color: $accent-colour;
+    }
 }

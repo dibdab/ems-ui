@@ -5,7 +5,7 @@ import { ITableHeaderProps } from './ITableHeaderProps';
 export const TableHeader = (props: ITableHeaderProps) => {
   const columnHeadings = props.columnHeadings.map(
     columnHeading => (
-      <th className="divTable-th" key={columnHeading}>{columnHeading}</th>
+      <th key={columnHeading}>{columnHeading}</th>
     ),
   );
   return (

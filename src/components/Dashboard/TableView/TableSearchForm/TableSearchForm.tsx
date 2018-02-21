@@ -12,22 +12,19 @@ import { getTableData } from 'services';
 import { tableDataTypes } from 'enums';
 import Config from 'config';
 
-
 export default class TableSearchForm extends React.Component<ITableSearchFormProps, ITableSearchFormState> {
+    private textArea: HTMLTextAreaElement;
     constructor(props: ITableSearchFormProps) {
         super(props);
         this.state = {
             filter: JSON.stringify(this.props.filter),
-            limit: '',
+            limit: '10',
             isFilterInvalid: false,
         };
-
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleLimitChange = this.handleLimitChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-
 
     componentWillReceiveProps(nextProps: ITableSearchFormProps) {
         if (this.state.filter !== JSON.stringify(nextProps.filter)) {
@@ -35,23 +32,28 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
         }
     }
 
+    componentDidUpdate(prevProps: ITableSearchFormProps, prevState: ITableSearchFormState) {
+        if (this.state.filter !== prevState.filter) {
+            this.resizeTextArea(this.textArea);
+        }
+    }
 
-
-    handleSearchChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        // console.log(JSON.stringify(this.props.filter), 'searchfil;ter');
+    handleSearchChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         this.setState({ filter: event.target.value ? event.target.value : '{}' });
+        this.resizeTextArea(event.target);
+    }
+
+    resizeTextArea(element: HTMLTextAreaElement) {
+        element.style.height = '1px';
+        element.style.height = (element.scrollHeight - 22) + 'px';
     }
 
     handleSearchBlur = () => {
         try {
-            let filter = JSON.parse(this.state.filter);
+            const filter = JSON.parse(this.state.filter);
             this.setState({ isFilterInvalid: false });
-            console.log(filter, 'search parsed');
             store.dispatch(SubscriberActionCreators.subscribersFilterChange(filter));
-            console.log(JSON.stringify(this.props.filter), 'searchfil;ter');
         } catch (error) {
-            // TODO: Show on UI
-            console.log(error, 'error on searcblur');
             this.setState({ isFilterInvalid: true });
         }
     }
@@ -62,10 +64,7 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
     }
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
-        console.log('handleSubmit')
         try {
-            console.log(this.state.filter, 'search state')
-            console.log(this.props.filter, 'search props')
             store.dispatch(SubscriberActionCreators.subscribersFilterChange(JSON.parse(this.state.filter)));
             this.setState({ isFilterInvalid: false });
             getTableData(
@@ -76,8 +75,6 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
                 parseInt(this.state.limit, 10),
             );
         } catch (error) {
-            // TODO: Show on UI
-            console.log(error, 'error on searchsubmit');
             this.setState({ isFilterInvalid: true });
         }
 
@@ -91,10 +88,8 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
         return (
             <div className="tableView-searchbar-container" >
                 <form action="submit" onSubmit={this.handleSubmit}>
-                    <button className="tableView-searchbar-button" type="submit">
-                        <i className="fas fa-search tableView-searchbar-searchIcon button"></i>
-                    </button>
                     <textarea
+                        ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
                         className={`tableView-searchbar-searchInput ${isAccordionVisibleClass}`}
                         value={this.state.filter}
                         onChange={this.handleSearchChange}
@@ -106,9 +101,15 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
                         type="text"
                         value={this.state.limit}
                         onChange={this.handleLimitChange}
-                        placeholder="25-100"
+                        placeholder="1-100"
                     />
+                    <button className="tableView-searchbar-button" type="submit">
+                        <i className="fas fa-search tableView-searchbar-searchIcon button" />
+                    </button>
                 </form>
+                <div className="tableView-searchbar-results-count">
+                    {this.props.resultsCount} results found.
+                </div>
             </div>
         );
     }

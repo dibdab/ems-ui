@@ -3,7 +3,13 @@ import { SubscriberActionCreators } from 'redux_';
 import { ISubscriber } from 'types';
 import { tableDataTypes } from 'enums';
 
-export function getSubscribers(dataType: string, endpoint: string, messageBody?: string, responseLimit?: number, skip?: number): void {
+export function getSubscribers(
+  dataType: string,
+  endpoint: string,
+  messageBody?: string,
+  responseLimit?: number,
+  skip?: number,
+): void {
   setErrored(dataType, false);
   setLoading(dataType, true);
   let fullEndpoint: string;
@@ -18,7 +24,6 @@ export function getSubscribers(dataType: string, endpoint: string, messageBody?:
   } else {
     fullEndpoint = `${endpoint}?limit=${responseLimit}`;
   }
-  console.log('call service');
   fetch(fullEndpoint, {
     method: 'POST',
     headers: headers,
@@ -30,15 +35,19 @@ export function getSubscribers(dataType: string, endpoint: string, messageBody?:
       setLoading(dataType, false);
     })
     .catch(() => {
-      console.log('service error');
       setErrored(dataType, true);
       setLoading(dataType, false);
     },
   );
 }
 
-export function getTableData(tableName: string, dataType: string, endpoint: string, messageBody: string, responseLimit?: number) {
-  console.log('getTableData')
+export function getTableData(
+  tableName: string,
+  dataType: string,
+  endpoint: string,
+  messageBody: string,
+  responseLimit?: number,
+) {
   switch (tableName) {
     case (tableDataTypes.Subscribers):
       getSubscribers(dataType, endpoint, messageBody, !responseLimit ? 10 : responseLimit);

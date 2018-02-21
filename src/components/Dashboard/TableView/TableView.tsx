@@ -20,25 +20,29 @@ export class TableView extends React.Component<ITableViewProps, IRootState> {
     getTableData(this.props.tableName, tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, '', 10);
   }
 
-
   render() {
-    if (this.props.subscribers.length <= 0) {
-      return (
-        <TableSearchForm tableName={this.props.tableName} filter={this.props.filter} />
-      );
+    let loadingSpinner;
+    if (this.props.isLoading) {
+      loadingSpinner = <div className="loader">Loading...</div>;
+    } else {
+      loadingSpinner = null;
     }
     return (
       <React.Fragment>
-        {/* style returned amount */}
-        {this.props.subscribers.length}
-        <TableSearchForm tableName={this.props.tableName} filter={this.props.filter} />
-        <table className="dashboardTable">
+        <TableSearchForm
+          tableName={this.props.tableName}
+          filter={this.props.filter}
+          resultsCount={this.props.tableData.length}
+        />
+        {loadingSpinner}
+        <table className="tableView">
           <TableHeader columnHeadings={this.props.columnHeadings} />
           <TableBody
             columnKeyNames={this.props.columnKeyNames}
             tableName={this.props.tableName}
-            subscribers={this.props.subscribers}
+            tableData={this.props.tableData}
             filter={this.props.filter}
+            isLoading={this.props.isLoading}
           />
         </table>
       </React.Fragment>
@@ -48,7 +52,7 @@ export class TableView extends React.Component<ITableViewProps, IRootState> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    subscribers: state.subscribers.subscribers,
+    tableData: state.subscribers.subscribers,
     hasErrored: state.subscribers.subscribersHasErrored,
     isLoading: state.subscribers.subscribersIsLoading,
     filter: state.subscribers.subscribersFilter,

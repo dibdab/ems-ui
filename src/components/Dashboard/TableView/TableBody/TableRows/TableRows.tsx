@@ -52,6 +52,13 @@ export default class TableRows extends React.Component<
     }
 
     render() {
+        if (this.props.tableData.length <= 0) {
+            return (
+                <tr className="tableView-no-interact-tr">
+                    <td colSpan={8}>No results found.</td>
+                </tr>
+            );
+        }
         const subscribers: JSX.Element[] = [];
         this.props.tableData.map((subscriber: ISubscriber, index) => {
             const subscriberWithoutId = Object.assign({}, subscriber);
@@ -65,7 +72,7 @@ export default class TableRows extends React.Component<
                         onClick={this.toggleAccordion}
                         id={`${subscriber._id.counter}`}
                     >
-                        <td className="dashboardTable-checkbox-td" >
+                        <td className="tableView-checkbox-td" >
                             <input type="checkbox" onClick={this.inputStopPropagation} />
                         </td>
                         <Switch>

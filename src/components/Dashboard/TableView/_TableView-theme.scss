@@ -4,7 +4,7 @@
     $background-colour-dark: map-get($theme, background-colour-dark);
     $background-colour-darker: map-get($theme, background-colour-darker);
     $text-colour-secondary: map-get($theme, text-colour-secondary);
-    .dashboardTable {
+    .tableView {
         thead {
             color: $text-colour-secondary;
         }
@@ -24,7 +24,7 @@
                         background-color: $background-colour-darker;
                     }
                 }
-                td:not(.dashboardTable-checkbox-td):not(.filter-td):hover {
+                td:not(.tableView-checkbox-td):not(.filter-td):hover {
                     background-color: $background-colour-darker;
                 }
             }

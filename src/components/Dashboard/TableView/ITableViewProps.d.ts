@@ -7,7 +7,7 @@ export interface ITableViewProps {
   columnHeadings: string[];
   columnKeyNames: string[];
   tableName: string;
-  subscribers: ISubscriber[];
+  tableData: ISubscriber[];
   hasErrored: boolean;
   isLoading: boolean;
   filter: ISubscriberFilter;

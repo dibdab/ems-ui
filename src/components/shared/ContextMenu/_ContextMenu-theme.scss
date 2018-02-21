@@ -1,10 +1,11 @@
 @mixin contextMenu-theme($theme) {
     $divider-colour: map-get($theme, divider-colour);
-    $text-colour-secondary: map-get($theme, text-colour-secondary);
+    $text-colour-dark: map-get($theme, text-colour-dark);
     $background-colour: map-get($theme, background-colour);
     $background-colour-dark: map-get($theme, background-colour-dark);
     tbody>tr.contextMenu {
         border-color: $divider-colour;
+        color: $text-colour-dark;
     }
     .contextMenu:first-child {
         background-color: $background-colour;

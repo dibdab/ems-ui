@@ -6,10 +6,10 @@ import { IFilter, IJMSConnector, IRESTConnector } from 'types';
 export const SubscriberTableDataCells = (props: ISubscriberTableDataCellsProps) => {
     return (
         <React.Fragment>
-            <td data-filter={props.subscriber.event} data-filterjsonlocation='event'>
+            <td data-filter={props.subscriber.event} data-filterjsonlocation="event">
                 {props.subscriber.event}
             </td>
-            <td data-filter={props.subscriber.listenerSystem} data-filterjsonlocation='listenerSystem'>
+            <td data-filter={props.subscriber.listenerSystem} data-filterjsonlocation="listenerSystem">
                 {props.subscriber.listenerSystem}
             </td>
             <ConnectorTdComponent connector={props.subscriber.connector} />
@@ -33,10 +33,13 @@ const ConnectorTdComponent = (props: IConnectorTdComponentProps) => {
         const connectorUrl = `${connectorContents.host}:${connectorContents.port}`;
         return (
             <React.Fragment>
-                <td className="connectorCell" data-filter={JSON.stringify(connector.JMS)} data-filterjsonlocation='connectorJMS'>
-                    <div>{connectorKey}</div>
+                <td
+                    className="tableView-connector-td"
+                    data-filter={JSON.stringify(connector.JMS)}
+                    data-filterjsonlocation="connectorJMS"
+                >
+                    <div>{connectorKey} - {connectorContents.queue}</div>
                     <div>{connectorUrl}</div>
-                    <div>{connectorContents.queue}</div>
                 </td>
             </React.Fragment>
         );
@@ -44,13 +47,15 @@ const ConnectorTdComponent = (props: IConnectorTdComponentProps) => {
         const connectorContents = connector.REST;
         const connectorUrl = `${connectorContents.host}:${connectorContents.port +
             connectorContents.path}`;
-        console.log(JSON.stringify(connector))
         return (
             <React.Fragment>
-                <td className="connectorCell" data-filter={JSON.stringify(connector.REST)} data-filterjsonlocation='connectorREST'>
-                    <div>{connectorKey}</div>
+                <td
+                    className="tableView-connector-td"
+                    data-filter={JSON.stringify(connector.REST)}
+                    data-filterjsonlocation="connectorREST"
+                >
+                    <div>{connectorKey} - {connectorContents.method}</div>
                     <div>{connectorUrl}</div>
-                    <div>{connectorContents.method}</div>
                 </td>
             </React.Fragment>
         );
@@ -83,7 +88,7 @@ function constructFiltersCell(filters: IFilter[]) {
                 (
                     <div
                         data-filter={JSON.stringify({ name: filter.name, value: filter.value })}
-                        data-filterjsonlocation='filter'
+                        data-filterjsonlocation="filter"
                         key={index + tdTextHead}
                     >
                         <b>{tdTextHead}</b>{tdText}<br />
