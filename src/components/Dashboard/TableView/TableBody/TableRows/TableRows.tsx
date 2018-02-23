@@ -5,15 +5,11 @@ import { Route, Switch } from 'react-router-dom';
 import { ITableRowsProps } from './ITableRowsProps';
 import { ITableRowsState } from './ITableRowsState';
 
-// import { ISubscriber, IRESTConnector, IJMSConnector } from 'types';
 import { SubscriberTableDataCells } from './SubscriberTableDataCells/SubscriberTableDataCells';
 import { ISubscriber } from 'types';
 import { AccordionTableRow } from 'components/shared/AccordionTableRow/AccordionTableRow';
 import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
-// import { TableCellWithContextMenu } from './TableCellWithContextMenu/TableCellWithContextMenu';
 
-// TODO: Create a index of all properties and values to search complex objects
-// TODO: Make completely generic so can get array of objects from any endpoint
 export default class TableRows extends React.Component<
     ITableRowsProps,
     ITableRowsState

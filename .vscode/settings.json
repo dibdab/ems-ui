@@ -7,8 +7,10 @@
         "Searchlist",
         "Topbar",
         "contextmenufilter",
+        "errored",
         "filterispositive",
         "filterjsonlocation",
-        "filterlocation"
+        "filterlocation",
+        "set"
     ],
 }

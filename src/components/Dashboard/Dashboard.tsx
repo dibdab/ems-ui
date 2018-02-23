@@ -66,5 +66,5 @@ export default class Dashboard extends React.Component<
 }
 
 function NoTableRoute(): JSX.Element {
-  return <div>Select a event type to view events</div>;
+  return <div>Select a event type to view events.</div>;
 }

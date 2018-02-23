@@ -6,14 +6,14 @@ import { IFilter, IJMSConnector, IRESTConnector } from 'types';
 export const SubscriberTableDataCells = (props: ISubscriberTableDataCellsProps) => {
     return (
         <React.Fragment>
-            <td data-filter={props.subscriber.event} data-filterjsonlocation="event">
+            <td title="event" data-filter={props.subscriber.event} data-filterjsonlocation="event">
                 {props.subscriber.event}
             </td>
-            <td data-filter={props.subscriber.listenerSystem} data-filterjsonlocation="listenerSystem">
+            <td title="listenerSystem" data-filter={props.subscriber.listenerSystem} data-filterjsonlocation="listenerSystem">
                 {props.subscriber.listenerSystem}
             </td>
             <ConnectorTdComponent connector={props.subscriber.connector} />
-            <td className="filter-td">{constructFiltersCell(props.subscriber.filter)}</td>
+            <td title="filter" className="filter-td">{constructFiltersCell(props.subscriber.filter)}</td>
         </React.Fragment>
     );
 };
@@ -34,6 +34,7 @@ const ConnectorTdComponent = (props: IConnectorTdComponentProps) => {
         return (
             <React.Fragment>
                 <td
+                    title="connector"
                     className="tableView-connector-td"
                     data-filter={JSON.stringify(connector.JMS)}
                     data-filterjsonlocation="connectorJMS"
@@ -50,6 +51,7 @@ const ConnectorTdComponent = (props: IConnectorTdComponentProps) => {
         return (
             <React.Fragment>
                 <td
+                    title="connector"
                     className="tableView-connector-td"
                     data-filter={JSON.stringify(connector.REST)}
                     data-filterjsonlocation="connectorREST"

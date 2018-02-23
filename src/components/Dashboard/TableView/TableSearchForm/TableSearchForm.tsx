@@ -59,8 +59,11 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
     }
 
     handleLimitChange(event: ChangeEvent<HTMLInputElement>) {
-        store.dispatch(SubscriberActionCreators.subscribersFilterChange(JSON.parse(this.state.filter)));
         this.setState({ limit: event.target.value });
+    }
+
+    handleReset = () => {
+        this.setState({ filter: '{}' });
     }
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -95,16 +98,29 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
                         onChange={this.handleSearchChange}
                         onBlur={this.handleSearchBlur}
                         placeholder="keyName: value, event: image_event..."
+                        title="Json String to Filter on"
                     />
                     <input
                         className="tableView-searchbar-limitInput"
-                        type="text"
+                        type="number"
                         value={this.state.limit}
                         onChange={this.handleLimitChange}
                         placeholder="1-100"
+                        maxLength={3}
+                        min={1}
+                        max={100}
+                        title="No. of Results to Return"
                     />
-                    <button className="tableView-searchbar-button" type="submit">
-                        <i className="fas fa-search tableView-searchbar-searchIcon button" />
+                    <button title="Submit" className="tableView-searchbar-button button" type="submit">
+                        <i title="Submit" className="fas fa-search tableView-searchbar-searchIcon button" />
+                    </button>
+                    <button
+                        title="Reset"
+                        className="tableView-searchbar-button button"
+                        type="button"
+                        onClick={this.handleReset}
+                    >
+                        <i className="fas fa-eraser tableView-searchbar-searchIcon button" />
                     </button>
                 </form>
                 <div className="tableView-searchbar-results-count">

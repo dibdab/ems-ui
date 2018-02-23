@@ -15,8 +15,6 @@ import Config from 'config';
 
 export class TableView extends React.Component<ITableViewProps, IRootState> {
   componentDidMount() {
-    // TODO: Force reload of data to skip cache button - uneeded as post requests don't cache
-    // TODO: Implment isLoading and hasErroed bools
     getTableData(this.props.tableName, tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, '', 10);
   }
 
