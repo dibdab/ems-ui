@@ -6,13 +6,17 @@
     "cSpell.words": [
         "Searchlist",
         "Topbar",
+        "api",
         "apim",
         "contextmenufilter",
         "errored",
+        "eventnames",
         "filterispositive",
         "filterjsonlocation",
         "filterlocation",
         "set",
-        "subscribedevents"
+        "subscribedeventnames",
+        "subscribedevents",
+        "url"
     ],
 }

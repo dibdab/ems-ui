@@ -12,7 +12,10 @@ import { getTableData } from 'services';
 import { tableDataTypes } from 'enums';
 import Config from 'config';
 
-export default class DashboardTableSearchForm extends React.Component<IDashboardTableSearchFormProps, IDashboardTableSearchFormState> {
+export default class DashboardTableSearchForm extends React.Component<
+    IDashboardTableSearchFormProps,
+    IDashboardTableSearchFormState
+    > {
     private textArea: HTMLTextAreaElement;
     constructor(props: IDashboardTableSearchFormProps) {
         super(props);

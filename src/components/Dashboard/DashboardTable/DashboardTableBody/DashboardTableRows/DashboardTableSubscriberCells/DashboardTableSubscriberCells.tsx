@@ -6,14 +6,27 @@ import { IFilter, IJMSConnector, IRESTConnector } from 'types';
 export const DashboardTableSubscriberCells = (props: IDashboardTableSubscriberCellsProps) => {
     return (
         <React.Fragment>
-            <td title="event" data-filter={props.subscriber.event} data-filterjsonlocation="event">
+            <td
+                title="event"
+                data-filter={props.subscriber.event}
+                data-filterjsonlocation="event"
+            >
                 {props.subscriber.event}
             </td>
-            <td title="listenerSystem" data-filter={props.subscriber.listenerSystem} data-filterjsonlocation="listenerSystem">
+            <td
+                title="listenerSystem"
+                data-filter={props.subscriber.listenerSystem}
+                data-filterjsonlocation="listenerSystem"
+            >
                 {props.subscriber.listenerSystem}
             </td>
             <ConnectorTdComponent connector={props.subscriber.connector} />
-            <td title="filter" className="filter-td">{constructFiltersCell(props.subscriber.filter)}</td>
+            <td
+                title="filter"
+                className="filter-td"
+            >
+                {constructFiltersCell(props.subscriber.filter)}
+            </td>
         </React.Fragment>
     );
 };

@@ -70,10 +70,6 @@ export default class Dashboard extends React.Component<
         },
       },
       {
-        component: DashboardTable,
-        path: '/dashboard/test',
-      },
-      {
         component: NoTableRoute,
       },
     ];

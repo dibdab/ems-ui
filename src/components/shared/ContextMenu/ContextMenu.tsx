@@ -7,7 +7,7 @@ import { IContextMenuProps } from './IContextMenuProps';
 
 import { ISubscriberFilter } from 'types';
 import store from 'store';
-import { SubscriberActionCreators } from 'redux_';
+import { TableDataActionCreators } from 'redux_';
 
 export default class ContextMenu extends React.Component<
     IContextMenuProps,
@@ -117,7 +117,7 @@ export default class ContextMenu extends React.Component<
                 }
             }
         }
-        store.dispatch(SubscriberActionCreators.subscribersFilterChange(newFilter));
+        store.dispatch(TableDataActionCreators.tableDataFilterChange(newFilter));
     }
 
     createContent(e: MouseEvent<HTMLElement>) {

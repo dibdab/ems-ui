@@ -9,7 +9,6 @@ export default function Sidebar(): JSX.Element {
   const tables = [
     { sidebarName: 'Subscribers', urlName: tableDataTypes.Subscribers },
     { sidebarName: 'Events', urlName: tableDataTypes.Events },
-    { sidebarName: 'Test', urlName: tableDataTypes.Test },
   ];
   const tablelist = tables.map((table, index) => (
     <NavLink

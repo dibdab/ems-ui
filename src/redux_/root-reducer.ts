@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import {
   reducer as tableData,
   State as TableDataState,
-} from './subscribers';
+} from './tableData';
 interface IStoreEnhancerState { }
 
 export interface IRootState extends IStoreEnhancerState {
