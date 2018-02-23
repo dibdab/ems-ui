@@ -8,9 +8,9 @@ export interface IDashboardTableProps {
   columnKeyNames: string[];
   tableName: string;
   tableData: ISubscriber[];
-  hasErrored: boolean;
-  isLoading: boolean;
-  filter: ISubscriberFilter;
+  tableDataHasErrored: boolean;
+  tableDataIsLoading: boolean;
+  tableDataFilter: ISubscriberFilter;
 }
 
 type urlParams = { tableName: tableDataTypes };

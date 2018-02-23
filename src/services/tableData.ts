@@ -1,5 +1,7 @@
 import store from 'store';
-import { SubscriberActionCreators } from 'redux_';
+
+import { appendAuthHeader } from './serviceHelpers';
+import { TableDataActionCreators } from 'redux_';
 import { ISubscriber } from 'types';
 import { tableDataTypes } from 'enums';
 
@@ -10,15 +12,10 @@ export function getSubscribers(
   responseLimit?: number,
   skip?: number,
 ): void {
-  setErrored(dataType, false);
-  setLoading(dataType, true);
+  setErrored(false);
+  setLoading(true);
   let fullEndpoint: string;
-  const headers = new Headers();
-  headers.append(
-    'Ocp-Apim-Subscription-Key',
-    'c91b8409ed674a5eaf84ca423cd072c3',
-  );
-
+  const headers = appendAuthHeader(new Headers());
   if (skip) {
     fullEndpoint = `${endpoint}?limit=${responseLimit}&skip=${skip}`;
   } else {
@@ -31,12 +28,12 @@ export function getSubscribers(
   })
     .then(response => response.json())
     .then((responseData: ISubscriber[]) => {
-      SetResponseSuccess(dataType, responseData);
-      setLoading(dataType, false);
+      SetResponseSuccess(responseData);
+      setLoading(false);
     })
     .catch(() => {
-      setErrored(dataType, true);
-      setLoading(dataType, false);
+      setErrored(true);
+      setLoading(false);
     },
   );
 }
@@ -57,23 +54,14 @@ export function getTableData(
   }
 }
 
-function SetResponseSuccess(dataType: string, data: ISubscriber[]) {
-  switch (dataType) {
-    case tableDataTypes.Subscribers:
-      store.dispatch(SubscriberActionCreators.subscribersFetchSuccess(data));
-  }
+function SetResponseSuccess(data: ISubscriber[]) {
+  store.dispatch(TableDataActionCreators.tableDataFetchSuccess(data));
 }
 
-function setLoading(dataType: string, isLoading: boolean) {
-  switch (dataType) {
-    case tableDataTypes.Subscribers:
-      store.dispatch(SubscriberActionCreators.subscribersIsLoading(isLoading));
-  }
+function setLoading(isLoading: boolean) {
+  store.dispatch(TableDataActionCreators.tableDataIsLoading(isLoading));
 }
 
-function setErrored(dataType: string, hasErrored: boolean) {
-  switch (dataType) {
-    case tableDataTypes.Subscribers:
-      store.dispatch(SubscriberActionCreators.subscribersHasErrored(hasErrored));
-  }
+function setErrored(hasErrored: boolean) {
+  store.dispatch(TableDataActionCreators.tableDataHasErrored(hasErrored));
 }

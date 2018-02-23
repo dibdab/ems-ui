@@ -6,6 +6,7 @@ import { IDashboardTableRowsProps } from './IDashboardTableRowsProps';
 import { IDashboardTableRowsState } from './IDashboardTableRowsState';
 
 import { DashboardTableSubscriberCells } from './DashboardTableSubscriberCells/DashboardTableSubscriberCells';
+import { DashboardTableEventCells } from './DashboardTableEventCells/DashboardTableEventCells';
 import { ISubscriber } from 'types';
 import { AccordionTableRow } from 'components/shared/AccordionTableRow/AccordionTableRow';
 import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
@@ -77,6 +78,16 @@ export default class DashboardTableRows extends React.Component<
                                 // tslint:disable
                                 render={(routeProps) => (
                                     <DashboardTableSubscriberCells
+                                        columnKeyNames={this.props.columnKeyNames}
+                                        subscriber={subscriber}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/dashboard/events"
+                                // tslint:disable
+                                render={(routeProps) => (
+                                    <DashboardTableEventCells
                                         columnKeyNames={this.props.columnKeyNames}
                                         subscriber={subscriber}
                                     />

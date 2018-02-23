@@ -20,7 +20,7 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
 
   render() {
     let loadingSpinner;
-    if (this.props.isLoading) {
+    if (this.props.tableDataIsLoading) {
       loadingSpinner = <div className="loader">Loading...</div>;
     } else {
       loadingSpinner = null;
@@ -29,7 +29,7 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
       <React.Fragment>
         <DashboardTableSearchForm
           tableName={this.props.tableName}
-          filter={this.props.filter}
+          filter={this.props.tableDataFilter}
           resultsCount={this.props.tableData.length}
         />
         {loadingSpinner}
@@ -39,8 +39,8 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
             columnKeyNames={this.props.columnKeyNames}
             tableName={this.props.tableName}
             tableData={this.props.tableData}
-            filter={this.props.filter}
-            isLoading={this.props.isLoading}
+            filter={this.props.tableDataFilter}
+            isLoading={this.props.tableDataIsLoading}
           />
         </table>
       </React.Fragment>
@@ -50,10 +50,10 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    tableData: state.subscribers.subscribers,
-    hasErrored: state.subscribers.subscribersHasErrored,
-    isLoading: state.subscribers.subscribersIsLoading,
-    filter: state.subscribers.subscribersFilter,
+    tableData: state.tableData.tableData,
+    tableDataHasErrored: state.tableData.tableDataHasErrored,
+    tableDataIsLoading: state.tableData.tableDataIsLoading,
+    tableDataFilter: state.tableData.tableDataFilter,
   };
 };
 

@@ -1,5 +1,6 @@
 export enum tableDataTypes {
   Subscribers = 'subscribers',
+  Events = 'events',
   Test = 'test',
 } // Used by sidebar to determine path names and should be imported anywhere that needs to use those names in logic
 

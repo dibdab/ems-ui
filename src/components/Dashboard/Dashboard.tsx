@@ -39,6 +39,31 @@ export default class Dashboard extends React.Component<
             'listenerSystem',
             'connector',
             'filter',
+          ],
+          tableName: tableDataTypes.Subscribers,
+        },
+      },
+      {
+        component: DashboardTable,
+        path: '/dashboard/events',
+        routeProps: {
+          // columns: [
+          //   {
+          //     columnHeading: 'Event Name',
+          //     columnKeyName: 'event',
+          //     columnValueType: 'Array'
+          //   }
+          // ]
+          columnHeadings: [
+            'Event Name',
+            'Event',
+            'Event',
+            'Event',
+          ],
+          columnKeyNames: [
+            'event',
+            'listenerSystem',
+            'connector',
             'filter',
           ],
           tableName: tableDataTypes.Subscribers,

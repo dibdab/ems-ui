@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 
 import {
-  reducer as subscribers,
-  State as SubscriberState,
+  reducer as tableData,
+  State as TableDataState,
 } from './subscribers';
 interface IStoreEnhancerState { }
 
 export interface IRootState extends IStoreEnhancerState {
-  subscribers: SubscriberState;
+  tableData: TableDataState;
 }
 
 export const rootReducer = combineReducers<IRootState>({
-  subscribers,
+  tableData,
 });

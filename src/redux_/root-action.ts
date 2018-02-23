@@ -1,6 +1,6 @@
-import { Actions as SubscriberActions } from './subscribers';
+import { Actions as TableDataActions } from './subscribers';
 
-export { actionCreators as SubscriberActionCreators } from './subscribers';
+export { actionCreators as TableDataActionCreators } from './subscribers';
 
 // To add more types use union type
-export type RootAction = SubscriberActions[keyof SubscriberActions];
+export type RootAction = TableDataActions[keyof TableDataActions];

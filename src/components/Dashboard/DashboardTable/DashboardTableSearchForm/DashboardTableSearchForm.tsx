@@ -6,7 +6,7 @@ import IDashboardTableSearchFormState from './IDashboardTableSearchFormState';
 import './DashboardTableSearchForm.css';
 
 import store from 'store';
-import { SubscriberActionCreators } from 'redux_';
+import { TableDataActionCreators } from 'redux_';
 import { getTableData } from 'services';
 
 import { tableDataTypes } from 'enums';
@@ -52,7 +52,7 @@ export default class DashboardTableSearchForm extends React.Component<IDashboard
         try {
             const filter = JSON.parse(this.state.filter);
             this.setState({ isFilterInvalid: false });
-            store.dispatch(SubscriberActionCreators.subscribersFilterChange(filter));
+            store.dispatch(TableDataActionCreators.tableDataFilterChange(filter));
         } catch (error) {
             this.setState({ isFilterInvalid: true });
         }
@@ -68,7 +68,7 @@ export default class DashboardTableSearchForm extends React.Component<IDashboard
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
         try {
-            store.dispatch(SubscriberActionCreators.subscribersFilterChange(JSON.parse(this.state.filter)));
+            store.dispatch(TableDataActionCreators.tableDataFilterChange(JSON.parse(this.state.filter)));
             this.setState({ isFilterInvalid: false });
             getTableData(
                 this.props.tableName,
