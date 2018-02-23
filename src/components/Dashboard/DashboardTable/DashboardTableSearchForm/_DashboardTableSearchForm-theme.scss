@@ -1,21 +1,21 @@
-@mixin tableSearchForm-theme($theme) {
+@mixin dashboardTableSearchForm-theme($theme) {
     $divider-colour: map-get($theme, divider-colour);
     $text-colour-dark: map-get($theme, text-colour-dark);
     $background-colour: map-get($theme, background-colour);
     $background-colour-dark: map-get($theme, background-colour-dark);
     $text-colour-secondary: map-get($theme, text-colour-secondary);
-    .tableView-searchbar-container {
-        .tableView-searchbar-searchIcon {
+    .dashboardTable-searchbar-container {
+        .dashboardTable-searchbar-searchIcon {
             border-color: $divider-colour;
             background-color: $background-colour;
             color: $text-colour-dark;
         }
-        .tableView-searchbar-searchInput,
-        .tableView-searchbar-limitInput {
+        .dashboardTable-searchbar-searchInput,
+        .dashboardTable-searchbar-limitInput {
             border-bottom-color: $text-colour-secondary;
             background-color: $background-colour;
         }
-        .tableView-searchbar-results-count {
+        .dashboardTable-searchbar-results-count {
             color: $text-colour-secondary;
         }
     }

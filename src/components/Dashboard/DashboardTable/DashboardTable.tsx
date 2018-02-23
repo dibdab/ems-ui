@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { ITableViewProps } from './ITableViewProps';
-import './TableView.css';
+import { IDashboardTableProps } from './IDashboardTableProps';
+import './DashboardTable.css';
 
-import { TableHeader } from './TableHeader/TableHeader';
-import { TableBody } from './TableBody/TableBody';
-import TableSearchForm from './TableSearchForm/TableSearchForm';
+import { DashboardTableHead } from './DashboardTableHead/DashboardTableHead';
+import { DashboardTableBody } from './DashboardTableBody/DashboardTableBody';
+import DashboardTableSearchForm from './DashboardTableSearchForm/DashboardTableSearchForm';
 
 import { IRootState } from 'redux_';
 import { getTableData } from 'services';
 import { tableDataTypes } from 'enums';
 import Config from 'config';
 
-export class TableView extends React.Component<ITableViewProps, IRootState> {
+export class DashboardTable extends React.Component<IDashboardTableProps, IRootState> {
   componentDidMount() {
     getTableData(this.props.tableName, tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, '', 10);
   }
@@ -27,15 +27,15 @@ export class TableView extends React.Component<ITableViewProps, IRootState> {
     }
     return (
       <React.Fragment>
-        <TableSearchForm
+        <DashboardTableSearchForm
           tableName={this.props.tableName}
           filter={this.props.filter}
           resultsCount={this.props.tableData.length}
         />
         {loadingSpinner}
-        <table className="tableView">
-          <TableHeader columnHeadings={this.props.columnHeadings} />
-          <TableBody
+        <table className="dashboardTable">
+          <DashboardTableHead columnHeadings={this.props.columnHeadings} />
+          <DashboardTableBody
             columnKeyNames={this.props.columnKeyNames}
             tableName={this.props.tableName}
             tableData={this.props.tableData}
@@ -57,4 +57,4 @@ const mapStateToProps = (state: IRootState) => {
   };
 };
 
-export default connect(mapStateToProps, {})(TableView);
+export default connect(mapStateToProps, {})(DashboardTable);

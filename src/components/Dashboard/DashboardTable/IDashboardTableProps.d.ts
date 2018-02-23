@@ -3,7 +3,7 @@ import { tableDataTypes } from 'enums';
 import { IRoute, ISubscriberFilter } from 'types';
 import { ISubscriber } from 'types/';
 
-export interface ITableViewProps {
+export interface IDashboardTableProps {
   columnHeadings: string[];
   columnKeyNames: string[];
   tableName: string;

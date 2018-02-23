@@ -1,17 +1,17 @@
-.tableView-searchbar-container {
+.dashboardTable-searchbar-container {
     margin: 32px auto;
     width: 80%;
     :not(:last-child) {
         margin-right: 16px;
     }
-    .tableView-searchbar-searchInput,
-    .tableView-searchbar-limitInput {
+    .dashboardTable-searchbar-searchInput,
+    .dashboardTable-searchbar-limitInput {
         font-size: 18px;
         padding: 8px 8px 8px 4px;
         border: none;
         border-bottom: 1px solid;
     }
-    .tableView-searchbar-searchInput {
+    .dashboardTable-searchbar-searchInput {
         max-height: 300px;
         width: 70%;
         height: 22px;
@@ -20,10 +20,10 @@
         vertical-align: bottom;
         resize: none;
     }
-    .tableView-searchbar-limitInput {
+    .dashboardTable-searchbar-limitInput {
         width: 5%;
     }
-    .tableView-searchbar-searchIcon {
+    .dashboardTable-searchbar-searchIcon {
         padding: 4px;
         margin-bottom: -14px;
         width: 38px;
@@ -32,14 +32,14 @@
         box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.12);
         border: solid 1px;
     }
-    .tableView-searchbar-button {
+    .dashboardTable-searchbar-button {
         width: auto;
         height: auto;
         padding: 0;
         border: none;
         border-radius: 4px;
     }
-    .tableView-searchbar-results-count {
+    .dashboardTable-searchbar-results-count {
         margin-top: 8px;
     }
 }

@@ -1,7 +1,7 @@
 @import 'src/styles/mixins.scss';
 @import 'src/styles/variables.scss';
 $doc-viwer-padding: 16px;
-.document-viewer {
+.dashboard-container {
   position: fixed;
   padding: $doc-viwer-padding;
   height: calc(#{$document-view-height} - (#{$doc-viwer-padding}*2));

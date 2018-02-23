@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom';
 import './Dashboard.css';
 import Topbar from './Topbar/Topbar';
 import Sidebar from './Sidebar/Sidebar';
-import TableView from './TableView/TableView';
+import DashboardTable from './DashboardTable/DashboardTable';
 import { IDashboardProps } from './IDashboardProps';
 import { IRootState } from 'redux_';
 import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes';
@@ -18,7 +18,7 @@ export default class Dashboard extends React.Component<
   render() {
     const routes: IRoute[] = [
       {
-        component: TableView,
+        component: DashboardTable,
         path: '/dashboard/subscribers',
         routeProps: {
           // columns: [
@@ -45,7 +45,7 @@ export default class Dashboard extends React.Component<
         },
       },
       {
-        component: TableView,
+        component: DashboardTable,
         path: '/dashboard/test',
       },
       {
@@ -57,7 +57,7 @@ export default class Dashboard extends React.Component<
       <div>
         <Topbar />
         <Sidebar />
-        <div className="document-viewer">
+        <div className="dashboard-container">
           <Switch> {routes.map((route, i) => (<RouteWithSubRoutes key={i} {...route} />))} </Switch>
         </div>
       </div>

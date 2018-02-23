@@ -2,20 +2,20 @@ import * as React from 'react';
 import { MouseEvent } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { ITableRowsProps } from './ITableRowsProps';
-import { ITableRowsState } from './ITableRowsState';
+import { IDashboardTableRowsProps } from './IDashboardTableRowsProps';
+import { IDashboardTableRowsState } from './IDashboardTableRowsState';
 
-import { SubscriberTableDataCells } from './SubscriberTableDataCells/SubscriberTableDataCells';
+import { DashboardTableSubscriberCells } from './DashboardTableSubscriberCells/DashboardTableSubscriberCells';
 import { ISubscriber } from 'types';
 import { AccordionTableRow } from 'components/shared/AccordionTableRow/AccordionTableRow';
 import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
 
-export default class TableRows extends React.Component<
-    ITableRowsProps,
-    ITableRowsState
+export default class DashboardTableRows extends React.Component<
+    IDashboardTableRowsProps,
+    IDashboardTableRowsState
     > {
     private contextMenu: ContextMenu;
-    constructor(props: ITableRowsProps) {
+    constructor(props: IDashboardTableRowsProps) {
         super(props);
         this.state = {
             visibleAccordion: {},
@@ -50,7 +50,7 @@ export default class TableRows extends React.Component<
     render() {
         if (this.props.tableData.length <= 0) {
             return (
-                <tr className="tableView-no-interact-tr">
+                <tr className="dashboardTable-no-interact-tr">
                     <td colSpan={8}>No results found.</td>
                 </tr>
             );
@@ -68,7 +68,7 @@ export default class TableRows extends React.Component<
                         onClick={this.toggleAccordion}
                         id={`${subscriber._id.counter}`}
                     >
-                        <td className="tableView-checkbox-td" >
+                        <td className="dashboardTable-checkbox-td" >
                             <input type="checkbox" onClick={this.inputStopPropagation} />
                         </td>
                         <Switch>
@@ -76,7 +76,7 @@ export default class TableRows extends React.Component<
                                 path="/dashboard/subscribers"
                                 // tslint:disable
                                 render={(routeProps) => (
-                                    <SubscriberTableDataCells
+                                    <DashboardTableSubscriberCells
                                         columnKeyNames={this.props.columnKeyNames}
                                         subscriber={subscriber}
                                     />

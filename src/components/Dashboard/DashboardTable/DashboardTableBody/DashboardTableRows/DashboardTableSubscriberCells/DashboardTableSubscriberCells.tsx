@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import ISubscriberTableDataCellsProps from './ISubscriberTableDataCellsProps';
+import IDashboardTableSubscriberCellsProps from './IDashboardTableSubscriberCellsProps';
 import { IFilter, IJMSConnector, IRESTConnector } from 'types';
 
-export const SubscriberTableDataCells = (props: ISubscriberTableDataCellsProps) => {
+export const DashboardTableSubscriberCells = (props: IDashboardTableSubscriberCellsProps) => {
     return (
         <React.Fragment>
             <td title="event" data-filter={props.subscriber.event} data-filterjsonlocation="event">
@@ -35,7 +35,7 @@ const ConnectorTdComponent = (props: IConnectorTdComponentProps) => {
             <React.Fragment>
                 <td
                     title="connector"
-                    className="tableView-connector-td"
+                    className="dashboardTable-connector-td"
                     data-filter={JSON.stringify(connector.JMS)}
                     data-filterjsonlocation="connectorJMS"
                 >
@@ -52,7 +52,7 @@ const ConnectorTdComponent = (props: IConnectorTdComponentProps) => {
             <React.Fragment>
                 <td
                     title="connector"
-                    className="tableView-connector-td"
+                    className="dashboardTable-connector-td"
                     data-filter={JSON.stringify(connector.REST)}
                     data-filterjsonlocation="connectorREST"
                 >

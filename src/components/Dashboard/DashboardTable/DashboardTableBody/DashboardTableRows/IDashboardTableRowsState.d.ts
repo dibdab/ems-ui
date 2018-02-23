@@ -1,4 +1,4 @@
-export interface ITableRowsState {
+export interface IDashboardTableRowsState {
     visibleAccordion: {
         [index: string]: boolean;
     };

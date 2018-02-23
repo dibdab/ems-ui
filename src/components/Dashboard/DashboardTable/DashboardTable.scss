@@ -1,8 +1,8 @@
-.tableView {
+.dashboardTable {
   border-collapse: collapse;
   width: 100%;
-  th.tableView-checkbox-td,
-  td.tableView-checkbox-td {
+  th.dashboardTable-checkbox-td,
+  td.dashboardTable-checkbox-td {
     width: 19px;
   }
   tr {
@@ -19,7 +19,7 @@
   }
   tbody {
     width: 100%;
-    .tableView-no-interact-tr {
+    .dashboardTable-no-interact-tr {
       & td {
         font-weight: bold;
       }
@@ -27,7 +27,7 @@
     tr {
       border-bottom: solid 1px;
     }
-    & tr:not(.tableView-no-interact-tr):hover {
+    & tr:not(.dashboardTable-no-interact-tr):hover {
       cursor: pointer;
     }
     td {
@@ -35,7 +35,7 @@
       white-space: nowrap;
     }
     td {
-      &.tableView-connector-td {
+      &.dashboardTable-connector-td {
         div {
           pointer-events: none;
         }

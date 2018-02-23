@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ChangeEvent, FormEvent } from 'react';
 
-import ITableSearchFormProps from './ITableSearchFormProps';
-import ITableSearchFormState from './ITableSearchFormState';
-import './TableSearchForm.css';
+import IDashboardTableSearchFormProps from './IDashboardTableSearchFormProps';
+import IDashboardTableSearchFormState from './IDashboardTableSearchFormState';
+import './DashboardTableSearchForm.css';
 
 import store from 'store';
 import { SubscriberActionCreators } from 'redux_';
@@ -12,9 +12,9 @@ import { getTableData } from 'services';
 import { tableDataTypes } from 'enums';
 import Config from 'config';
 
-export default class TableSearchForm extends React.Component<ITableSearchFormProps, ITableSearchFormState> {
+export default class DashboardTableSearchForm extends React.Component<IDashboardTableSearchFormProps, IDashboardTableSearchFormState> {
     private textArea: HTMLTextAreaElement;
-    constructor(props: ITableSearchFormProps) {
+    constructor(props: IDashboardTableSearchFormProps) {
         super(props);
         this.state = {
             filter: JSON.stringify(this.props.filter),
@@ -26,13 +26,13 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps: ITableSearchFormProps) {
+    componentWillReceiveProps(nextProps: IDashboardTableSearchFormProps) {
         if (this.state.filter !== JSON.stringify(nextProps.filter)) {
             this.setState({ filter: JSON.stringify(nextProps.filter, null, 2) });
         }
     }
 
-    componentDidUpdate(prevProps: ITableSearchFormProps, prevState: ITableSearchFormState) {
+    componentDidUpdate(prevProps: IDashboardTableSearchFormProps, prevState: IDashboardTableSearchFormState) {
         if (this.state.filter !== prevState.filter) {
             this.resizeTextArea(this.textArea);
         }
@@ -89,11 +89,11 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
             ? 'error'
             : '';
         return (
-            <div className="tableView-searchbar-container" >
+            <div className="dashboardTable-searchbar-container" >
                 <form action="submit" onSubmit={this.handleSubmit}>
                     <textarea
                         ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
-                        className={`tableView-searchbar-searchInput ${isAccordionVisibleClass}`}
+                        className={`dashboardTable-searchbar-searchInput ${isAccordionVisibleClass}`}
                         value={this.state.filter}
                         onChange={this.handleSearchChange}
                         onBlur={this.handleSearchBlur}
@@ -101,7 +101,7 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
                         title="Json String to Filter on"
                     />
                     <input
-                        className="tableView-searchbar-limitInput"
+                        className="dashboardTable-searchbar-limitInput"
                         type="number"
                         value={this.state.limit}
                         onChange={this.handleLimitChange}
@@ -111,19 +111,19 @@ export default class TableSearchForm extends React.Component<ITableSearchFormPro
                         max={100}
                         title="No. of Results to Return"
                     />
-                    <button title="Submit" className="tableView-searchbar-button button" type="submit">
-                        <i title="Submit" className="fas fa-search tableView-searchbar-searchIcon button" />
+                    <button title="Submit" className="dashboardTable-searchbar-button button" type="submit">
+                        <i title="Submit" className="fas fa-search dashboardTable-searchbar-searchIcon button" />
                     </button>
                     <button
                         title="Reset"
-                        className="tableView-searchbar-button button"
+                        className="dashboardTable-searchbar-button button"
                         type="button"
                         onClick={this.handleReset}
                     >
-                        <i className="fas fa-eraser tableView-searchbar-searchIcon button" />
+                        <i className="fas fa-eraser dashboardTable-searchbar-searchIcon button" />
                     </button>
                 </form>
-                <div className="tableView-searchbar-results-count">
+                <div className="dashboardTable-searchbar-results-count">
                     {this.props.resultsCount} results found.
                 </div>
             </div>

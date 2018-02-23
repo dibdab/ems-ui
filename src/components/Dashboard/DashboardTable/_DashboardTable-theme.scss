@@ -1,10 +1,10 @@
-@mixin tableView-theme($theme) {
+@mixin dashboardTable-theme($theme) {
     $divider-colour: map-get($theme, divider-colour);
     $text-colour-secondary: map-get($theme, text-colour-secondary);
     $background-colour-dark: map-get($theme, background-colour-dark);
     $background-colour-darker: map-get($theme, background-colour-darker);
     $text-colour-secondary: map-get($theme, text-colour-secondary);
-    .tableView {
+    .dashboardTable {
         thead {
             color: $text-colour-secondary;
         }
@@ -24,7 +24,7 @@
                         background-color: $background-colour-darker;
                     }
                 }
-                td:not(.tableView-checkbox-td):not(.filter-td):hover {
+                td:not(.dashboardTable-checkbox-td):not(.filter-td):hover {
                     background-color: $background-colour-darker;
                 }
             }

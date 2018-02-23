@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import ITableDataCellsProps from './ITableDataCellsProps';
+import IDashboardTableCellsProps from './IDashboardTableCellsProps';
 
-export const TableDataCells = (props: ITableDataCellsProps) => {
+export const DashboardTableCells = (props: IDashboardTableCellsProps) => {
     const cells: JSX.Element[] = [];
     let value;
     props.columnKeyNames.map((columnKeyName: any, index: number) => {

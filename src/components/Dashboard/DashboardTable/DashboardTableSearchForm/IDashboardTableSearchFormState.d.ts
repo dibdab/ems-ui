@@ -1,6 +1,6 @@
 import { ISubscriberFilter } from 'types';
 
-export default interface ITableSearchFormProps {
+export default interface IDashboardTableSearchFormProps {
     filter: string;
     limit: string;
     isFilterInvalid: boolean;

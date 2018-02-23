@@ -1,6 +1,6 @@
 import { ISubscriber, ISubscriberFilter } from 'types/';
 
-export interface ITableBodyProps {
+export interface IDashboardTableBodyProps {
   columnKeyNames: string[];
   tableName: string;
   tableData: ISubscriber[];
