@@ -1,1 +1,3 @@
-export interface IDashboardProps {}
+export interface IDashboardProps {
+    isSidebarOpen: boolean;
+}

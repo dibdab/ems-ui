@@ -1,33 +1,45 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { Switch } from 'react-router-dom';
+import store from 'store';
 
 import './Dashboard.css';
-import Topbar from './Topbar/Topbar';
-import Sidebar from './Sidebar/Sidebar';
+import { Topbar } from './Topbar/Topbar';
+import { Sidebar } from './Sidebar/Sidebar';
 import DashboardTable from './DashboardTable/DashboardTable';
 import { IDashboardProps } from './IDashboardProps';
 import { IRootState } from 'redux_';
 import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes';
 import { IRoute } from 'types';
 import { tableDataTypes } from 'enums';
+import { SidebarCreators } from 'redux_';
 
-export default class Dashboard extends React.Component<
+class Dashboard extends React.Component<
   IDashboardProps,
   IRootState
   > {
+  componentDidMount() {
+    window.addEventListener('resize', this.onWindowResize);
+    this.onWindowResize();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onWindowResize);
+  }
+
+  onWindowResize() {
+    if (window.innerWidth >= 1480) {
+      store.dispatch(SidebarCreators.isOpen(true));
+    } else if (window.innerWidth < 1480) {
+      store.dispatch(SidebarCreators.isOpen(false));
+    }
+  }
+
   render() {
     const routes: IRoute[] = [
       {
         component: DashboardTable,
         path: '/dashboard/subscribers',
         routeProps: {
-          // columns: [
-          //   {
-          //     columnHeading: 'Event Name',
-          //     columnKeyName: 'event',
-          //     columnValueType: 'Array'
-          //   }
-          // ]
           columnHeadings: [
             'Event Name',
             'Subscriber',
@@ -47,18 +59,11 @@ export default class Dashboard extends React.Component<
         component: DashboardTable,
         path: '/dashboard/events',
         routeProps: {
-          // columns: [
-          //   {
-          //     columnHeading: 'Event Name',
-          //     columnKeyName: 'event',
-          //     columnValueType: 'Array'
-          //   }
-          // ]
           columnHeadings: [
             'Event Name',
-            'Event',
-            'Event',
-            'Event',
+            'EventColumn1',
+            'EventColumn2',
+            'EventColumn3',
           ],
           columnKeyNames: [
             'event',
@@ -66,7 +71,7 @@ export default class Dashboard extends React.Component<
             'connector',
             'filter',
           ],
-          tableName: tableDataTypes.Subscribers,
+          tableName: tableDataTypes.Events,
         },
       },
       {
@@ -74,14 +79,18 @@ export default class Dashboard extends React.Component<
       },
     ];
 
+    const isSidebarOpenClass = this.props.isSidebarOpen
+      ? 'sidebar-open'
+      : 'sidebar-closed';
+
     return (
-      <div>
-        <Topbar />
-        <Sidebar />
-        <div className="dashboard-container">
+      <React.Fragment>
+        <Topbar isSidebarOpen={this.props.isSidebarOpen} />
+        <Sidebar isSidebarOpen={this.props.isSidebarOpen} />
+        <div className={`dashboard-container ${isSidebarOpenClass}`}>
           <Switch> {routes.map((route, i) => (<RouteWithSubRoutes key={i} {...route} />))} </Switch>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -89,3 +98,11 @@ export default class Dashboard extends React.Component<
 function NoTableRoute(): JSX.Element {
   return <div>Select a event type to view events.</div>;
 }
+
+const mapStateToProps = (state: IRootState) => {
+  return {
+    isSidebarOpen: state.sidebar.isOpen,
+  };
+};
+
+export default connect(mapStateToProps, {})(Dashboard);

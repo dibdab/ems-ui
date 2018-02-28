@@ -1,10 +1,11 @@
 import store from 'store';
 
-import { appendAuthHeader } from './serviceHelpers';
-import { TableDataActionCreators } from 'redux_';
+import { appendAuthHeader, caseInsensitiveStringSort } from './serviceHelpers';
+import { EventNameCreators } from 'redux_';
+import { IEventNames } from 'types';
 import Config from 'config';
 
-export function getAllEventNames(endpoint: string, cacheControl: RequestCache): void {
+export function getAllEventNames(cacheControl: RequestCache): void {
     setErrored(false);
     setLoading(true);
     const headers = appendAuthHeader(new Headers());
@@ -14,7 +15,9 @@ export function getAllEventNames(endpoint: string, cacheControl: RequestCache): 
         cache: cacheControl,
     })
         .then(response => response.json())
-        .then((responseData: any) => {
+        .then((responseData: IEventNames) => {
+            // Sort Event names regardless of first char case
+            responseData.events = caseInsensitiveStringSort(responseData.events);
             SetResponseSuccess(responseData);
             setLoading(false);
         })
@@ -25,14 +28,14 @@ export function getAllEventNames(endpoint: string, cacheControl: RequestCache): 
     );
 }
 
-function SetResponseSuccess(data: any) {
-    store.dispatch(TableDataActionCreators.tableDataFetchSuccess(data));
+function SetResponseSuccess(data: IEventNames) {
+    store.dispatch(EventNameCreators.getAllEventNamesFetchSuccess(data));
 }
 
 function setLoading(isLoading: boolean) {
-    store.dispatch(TableDataActionCreators.tableDataIsLoading(isLoading));
+    store.dispatch(EventNameCreators.getAllEventNamesIsLoading(isLoading));
 }
 
 function setErrored(hasErrored: boolean) {
-    store.dispatch(TableDataActionCreators.tableDataHasErrored(hasErrored));
+    store.dispatch(EventNameCreators.getAllEventNamesHasErrored(hasErrored));
 }

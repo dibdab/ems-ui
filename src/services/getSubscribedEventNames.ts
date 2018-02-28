@@ -1,7 +1,8 @@
 import store from 'store';
 
-import { appendAuthHeader } from './serviceHelpers';
-import { TableDataActionCreators } from 'redux_';
+import { appendAuthHeader, caseInsensitiveStringSort } from './serviceHelpers';
+import { EventNameCreators } from 'redux_';
+import { IEventNames } from 'types';
 import Config from 'config';
 
 export function getSubscribedEventNames(cacheControl: RequestCache): void {
@@ -14,7 +15,8 @@ export function getSubscribedEventNames(cacheControl: RequestCache): void {
         cache: cacheControl,
     })
         .then(response => response.json())
-        .then((responseData: any) => {
+        .then((responseData: IEventNames) => {
+            responseData.events = caseInsensitiveStringSort(responseData.events);
             SetResponseSuccess(responseData);
             setLoading(false);
         })
@@ -25,14 +27,14 @@ export function getSubscribedEventNames(cacheControl: RequestCache): void {
     );
 }
 
-function SetResponseSuccess(data: any) {
-    store.dispatch(TableDataActionCreators.tableDataFetchSuccess(data));
+function SetResponseSuccess(data: IEventNames) {
+    store.dispatch(EventNameCreators.getSubscribedEventNamesFetchSuccess(data));
 }
 
 function setLoading(isLoading: boolean) {
-    store.dispatch(TableDataActionCreators.tableDataIsLoading(isLoading));
+    store.dispatch(EventNameCreators.getSubscribedEventNamesIsLoading(isLoading));
 }
 
 function setErrored(hasErrored: boolean) {
-    store.dispatch(TableDataActionCreators.tableDataHasErrored(hasErrored));
+    store.dispatch(EventNameCreators.getSubscribedEventNamesHasErrored(hasErrored));
 }

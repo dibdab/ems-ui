@@ -1,13 +1,7 @@
 @import 'src/styles/mixins.scss';
 @import 'src/styles/variables.scss';
-.topbar-header {
-  width: 200px;
-  text-align: center;
-  margin: auto 0;
-}
-
 .topbar-wrapper {
-  transition: $theme-change-transistion;
+  transition: $theme-change-transition;
   position: fixed;
   width: 100%;
   top: 0;
@@ -16,4 +10,17 @@
   min-height: $topbar-height;
   height: $topbar-height;
   z-index: 2;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  .topbar-header {
+    width: 200px;
+    text-align: center;
+    padding: 0 16px;
+  }
+  .button {
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0 32px;
+  }
 }

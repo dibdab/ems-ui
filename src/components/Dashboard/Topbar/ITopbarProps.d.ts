@@ -1,3 +1,3 @@
 export interface ITopbarProps {
-    databaseArray: string[];
+    isSidebarOpen: boolean;
 }

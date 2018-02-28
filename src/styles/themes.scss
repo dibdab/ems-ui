@@ -13,13 +13,13 @@
 $light-theme: theme-setter( $primary-colour-dark: #303f9f, $primary-colour: #3f51b5, $primary-colour-light: #c5cae9, $text-colour-light: #fff, $accent-colour: #ffc107, $text-colour-dark: rgba(0, 0, 0, 0.77), $text-colour-secondary: #757575, $divider-colour: #bdbdbd, $background-colour-light: #fff, $background-colour: #fafafa, $background-colour-dark: #f5f5f5, $background-colour-darker: #f0f0f0);
 // Pass theme to each imported component
 @mixin theme-applier($theme) {
+  @include app-theme($theme);
   @include card-theme($theme);
   @include topbar-theme($theme);
   @include sidebar-theme($theme);
   @include dashboardTable-theme($theme);
   @include contextMenu-theme($theme);
   @include dashboardTableSearchForm-theme($theme);
-  @include app-theme($theme);
 }
 
 // Create class for theme that passes theme variable from import to applier

@@ -9,16 +9,32 @@ import { DashboardTableBody } from './DashboardTableBody/DashboardTableBody';
 import DashboardTableSearchForm from './DashboardTableSearchForm/DashboardTableSearchForm';
 
 import { IRootState } from 'redux_';
-import { getTableData } from 'services';
+import { getTableData, getAllEventNames, getSubscribedEventNames } from 'services';
 import { tableDataTypes } from 'enums';
 import Config from 'config';
 
 export class DashboardTable extends React.Component<IDashboardTableProps, IRootState> {
+
   componentDidMount() {
-    getTableData(this.props.tableName, tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, '', 10);
+
+    if (this.props.tableName === tableDataTypes.Events) {
+      getAllEventNames('default');
+    } else if (this.props.tableName === tableDataTypes.Subscribers) {
+      getSubscribedEventNames('default');
+      getTableData(this.props.tableName, tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, '', 10);
+    }
   }
 
   render() {
+    let eventNames;
+    let eventNamesIsLoading;
+    if (this.props.tableName === tableDataTypes.Events) {
+      eventNames = this.props.allEventNames;
+      eventNamesIsLoading = this.props.allEventNamesIsLoading;
+    } else {
+      eventNames = this.props.subscribedEventNames;
+      eventNamesIsLoading = this.props.subscribedEventNamesIsLoading;
+    }
     let loadingSpinner;
     if (this.props.tableDataIsLoading) {
       loadingSpinner = <div className="loader">Loading...</div>;
@@ -30,9 +46,13 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
         <DashboardTableSearchForm
           tableName={this.props.tableName}
           filter={this.props.tableDataFilter}
-          resultsCount={this.props.tableData.length}
+          eventNames={eventNames}
+          eventNamesIsLoading={eventNamesIsLoading}
         />
         {loadingSpinner}
+        <div className="dashboardTable-results-count">
+          {this.props.tableData.length} {this.props.tableName} found.
+        </div>
         <table className="dashboardTable">
           <DashboardTableHead columnHeadings={this.props.columnHeadings} />
           <DashboardTableBody
@@ -54,6 +74,12 @@ const mapStateToProps = (state: IRootState) => {
     tableDataHasErrored: state.tableData.tableDataHasErrored,
     tableDataIsLoading: state.tableData.tableDataIsLoading,
     tableDataFilter: state.tableData.tableDataFilter,
+    allEventNames: state.eventNames.allEventNames,
+    allEventNamesIsLoading: state.eventNames.allEventNamesIsLoading,
+    allEventNamesHasErrored: state.eventNames.allEventNamesHasErrored,
+    subscribedEventNames: state.eventNames.subscribedEventNames,
+    subscribedEventNamesIsLoading: state.eventNames.subscribedEventNamesIsLoading,
+    subscribedEventNamesHasErrored: state.eventNames.subscribedEventNamesHasErrored,
   };
 };
 

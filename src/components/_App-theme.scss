@@ -13,12 +13,12 @@
         color: $text-colour-dark;
         &:hover,
         &:focus,
-        &:focus>[class*="fa-"] {
+        &:focus>[class*="fa-"],
+        &:hover>[class*="fa-"] {
+            background-color: $background-colour-dark;
             color: $accent-colour;
         }
-        &.active,
-        &:hover,
-        &:focus {
+        &.active {
             background-color: $background-colour-dark;
         }
     }

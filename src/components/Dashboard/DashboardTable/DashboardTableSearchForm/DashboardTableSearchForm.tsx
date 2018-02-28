@@ -88,20 +88,42 @@ export default class DashboardTableSearchForm extends React.Component<
     }
 
     render() {
-        const isAccordionVisibleClass = this.state.isFilterInvalid
+        const isFilterInvalidClass = this.state.isFilterInvalid
             ? 'error'
             : '';
+        const eventNamesInputLoadingClass = this.props.eventNamesIsLoading
+            ? 'loading'
+            : '';
+        let eventNamesList;
+        if (this.props.eventNames.events.length <= 0) {
+            eventNamesList = (
+                <option value="Could not retrieve event names." />
+            );
+        } else {
+            eventNamesList = this.props.eventNames.events.map((eventName: string) => (
+                <option key={eventName} value={eventName} />
+            ));
+        } console.log(eventNamesInputLoadingClass);
         return (
             <div className="dashboardTable-searchbar-container" >
                 <form action="submit" onSubmit={this.handleSubmit}>
+                    <input
+                        className={`dashboardTable-searchbar-eventNameInput ${eventNamesInputLoadingClass}`}
+                        list="eventNames"
+                        title="Event name"
+                        placeholder="Event name"
+                    />
+                    <datalist id="eventNames">
+                        {eventNamesList}
+                    </datalist>
                     <textarea
                         ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
-                        className={`dashboardTable-searchbar-searchInput ${isAccordionVisibleClass}`}
+                        className={`dashboardTable-searchbar-searchInput ${isFilterInvalidClass}`}
                         value={this.state.filter}
                         onChange={this.handleSearchChange}
                         onBlur={this.handleSearchBlur}
                         placeholder="keyName: value, event: image_event..."
-                        title="Json String to Filter on"
+                        title="Json string to filter on."
                     />
                     <input
                         className="dashboardTable-searchbar-limitInput"
@@ -126,9 +148,7 @@ export default class DashboardTableSearchForm extends React.Component<
                         <i className="fas fa-eraser dashboardTable-searchbar-searchIcon button" />
                     </button>
                 </form>
-                <div className="dashboardTable-searchbar-results-count">
-                    {this.props.resultsCount} results found.
-                </div>
+
             </div>
         );
     }

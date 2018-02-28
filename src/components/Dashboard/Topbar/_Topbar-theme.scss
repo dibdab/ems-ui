@@ -1,12 +1,30 @@
 @mixin topbar-theme ($theme) {
   $primary-colour: map-get($theme, primary-colour);
+  $primary-colour-dark: map-get($theme, primary-colour-dark);
   $text-colour-dark: map-get($theme, text-colour-dark);
   $text-colour-light: map-get($theme, text-colour-light);
   .topbar-wrapper {
     background-color: $primary-colour;
     color: $text-colour-dark;
-  }
-  .topbar-header {
-    color: $text-colour-light;
+    .topbar-header {
+      color: $text-colour-light;
+    }
+    .button {
+      color: $text-colour-light;
+      &:hover {
+        background-color: $primary-colour-dark;
+        color: $text-colour-dark;
+      }
+      &:hover,
+      &:focus,
+      &:focus>[class*="fa-"],
+      &:hover>[class*="fa-"] {
+        background-color: $primary-colour-dark;
+        color: $text-colour-dark;
+      }
+      &.active {
+        background-color: $primary-colour-dark;
+      }
+    }
   }
 }

@@ -11,7 +11,7 @@ export const DashboardTableHead = (props: IDashboardTableHeadProps) => {
   return (
     <thead>
       <tr>
-        <th>
+        <th className="dashboardTable-checkbox-td">
           <input type="checkbox" />
         </th>
         {columnHeadings}

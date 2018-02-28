@@ -1,16 +1,21 @@
 @import 'src/styles/variables.scss';
 @import 'src/styles/mixins.scss';
 .sidebar {
-  transition: $theme-change-transistion;
-  min-width: $sidebar-width;
-  max-width: $sidebar-width;
+  transition: $theme-change-transition, width 400ms $mat-anim-curve;
+  width: $sidebar-width;
   height: calc(100% - #{$topbar-height});
   top: $topbar-height;
   left: 0;
   position: fixed;
   z-index: 4;
   overflow-y: auto;
-  overflow-x: none;
+  overflow-x: hidden;
+  &.hidden {
+    width: 0;
+  }
+  &.visible {
+    width: $sidebar-width;
+  }
   nav {
     height: 80%;
     margin: 8px 16px 8px 0;

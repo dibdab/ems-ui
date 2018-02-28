@@ -7,6 +7,26 @@ $doc-viwer-padding: 16px;
   height: calc(#{$document-view-height} - (#{$doc-viwer-padding}*2));
   width: calc(#{$document-view-width} - (#{$doc-viwer-padding}*2));
   top: $topbar-height;
-  left: $sidebar-width;
-  overflow-y: auto;
+  overflow: auto;
+  transition: padding-left 400ms $mat-anim-curve, width 400ms $mat-anim-curve;
+  @include breakpoint-xs-media {
+    min-width: 120px;
+  }
+  @include breakpoint-s-media {
+    min-width: 340px;
+  }
+  @include breakpoint-m-media {
+    min-width: 500px;
+  }
+  @include breakpoint-l-media {
+    min-width: 740px;
+  }
+  @include breakpoint-xl-media {
+    min-width: 960px;
+  }
+}
+
+.sidebar-open {
+  padding-left: calc((#{$sidebar-width}) + (#{$doc-viwer-padding}));
+  width: calc((#{$document-view-width} - #{$sidebar-width}) - (#{$doc-viwer-padding}*2));
 }

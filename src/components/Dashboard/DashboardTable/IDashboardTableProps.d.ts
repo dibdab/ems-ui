@@ -1,7 +1,5 @@
 import * as router from 'react-router-dom';
-import { tableDataTypes } from 'enums';
-import { IRoute, ISubscriberFilter } from 'types';
-import { ISubscriber } from 'types/';
+import { IRoute, ISubscriber, ISubscriberFilter, IEventNames } from 'types';
 
 export interface IDashboardTableProps {
   columnHeadings: string[];
@@ -11,6 +9,10 @@ export interface IDashboardTableProps {
   tableDataHasErrored: boolean;
   tableDataIsLoading: boolean;
   tableDataFilter: ISubscriberFilter;
+  allEventNames: IEventNames;
+  allEventNamesIsLoading: boolean;
+  allEventNamesHasErrored: boolean;
+  subscribedEventNames: IEventNames;
+  subscribedEventNamesIsLoading: boolean;
+  subscribedEventNamesHasErrored: boolean;
 }
-
-type urlParams = { tableName: tableDataTypes };

@@ -1,36 +1,35 @@
-
 @mixin breakpoint-xs-media {
-    @media (max-width: #{$breakpoint-xs}) {
-      @content;
-    }
+  @media (max-width: #{$breakpoint-xs}) {
+    @content;
   }
-  
-  @mixin breakpoint-s-media {
-    @media (min-width: #{$breakpoint-s}) and (max-width: #{$breakpoint-m - 1px}) {
-      @content;
-    }
+}
+
+@mixin breakpoint-s-media {
+  @media (min-width: #{$breakpoint-s}) and (max-width: #{$breakpoint-m - 1px}) {
+    @content;
   }
-  
-  @mixin breakpoint-m-media {
-    @media (min-width: #{$breakpoint-m}) and (max-width: #{$breakpoint-l - 1px}) {
-      @content;
-    }
+}
+
+@mixin breakpoint-m-media {
+  @media (min-width: #{$breakpoint-m}) and (max-width: #{$breakpoint-l - 1px}) {
+    @content;
   }
-  
-  @mixin breakpoint-l-media {
-    @media (min-width: #{$breakpoint-l}) and (max-width: #{$breakpoint-xl - 1px}) {
-      @content;
-    }
+}
+
+@mixin breakpoint-l-media {
+  @media (min-width: #{$breakpoint-l}) and (max-width: #{$breakpoint-xl - 1px}) {
+    @content;
   }
-  
-  @mixin breakpoint-sidenavOpen-media {
-    @media (min-width: #{1480px}) {
-      @content;
-    }
+}
+
+@mixin breakpoint-sidenavOpen-media {
+  @media (min-width: #{1480px}) {
+    @content;
   }
-  
-  @mixin breakpoint-xl-media {
-    @media (min-width: #{$breakpoint-xl}) {
-      @content;
-    }
+}
+
+@mixin breakpoint-xl-media {
+  @media (min-width: #{$breakpoint-xl}) {
+    @content;
   }
+}
