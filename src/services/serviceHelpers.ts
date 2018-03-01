@@ -7,10 +7,12 @@ export function appendAuthHeader(headers: Headers): Headers {
 }
 
 export function caseInsensitiveStringSort(strings: string[]) {
-    return strings.sort(function (a, b) {
+    return strings.sort((a: string, b: string) => {
         a = a.toLowerCase();
         b = b.toLowerCase();
-        if (a == b) return 0;
+        if (a === b) {
+            return 0;
+        }
         return a < b ? -1 : 1;
     });
 }

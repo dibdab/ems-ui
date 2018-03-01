@@ -1,11 +1,11 @@
 import * as router from 'react-router-dom';
-import { IRoute, ISubscriber, ISubscriberFilter, IEventNames } from 'types';
+import { IRoute, ISubscriber, ISubscriberFilter, IEventNames, IEvent } from 'types';
 
 export interface IDashboardTableProps {
   columnHeadings: string[];
   columnKeyNames: string[];
   tableName: string;
-  tableData: ISubscriber[];
+  tableData: ISubscriber[] | IEvent[];
   tableDataHasErrored: boolean;
   tableDataIsLoading: boolean;
   tableDataFilter: ISubscriberFilter;

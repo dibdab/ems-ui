@@ -9,7 +9,7 @@ export function getAllEventNames(cacheControl: RequestCache): void {
     setErrored(false);
     setLoading(true);
     const headers = appendAuthHeader(new Headers());
-    fetch(Config.EVENT_NAMES_API_URL, {
+    fetch(Config.ALL_EVENT_NAMES_API_URL, {
         method: 'GET',
         headers: headers,
         cache: cacheControl,

@@ -1,4 +1,4 @@
-import { ISubscriber, ISubscriberFilter } from 'types';
+import { ISubscriber, ISubscriberFilter, IEvent } from 'types';
 
 import {
   TABLEDATA_IS_LOADING,
@@ -10,10 +10,10 @@ import { combineReducers } from 'redux';
 
 // Set as Readonly to achieve immutability on nested types same with ReadonlyArray
 export type State = Readonly<{
-  tableData: ISubscriber[];
+  tableData: ISubscriber[] | IEvent[];
   tableDataIsLoading: boolean;
   tableDataHasErrored: boolean;
-  tableDataFilter: ISubscriberFilter;
+  tableDataFilter: ISubscriberFilter | {};
 }>;
 
 export const reducer = combineReducers<State>({

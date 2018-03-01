@@ -1,48 +1,11 @@
+import { IFilter, IFilterObject, IId, IRESTConnector, IJMSConnector, IOptions, INegativeFilter } from './SharedEMSTypes';
 
-interface ISubscriberFilterOptions {
-    payloadcontent: string[];
-}
-
-interface ISubscriberFilterFilter {
-    name: string;
-    value: string | boolean | ISubscriberFilterFilterObject;
-}
-
-interface ISubscriberFilterFilterObject {
-    [key: string]: any[];
-}
-
-interface ISubscriberFilterConnector {
-    host: string;
-    port: string;
-}
-
-interface ISubscriberFilterREST extends ISubscriberFilterConnector {
-    path: string;
-    method: string;
-}
-
-interface ISubscriberFilterJMS extends ISubscriberFilterConnector {
-    queue: string;
-}
-
-interface ISubscriberFilterRESTConnector {
-    REST: ISubscriberFilterREST;
-}
-
-interface ISubscriberFilterJMSConnector {
-    JMS: ISubscriberFilterJMS;
-}
-
-interface INegativeFilter<T> {
-    $ne: T
-}
 
 export interface ISubscriberFilter {
-    [key: string]: string | ISubscriberFilterFilter | INegativeFilter<ISubscriberFilterFilter> | ISubscriberFilterRESTConnector | ISubscriberFilterJMSConnector | ISubscriberFilterOptions | INegativeFilter<string> | INegativeFilter<ISubscriberFilterOptions> | INegativeFilter<ISubscriberFilterRESTConnector> | INegativeFilter<ISubscriberFilterJMSConnector>;
-    event: string | INegativeFilter<string>;
+    [key: string]: string | IFilter | INegativeFilter<IFilter> | IRESTConnector | IJMSConnector | IOptions | INegativeFilter<string> | INegativeFilter<IOptions> | INegativeFilter<IRESTConnector> | INegativeFilter<IJMSConnector> | undefined;
+    event: string | INegativeFilter<string> | undefined;
     listenerSystem: string | INegativeFilter<string>;
-    options: ISubscriberFilterOptions | INegativeFilter<ISubscriberFilterOptions>;
-    filter: ISubscriberFilterFilter | INegativeFilter<ISubscriberFilterFilter>;
-    connector: ISubscriberFilterRESTConnector | ISubscriberFilterJMSConnector | INegativeFilter<ISubscriberFilterJMSConnector> | INegativeFilter<ISubscriberFilterRESTConnector>;
+    options: IOptions | INegativeFilter<IOptions>;
+    filter: IFilter | INegativeFilter<IFilter>;
+    connector: IRESTConnector | IJMSConnector | INegativeFilter<IJMSConnector> | INegativeFilter<IRESTConnector>;
 }

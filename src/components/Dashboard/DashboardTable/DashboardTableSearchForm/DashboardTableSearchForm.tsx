@@ -10,7 +10,6 @@ import { TableDataActionCreators } from 'redux_';
 import { getTableData } from 'services';
 
 import { tableDataTypes } from 'enums';
-import Config from 'config';
 
 export default class DashboardTableSearchForm extends React.Component<
     IDashboardTableSearchFormProps,
@@ -23,6 +22,7 @@ export default class DashboardTableSearchForm extends React.Component<
             filter: JSON.stringify(this.props.filter),
             limit: '10',
             isFilterInvalid: false,
+            selectedEventName: typeof this.props.filter.event === 'string' ? this.props.filter.event : '',
         };
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleLimitChange = this.handleLimitChange.bind(this);
@@ -31,7 +31,10 @@ export default class DashboardTableSearchForm extends React.Component<
 
     componentWillReceiveProps(nextProps: IDashboardTableSearchFormProps) {
         if (this.state.filter !== JSON.stringify(nextProps.filter)) {
-            this.setState({ filter: JSON.stringify(nextProps.filter, null, 2) });
+            this.setState({
+                filter: JSON.stringify(nextProps.filter, null, 2),
+                selectedEventName: typeof nextProps.filter.event === 'string' ? nextProps.filter.event : '',
+            });
         }
     }
 
@@ -65,8 +68,26 @@ export default class DashboardTableSearchForm extends React.Component<
         this.setState({ limit: event.target.value });
     }
 
+    handleOnSelect = (event: ChangeEvent<HTMLSelectElement>) => {
+        if (event.target.value && event.target.value) {
+            const filter = this.props.filter;
+            filter.event = event.target.value;
+            this.setState({
+                filter: JSON.stringify(filter, null, 2),
+                selectedEventName: event.target.value,
+            });
+        } else {
+            const filter = this.props.filter;
+            filter.event = undefined;
+            this.setState({
+                filter: JSON.stringify(filter, null, 2),
+                selectedEventName: '',
+            });
+        }
+    }
+
     handleReset = () => {
-        this.setState({ filter: '{}' });
+        this.setState({ filter: '{}', selectedEventName: '' });
     }
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -75,8 +96,6 @@ export default class DashboardTableSearchForm extends React.Component<
             this.setState({ isFilterInvalid: false });
             getTableData(
                 this.props.tableName,
-                tableDataTypes.Subscribers,
-                Config.SUBSCRIBER_API_URL,
                 this.state.filter,
                 parseInt(this.state.limit, 10),
             );
@@ -95,27 +114,37 @@ export default class DashboardTableSearchForm extends React.Component<
             ? 'loading'
             : '';
         let eventNamesList;
-        if (this.props.eventNames.events.length <= 0) {
+        if (this.props.eventNames.events.length <= 0 && !this.props.eventNamesIsLoading) {
             eventNamesList = (
-                <option value="Could not retrieve event names." />
+                <option value="">Could not retrieve event names.</option>
             );
-        } else {
-            eventNamesList = this.props.eventNames.events.map((eventName: string) => (
-                <option key={eventName} value={eventName} />
+        } else if (!this.props.eventNamesIsLoading) {
+            const eventNamesOptions = this.props.eventNames.events.map((eventName: string) => (
+                <option key={eventName} value={eventName}>{eventName}</option>
             ));
-        } console.log(eventNamesInputLoadingClass);
+            eventNamesList = (
+                <React.Fragment>
+                    <option
+                        value=""
+                    >
+                        {this.props.tableName === tableDataTypes.Events ? 'Select an event name.' : 'Event name.'}
+                    </option>
+                    {eventNamesOptions}
+                </React.Fragment>
+            );
+        }
         return (
             <div className="dashboardTable-searchbar-container" >
                 <form action="submit" onSubmit={this.handleSubmit}>
-                    <input
+                    <select
+                        onChange={this.handleOnSelect}
                         className={`dashboardTable-searchbar-eventNameInput ${eventNamesInputLoadingClass}`}
-                        list="eventNames"
                         title="Event name"
-                        placeholder="Event name"
-                    />
-                    <datalist id="eventNames">
+                        required={this.props.tableName === tableDataTypes.Events ? true : false}
+                        value={this.state.selectedEventName}
+                    >
                         {eventNamesList}
-                    </datalist>
+                    </select>
                     <textarea
                         ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
                         className={`dashboardTable-searchbar-searchInput ${isFilterInvalidClass}`}

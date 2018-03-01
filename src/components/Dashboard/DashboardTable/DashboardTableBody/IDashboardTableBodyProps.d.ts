@@ -1,9 +1,10 @@
-import { ISubscriber, ISubscriberFilter } from 'types/';
+import { ISubscriber, ISubscriberFilter, IEvent } from 'types/';
 
 export interface IDashboardTableBodyProps {
   columnKeyNames: string[];
   tableName: string;
-  tableData: ISubscriber[];
-  filter: ISubscriberFilter;
+  tableData: ISubscriber[] | IEvent[];
   isLoading: boolean;
+  hasErrored: boolean;
+  filter: ISubscriberFilter;
 }

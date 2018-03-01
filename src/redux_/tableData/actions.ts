@@ -1,4 +1,4 @@
-import { ISubscriber, ISubscriberFilter } from 'types';
+import { ISubscriber, ISubscriberFilter, IEvent } from 'types';
 
 // Define constants for actions names
 export const TABLEDATA_IS_LOADING = 'TABLEDATA_IS_LOADING';
@@ -18,11 +18,11 @@ export type Actions = {
   };
   TABLEDATA_FETCH_SUCCESS: {
     type: typeof TABLEDATA_FETCH_SUCCESS;
-    payload: ISubscriber[];
+    payload: ISubscriber[] | IEvent[];
   };
   TABLEDATA_FILTER_CHANGE: {
     type: typeof TABLEDATA_FILTER_CHANGE;
-    payload: ISubscriberFilter;
+    payload: ISubscriberFilter | {};
   };
 };
 
@@ -41,13 +41,13 @@ export const actionCreators = {
     payload,
   }),
   tableDataFetchSuccess: (
-    payload: ISubscriber[],
+    payload: ISubscriber[] | IEvent[],
   ): Actions[typeof TABLEDATA_FETCH_SUCCESS] => ({
     type: TABLEDATA_FETCH_SUCCESS,
     payload,
   }),
   tableDataFilterChange: (
-    payload: ISubscriberFilter,
+    payload: ISubscriberFilter | {},
   ): Actions[typeof TABLEDATA_FILTER_CHANGE] => ({
     type: TABLEDATA_FILTER_CHANGE,
     payload,

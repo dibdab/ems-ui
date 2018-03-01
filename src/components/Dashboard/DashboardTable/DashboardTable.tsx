@@ -11,7 +11,6 @@ import DashboardTableSearchForm from './DashboardTableSearchForm/DashboardTableS
 import { IRootState } from 'redux_';
 import { getTableData, getAllEventNames, getSubscribedEventNames } from 'services';
 import { tableDataTypes } from 'enums';
-import Config from 'config';
 
 export class DashboardTable extends React.Component<IDashboardTableProps, IRootState> {
 
@@ -21,7 +20,7 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
       getAllEventNames('default');
     } else if (this.props.tableName === tableDataTypes.Subscribers) {
       getSubscribedEventNames('default');
-      getTableData(this.props.tableName, tableDataTypes.Subscribers, Config.SUBSCRIBER_API_URL, '', 10);
+      getTableData(this.props.tableName, '', 10);
     }
   }
 
@@ -59,8 +58,9 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
             columnKeyNames={this.props.columnKeyNames}
             tableName={this.props.tableName}
             tableData={this.props.tableData}
-            filter={this.props.tableDataFilter}
             isLoading={this.props.tableDataIsLoading}
+            hasErrored={this.props.tableDataHasErrored}
+            filter={this.props.tableDataFilter}
           />
         </table>
       </React.Fragment>

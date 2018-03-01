@@ -10,8 +10,10 @@ export const DashboardTableBody = (props: IDashboardTableBodyProps) => {
       <DashboardTableRows
         tableData={props.tableData}
         columnKeyNames={props.columnKeyNames}
-        filter={props.filter}
         isLoading={props.isLoading}
+        hasErrored={props.hasErrored}
+        filter={props.filter}
+        tableName={props.tableName}
       />
     </tbody>
   );

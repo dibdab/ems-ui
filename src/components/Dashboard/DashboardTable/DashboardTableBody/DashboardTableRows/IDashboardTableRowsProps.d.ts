@@ -1,9 +1,11 @@
-import { ISubscriber, ISubscriberFilter } from 'types';
+import { ISubscriber, ISubscriberFilter, IEvent } from 'types';
 import { Component } from 'react';
 
 export interface IDashboardTableRowsProps {
-    tableData: ISubscriber[];
+    tableData: ISubscriber[] | IEvent[];
     columnKeyNames: string[];
-    filter: ISubscriberFilter;
     isLoading: boolean;
+    hasErrored: boolean;
+    filter: ISubscriberFilter;
+    tableName: string;
 }

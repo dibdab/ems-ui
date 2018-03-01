@@ -5,6 +5,8 @@ import { ISidebarProps } from './ISidebarProps';
 import './Sidebar.css';
 
 import { tableDataTypes } from 'enums';
+import store from 'store';
+import { TableDataActionCreators } from 'redux_';
 
 export const Sidebar = (props: ISidebarProps) => {
   const tables = [
@@ -17,6 +19,7 @@ export const Sidebar = (props: ISidebarProps) => {
       key={table.urlName}
       className="button button-simplelink"
       activeClassName="active"
+      onClick={handleClick}
     >
       {table.sidebarName}
     </NavLink>
@@ -24,6 +27,12 @@ export const Sidebar = (props: ISidebarProps) => {
   const isSidebarOpenClass = props.isSidebarOpen
     ? 'visible'
     : 'hidden';
+  // TODO: Set up events service with no filters
+  function handleClick() {
+    store.dispatch(TableDataActionCreators.tableDataFilterChange({}));
+    store.dispatch(TableDataActionCreators.tableDataFetchSuccess([]));
+  }
+
   return (
     <div className={`sidebar ${isSidebarOpenClass}`}>
       <nav>{tableList}</nav>

@@ -1,6 +1,6 @@
-import { ISubscriber } from 'types';
+import { IEvent } from 'types';
 
 export default interface IDashboardTableEventCellsProps {
     columnKeyNames: any;
-    subscriber: ISubscriber;
+    event: IEvent;
 }

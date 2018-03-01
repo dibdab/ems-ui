@@ -2,8 +2,9 @@ import store from 'store';
 
 import { appendAuthHeader } from './serviceHelpers';
 import { TableDataActionCreators } from 'redux_';
-import { ISubscriber } from 'types';
+import { ISubscriber, IEvent } from 'types';
 import { tableDataTypes } from 'enums';
+import Config from 'config';
 
 export function getSubscribers(
   dataType: string,
@@ -38,23 +39,57 @@ export function getSubscribers(
   );
 }
 
-export function getTableData(
-  tableName: string,
+export function getEvents(
   dataType: string,
   endpoint: string,
+  messageBody?: string,
+  responseLimit?: number,
+  skip?: number,
+): void {
+  setErrored(false);
+  setLoading(true);
+  let fullEndpoint: string;
+  const headers = appendAuthHeader(new Headers());
+  if (skip) {
+    fullEndpoint = `${endpoint}?limit=${responseLimit}&skip=${skip}`;
+  } else {
+    fullEndpoint = `${endpoint}?limit=${responseLimit}`;
+  }
+  fetch(fullEndpoint, {
+    method: 'POST',
+    headers: headers,
+    body: messageBody,
+  })
+    .then(response => response.json())
+    .then((responseData: IEvent[]) => {
+      SetResponseSuccess(responseData);
+      setLoading(false);
+    })
+    .catch(() => {
+      setErrored(true);
+      setLoading(false);
+    },
+  );
+}
+
+export function getTableData(
+  tableName: string,
   messageBody: string,
   responseLimit?: number,
 ) {
   switch (tableName) {
     case (tableDataTypes.Subscribers):
-      getSubscribers(dataType, endpoint, messageBody, !responseLimit ? 10 : responseLimit);
+      getSubscribers(tableName, Config.SUBSCRIBER_API_URL, messageBody, !responseLimit ? 10 : responseLimit);
+      break;
+    case (tableDataTypes.Events):
+      getEvents(tableName, Config.EVENTS_API_URL, messageBody, !responseLimit ? 10 : responseLimit);
       break;
     default:
       break;
   }
 }
 
-function SetResponseSuccess(data: ISubscriber[]) {
+function SetResponseSuccess(data: ISubscriber[] | IEvent[]) {
   store.dispatch(TableDataActionCreators.tableDataFetchSuccess(data));
 }
 
