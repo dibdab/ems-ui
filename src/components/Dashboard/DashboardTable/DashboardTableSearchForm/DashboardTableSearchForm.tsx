@@ -127,7 +127,7 @@ export default class DashboardTableSearchForm extends React.Component<
                     <option
                         value=""
                     >
-                        {this.props.tableName === tableDataTypes.Events ? 'Select an event name.' : 'Event name.'}
+                        {this.props.tableName === tableDataTypes.Events ? 'Event name*' : 'Event name (optional)'}
                     </option>
                     {eventNamesOptions}
                 </React.Fragment>
@@ -159,10 +159,11 @@ export default class DashboardTableSearchForm extends React.Component<
                         type="number"
                         value={this.state.limit}
                         onChange={this.handleLimitChange}
-                        placeholder="1-100"
+                        placeholder="1-100*"
                         maxLength={3}
                         min={1}
                         max={100}
+                        required={true}
                         title="No. of Results to Return"
                     />
                     <button title="Submit" className="dashboardTable-searchbar-button button" type="submit">
@@ -176,6 +177,7 @@ export default class DashboardTableSearchForm extends React.Component<
                     >
                         <i className="fas fa-eraser dashboardTable-searchbar-searchIcon button" />
                     </button>
+                    <span className="dashboardTable-requiredKey">* Required</span>
                 </form>
 
             </div>
