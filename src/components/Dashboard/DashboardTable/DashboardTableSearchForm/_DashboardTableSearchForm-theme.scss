@@ -4,19 +4,20 @@
     $background-colour: map-get($theme, background-colour);
     $background-colour-dark: map-get($theme, background-colour-dark);
     $text-colour-secondary: map-get($theme, text-colour-secondary);
-    .dashboardTable-searchbar-container {
-        .dashboardTable-searchbar-searchIcon {
+    .dashboardTable-searchForm-container {
+        .dashboardTable-searchForm-searchIcon {
             border-color: $divider-colour;
             background-color: $background-colour;
             color: $text-colour-dark;
         }
-        .dashboardTable-searchbar-eventNameInput,
-        .dashboardTable-searchbar-searchInput,
-        .dashboardTable-searchbar-limitInput {
+        .dashboardTable-searchForm-eventNameInput,
+        .dashboardTable-searchForm-dataPicker,
+        .dashboardTable-searchForm-searchInput,
+        .dashboardTable-searchForm-limitInput {
             border-bottom-color: $text-colour-secondary;
             background-color: $background-colour;
         }
-        .dashboardTable-searchbar-results-count {
+        .dashboardTable-searchForm-results-count {
             color: $text-colour-secondary;
         }
     }

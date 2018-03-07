@@ -93,7 +93,10 @@ export default class DashboardTableRows extends React.Component<
     render() {
         if (this.props.tableData.length <= 0) {
             let message;
-            if (!this.props.hasErrored && (!this.props.filter.event)) {
+            if (!this.props.hasErrored &&
+                !this.props.filter.event &&
+                !this.props.filter.receivedDate
+            ) {
                 message = 'Submit event name and received date filters to view events.';
             } else if (this.props.hasErrored) {
                 message = 'Error unable to retrieve data.';

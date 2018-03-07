@@ -1,4 +1,4 @@
-import { ISubscriber, ISubscriberFilter, IEvent } from 'types';
+import { ISubscriber, ISubscriberFilter, IEvent, IEventFilter } from 'types';
 
 // Define constants for actions names
 export const TABLEDATA_IS_LOADING = 'TABLEDATA_IS_LOADING';
@@ -22,7 +22,7 @@ export type Actions = {
   };
   TABLEDATA_FILTER_CHANGE: {
     type: typeof TABLEDATA_FILTER_CHANGE;
-    payload: ISubscriberFilter | {};
+    payload: ISubscriberFilter | IEventFilter | {};
   };
 };
 
@@ -47,7 +47,7 @@ export const actionCreators = {
     payload,
   }),
   tableDataFilterChange: (
-    payload: ISubscriberFilter | {},
+    payload: ISubscriberFilter | IEventFilter | {},
   ): Actions[typeof TABLEDATA_FILTER_CHANGE] => ({
     type: TABLEDATA_FILTER_CHANGE,
     payload,

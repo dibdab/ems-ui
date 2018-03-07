@@ -1,4 +1,4 @@
-import { ISubscriber, ISubscriberFilter, IEvent } from 'types';
+import { ISubscriber, ISubscriberFilter, IEvent, IEventFilter } from 'types';
 
 import {
   TABLEDATA_IS_LOADING,
@@ -13,7 +13,7 @@ export type State = Readonly<{
   tableData: ISubscriber[] | IEvent[];
   tableDataIsLoading: boolean;
   tableDataHasErrored: boolean;
-  tableDataFilter: ISubscriberFilter | {};
+  tableDataFilter: ISubscriberFilter | IEventFilter | {};
 }>;
 
 export const reducer = combineReducers<State>({

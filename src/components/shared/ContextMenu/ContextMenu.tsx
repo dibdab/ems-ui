@@ -5,7 +5,7 @@ import './ContextMenu.css';
 import { IContextMenuState } from './IContextMenuState';
 import { IContextMenuProps } from './IContextMenuProps';
 
-import { ISubscriberFilter } from 'types';
+import { ISubscriberFilter, IEventFilter } from 'types';
 import store from 'store';
 import { TableDataActionCreators } from 'redux_';
 
@@ -80,7 +80,7 @@ export default class ContextMenu extends React.Component<
     }
 
     handleContextMenuClick = (e: MouseEvent<HTMLTableCellElement>) => {
-        const newFilter: ISubscriberFilter = Object.assign({}, this.props.filter);
+        const newFilter: ISubscriberFilter | IEventFilter = Object.assign({}, this.props.filter);
         const contextMenuTarget = this.state.menuTarget as HTMLElement;
         if (contextMenuTarget.hasAttribute('data-filter')) {
             if (contextMenuTarget.hasAttribute('data-filterjsonlocation')) {

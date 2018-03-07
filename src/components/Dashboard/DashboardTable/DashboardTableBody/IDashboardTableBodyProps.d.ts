@@ -1,4 +1,4 @@
-import { ISubscriber, ISubscriberFilter, IEvent } from 'types/';
+import { ISubscriber, ISubscriberFilter, IEvent, IEventFilter } from 'types/';
 
 export interface IDashboardTableBodyProps {
   columnKeyNames: string[];
@@ -6,5 +6,5 @@ export interface IDashboardTableBodyProps {
   tableData: ISubscriber[] | IEvent[];
   isLoading: boolean;
   hasErrored: boolean;
-  filter: ISubscriberFilter;
+  filter: ISubscriberFilter | IEventFilter;
 }

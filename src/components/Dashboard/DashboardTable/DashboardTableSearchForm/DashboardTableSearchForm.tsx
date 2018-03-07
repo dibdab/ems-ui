@@ -10,6 +10,7 @@ import { TableDataActionCreators } from 'redux_';
 import { getTableData } from 'services';
 
 import { tableDataTypes } from 'enums';
+import { IEventFilter } from 'types';
 
 export default class DashboardTableSearchForm extends React.Component<
     IDashboardTableSearchFormProps,
@@ -18,11 +19,19 @@ export default class DashboardTableSearchForm extends React.Component<
     private textArea: HTMLTextAreaElement;
     constructor(props: IDashboardTableSearchFormProps) {
         super(props);
+        const filter = JSON.stringify(this.props.filter, null, 2);
+        const selectedEventName = typeof this.props.filter.event === 'string' ?
+            this.props.filter.event :
+            '';
+        const selectedReceivedDate = typeof this.props.filter.receivedDate === 'string' ?
+            this.props.filter.receivedDate as string :
+            '';
         this.state = {
-            filter: JSON.stringify(this.props.filter),
+            filter,
             limit: '10',
             isFilterInvalid: false,
-            selectedEventName: typeof this.props.filter.event === 'string' ? this.props.filter.event : '',
+            selectedEventName,
+            selectedReceivedDate,
         };
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleLimitChange = this.handleLimitChange.bind(this);
@@ -30,10 +39,20 @@ export default class DashboardTableSearchForm extends React.Component<
     }
 
     componentWillReceiveProps(nextProps: IDashboardTableSearchFormProps) {
-        if (this.state.filter !== JSON.stringify(nextProps.filter)) {
+        const filter = JSON.stringify(nextProps.filter, null, 2);
+        if (
+            this.state.filter !== filter ||
+            this.state.selectedEventName !== nextProps.filter.event ||
+            this.state.selectedReceivedDate !== nextProps.filter.receivedDate
+        ) {
             this.setState({
-                filter: JSON.stringify(nextProps.filter, null, 2),
-                selectedEventName: typeof nextProps.filter.event === 'string' ? nextProps.filter.event : '',
+                filter,
+                selectedEventName: typeof nextProps.filter.event === 'string' ?
+                    nextProps.filter.event :
+                    '',
+                selectedReceivedDate: typeof nextProps.filter.receivedDate === 'string' ?
+                    nextProps.filter.receivedDate as string :
+                    '',
             });
         }
     }
@@ -68,16 +87,15 @@ export default class DashboardTableSearchForm extends React.Component<
         this.setState({ limit: event.target.value });
     }
 
-    handleOnSelect = (event: ChangeEvent<HTMLSelectElement>) => {
+    handleSelectEventName = (event: ChangeEvent<HTMLSelectElement>) => {
+        const filter = this.props.filter;
         if (event.target.value && event.target.value) {
-            const filter = this.props.filter;
             filter.event = event.target.value;
             this.setState({
                 filter: JSON.stringify(filter, null, 2),
                 selectedEventName: event.target.value,
             });
         } else {
-            const filter = this.props.filter;
             filter.event = undefined;
             this.setState({
                 filter: JSON.stringify(filter, null, 2),
@@ -86,8 +104,25 @@ export default class DashboardTableSearchForm extends React.Component<
         }
     }
 
+    handleChangeReceivedDate = (event: ChangeEvent<HTMLInputElement>) => {
+        const filter = this.props.filter;
+        if (event.target.value && event.target.value) {
+            (filter as IEventFilter).receivedDate = event.target.value;
+            this.setState({
+                filter: JSON.stringify(filter, null, 2),
+                selectedReceivedDate: event.target.value,
+            });
+        } else {
+            (filter as IEventFilter).receivedDate = undefined;
+            this.setState({
+                filter: JSON.stringify(filter, null, 2),
+                selectedReceivedDate: '',
+            });
+        }
+    }
+
     handleReset = () => {
-        this.setState({ filter: '{}', selectedEventName: '' });
+        this.setState({ filter: '{}', selectedEventName: '', selectedReceivedDate: '' });
     }
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -107,12 +142,28 @@ export default class DashboardTableSearchForm extends React.Component<
     }
 
     render() {
+        let datePicker;
         const isFilterInvalidClass = this.state.isFilterInvalid
             ? 'error'
             : '';
         const eventNamesInputLoadingClass = this.props.eventNamesIsLoading
             ? 'loading'
             : '';
+
+        if (this.props.tableName === tableDataTypes.Events) {
+            datePicker = (
+                <div className="dashboardTable-searchForm-inputContainer">
+                    <label>Received Date*</label>
+                    <input
+                        onChange={this.handleChangeReceivedDate}
+                        value={this.state.selectedReceivedDate}
+                        className="dashboardTable-searchForm-dataPicker"
+                        type="date"
+                        required={true}
+                    />
+                </div>
+            );
+        }
         let eventNamesList;
         if (this.props.eventNames.events.length <= 0 && !this.props.eventNamesIsLoading) {
             eventNamesList = (
@@ -124,58 +175,66 @@ export default class DashboardTableSearchForm extends React.Component<
             ));
             eventNamesList = (
                 <React.Fragment>
-                    <option
-                        value=""
-                    >
-                        {this.props.tableName === tableDataTypes.Events ? 'Event name*' : 'Event name (optional)'}
-                    </option>
+                    <option value="" />
                     {eventNamesOptions}
                 </React.Fragment>
             );
         }
         return (
-            <div className="dashboardTable-searchbar-container" >
+            <div className="dashboardTable-searchForm-container" >
                 <form action="submit" onSubmit={this.handleSubmit}>
-                    <select
-                        onChange={this.handleOnSelect}
-                        className={`dashboardTable-searchbar-eventNameInput ${eventNamesInputLoadingClass}`}
-                        title="Event name"
-                        required={this.props.tableName === tableDataTypes.Events ? true : false}
-                        value={this.state.selectedEventName}
-                    >
-                        {eventNamesList}
-                    </select>
-                    <textarea
-                        ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
-                        className={`dashboardTable-searchbar-searchInput ${isFilterInvalidClass}`}
-                        value={this.state.filter}
-                        onChange={this.handleSearchChange}
-                        onBlur={this.handleSearchBlur}
-                        placeholder="keyName: value, event: image_event..."
-                        title="Json string to filter on."
-                    />
-                    <input
-                        className="dashboardTable-searchbar-limitInput"
-                        type="number"
-                        value={this.state.limit}
-                        onChange={this.handleLimitChange}
-                        placeholder="1-100*"
-                        maxLength={3}
-                        min={1}
-                        max={100}
-                        required={true}
-                        title="No. of Results to Return"
-                    />
-                    <button title="Submit" className="dashboardTable-searchbar-button button" type="submit">
-                        <i title="Submit" className="fas fa-search dashboardTable-searchbar-searchIcon button" />
+                    <div className="dashboardTable-searchForm-inputContainer">
+                        <label>
+                            {this.props.tableName === tableDataTypes.Events ? 'Event name*' : 'Event name (optional)'}
+                        </label>
+                        <select
+                            onChange={this.handleSelectEventName}
+                            className={`dashboardTable-searchForm-eventNameInput ${eventNamesInputLoadingClass}`}
+                            title="Event name"
+                            required={this.props.tableName === tableDataTypes.Events ? true : false}
+                            value={this.state.selectedEventName}
+                        >
+                            {eventNamesList}
+                        </select>
+                    </div>
+                    {datePicker}
+                    <div className="dashboardTable-searchForm-inputContainer">
+                        <label>Json filter</label>
+                        <textarea
+                            ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
+                            className={`dashboardTable-searchForm-searchInput ${isFilterInvalidClass}`}
+                            value={this.state.filter}
+                            onChange={this.handleSearchChange}
+                            onBlur={this.handleSearchBlur}
+                            placeholder="keyName: value, event: image_event..."
+                            title="Json string to filter on."
+                        />
+                    </div>
+                    <div className="dashboardTable-searchForm-inputContainer">
+                        <label>Result limit*</label>
+                        <input
+                            className="dashboardTable-searchForm-limitInput"
+                            type="number"
+                            value={this.state.limit}
+                            onChange={this.handleLimitChange}
+                            placeholder="1-100*"
+                            maxLength={3}
+                            min={1}
+                            max={100}
+                            required={true}
+                            title="No. of Results to Return."
+                        />
+                    </div>
+                    <button title="Submit" className="dashboardTable-searchForm-button button" type="submit">
+                        <i title="Submit" className="fas fa-search dashboardTable-searchForm-searchIcon button" />
                     </button>
                     <button
                         title="Reset"
-                        className="dashboardTable-searchbar-button button"
+                        className="dashboardTable-searchForm-button button"
                         type="button"
                         onClick={this.handleReset}
                     >
-                        <i className="fas fa-eraser dashboardTable-searchbar-searchIcon button" />
+                        <i className="fas fa-eraser dashboardTable-searchForm-searchIcon button" />
                     </button>
                     <span className="dashboardTable-requiredKey">* Required</span>
                 </form>

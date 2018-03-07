@@ -1,41 +1,52 @@
-.dashboardTable-searchbar-container {
+.dashboardTable-searchForm-container {
     width: 95%;
-    margin: 8px auto 0 auto;
+    margin: 16px auto 0 auto;
     form {
         :not(:last-child) {
             margin-right: 16px;
         }
         white-space: nowrap;
     }
-    .dashboardTable-searchbar-eventNameInput,
-    .dashboardTable-searchbar-searchInput,
-    .dashboardTable-searchbar-limitInput {
+    .dashboardTable-searchForm-inputContainer {
+        display: inline;
+        & label {
+            position: absolute;
+            top: 16px;
+        }
+    }
+    .dashboardTable-searchForm-eventNameInput,
+    .dashboardTable-searchForm-dataPicker,
+    .dashboardTable-searchForm-searchInput,
+    .dashboardTable-searchForm-limitInput {
         font-size: 18px;
-        padding: 8px 4px;
+        padding: 8px 4px 8px 0;
         border: none;
         border-bottom: 1px solid;
     }
-    .dashboardTable-searchbar-eventNameInput {
+    .dashboardTable-searchForm-eventNameInput {
         width: 18%;
         font-family: 'Roboto', 'Noto Sans', sans-serif;
         &.loading {
             background: url('../../../../assets/images/input-loading.gif') no-repeat center center;
         }
     }
-    .dashboardTable-searchbar-searchInput {
+    .dashboardTable-searchForm-dataPicker {
+        font-family: 'Roboto', 'Noto Sans', sans-serif;
+    }
+    .dashboardTable-searchForm-searchInput {
         max-height: 300px;
-        min-width: 60%;
+        min-width: 50%;
         height: 22px;
         min-height: 22px;
         line-height: 21px;
         vertical-align: bottom;
         resize: none;
     }
-    .dashboardTable-searchbar-limitInput {
+    .dashboardTable-searchForm-limitInput {
         min-width: 7%;
         font-family: 'Roboto', 'Noto Sans', sans-serif;
     }
-    .dashboardTable-searchbar-searchIcon {
+    .dashboardTable-searchForm-searchIcon {
         padding: 4px;
         margin-bottom: -14px;
         min-width: 38px;
@@ -44,7 +55,7 @@
         box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.12);
         border: solid 1px;
     }
-    .dashboardTable-searchbar-button {
+    .dashboardTable-searchForm-button {
         width: auto;
         height: auto;
         padding: 0;
