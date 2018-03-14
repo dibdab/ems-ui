@@ -61,14 +61,14 @@ class Dashboard extends React.Component<
         routeProps: {
           columnHeadings: [
             'Event Name',
-            'EventColumn1',
-            'EventColumn2',
-            'EventColumn3',
+            'Source System',
+            'Received Date',
+            'Filters',
           ],
           columnKeyNames: [
             'event',
-            'listenerSystem',
-            'connector',
+            'sourceSystem',
+            'receivedDate',
             'filter',
           ],
           tableName: tableTypes.Events,

@@ -20,29 +20,27 @@ export default class DashboardTableSearchForm extends React.Component<
     private textArea: HTMLTextAreaElement;
     constructor(props: IDashboardTableSearchFormProps) {
         super(props);
-        const filter = JSON.stringify(this.props.filter, null, 2);
-        const selectedEventName = this.props.filter.event !== undefined ?
-            this.props.filter.event as string :
-            '';
-        let selectedFromDate = '';
-        let selectedToDate = '';
-        if (this.props.tableName === tableTypes.Events) {
-            selectedFromDate = (this.props.filter as IEventFilter).timeStamp
-                && typeof (this.props.filter as IEventFilter).timeStamp.$gte.$date === 'string' ?
-                (this.props.filter as IEventFilter).timeStamp.$gte.$date :
-                '';
-            selectedToDate = (this.props.filter as IEventFilter).timeStamp
-                && typeof (this.props.filter as IEventFilter).timeStamp.$lte.$date === 'string' ?
-                (this.props.filter as IEventFilter).timeStamp.$lte.$date :
-                '';
+        let filter: string;
+        if (this.props.tableName === tableTypes.Subscribers) {
+            filter = JSON.stringify(this.props.filter, null, 2);
+        } else {
+            const eventsDefaultFilter: IEventFilter = {
+                event: '',
+                timeStamp: {
+                    $gte: { $date: '' },
+                    $lte: { $date: '' },
+                },
+            };
+            store.dispatch(TableDataActionCreators.tableDataFilterChange(eventsDefaultFilter));
+            filter = JSON.stringify(eventsDefaultFilter, null, 2);
         }
         this.state = {
             filter,
             limit: '10',
             isFilterInvalid: false,
-            selectedEventName,
-            selectedFromDate,
-            selectedToDate,
+            selectedEventName: '',
+            selectedFromDate: '',
+            selectedToDate: '',
         };
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleSelectEventName = this.handleSelectEventName.bind(this);
@@ -55,26 +53,33 @@ export default class DashboardTableSearchForm extends React.Component<
         if (
             this.state.filter !== filter ||
             this.state.selectedEventName !== nextProps.filter.event ||
-            this.state.selectedFromDate !== (this.props.filter as IEventFilter).timeStamp.$gte.$date ||
-            this.state.selectedToDate !== (this.props.filter as IEventFilter).timeStamp.$lte.$date
+            this.state.selectedFromDate !== (nextProps.filter as IEventFilter).timeStamp.$gte.$date ||
+            this.state.selectedToDate !== (nextProps.filter as IEventFilter).timeStamp.$lte.$date
         ) {
             if ((this.props.filter as IEventFilter).timeStamp) {
-                this.setState({
-                    selectedFromDate: (this.props.filter as IEventFilter).timeStamp.$gte.$date.substring(0, 10),
-                    selectedToDate: (this.props.filter as IEventFilter).timeStamp.$lte.$date.substring(0, 10),
-                });
+                if ((nextProps.filter as IEventFilter).timeStamp.$gte) {
+                    this.setState({
+                        selectedFromDate: (nextProps.filter as IEventFilter).timeStamp.$gte.$date.substring(0, 10),
+                    });
+                }
+                if ((nextProps.filter as IEventFilter).timeStamp.$lte) {
+                    this.setState({
+                        selectedToDate: (nextProps.filter as IEventFilter).timeStamp.$lte.$date.substring(0, 10),
+                    });
+                }
             }
             this.setState({
                 filter,
-                selectedEventName: this.props.filter.event !== undefined ?
-                    this.props.filter.event as string :
+                selectedEventName: nextProps.filter.event !== undefined ?
+                    nextProps.filter.event as string :
                     '',
             });
         }
     }
 
     componentDidUpdate(prevProps: IDashboardTableSearchFormProps, prevState: IDashboardTableSearchFormState) {
-        if (this.state.filter !== prevState.filter) {
+        if (this.state.filter !== prevState.filter ||
+            this.props.filter !== prevProps.filter) {
             this.resizeTextArea(this.textArea);
         }
     }
@@ -122,14 +127,22 @@ export default class DashboardTableSearchForm extends React.Component<
 
     handleSelectDateRange = (fromDate: string, toDate: string) => {
         const filter = this.props.filter as IEventFilter;
+        let selectedFromDate = fromDate;
+        let selectedToDate = toDate;
+        if (!selectedFromDate) {
+            selectedFromDate = this.state.selectedFromDate;
+        }
+        if (!selectedToDate) {
+            selectedToDate = this.state.selectedToDate;
+        }
         filter.timeStamp = {
-            $gte: { $date: fromDate },
-            $lte: { $date: toDate },
+            $gte: { $date: selectedFromDate },
+            $lte: { $date: selectedToDate },
         };
         this.setState({
             filter: JSON.stringify(filter, null, 2),
-            selectedFromDate: fromDate.substring(0, 10),
-            selectedToDate: toDate.substring(0, 10),
+            selectedFromDate: selectedFromDate.substring(0, 10),
+            selectedToDate: selectedToDate.substring(0, 10),
         });
     }
 
@@ -150,12 +163,23 @@ export default class DashboardTableSearchForm extends React.Component<
     }
 
     handleReset = () => {
+        let filter = {};
+        if (this.props.tableName === tableTypes.Events) {
+            filter = {
+                event: '',
+                timeStamp: {
+                    $gte: { $date: '' },
+                    $lte: { $date: '' },
+                },
+            };
+        }
         this.setState({
-            filter: '{}',
+            filter: JSON.stringify(filter, null, 2),
             selectedEventName: '',
             selectedFromDate: '',
             selectedToDate: '',
         });
+        store.dispatch(TableDataActionCreators.tableDataFilterChange(filter));
     }
 
     render() {
