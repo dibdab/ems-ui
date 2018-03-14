@@ -2,16 +2,17 @@
     width: 95%;
     margin: 16px auto 0 auto;
     form {
-        :not(:last-child) {
-            margin-right: 16px;
-        }
         white-space: nowrap;
+    }
+    .dashboardTable-searchForm-inputGroupContainer {
+        margin-top: 32px;
     }
     .dashboardTable-searchForm-inputContainer {
         display: inline;
+        margin-right: 16px;
         & label {
             position: absolute;
-            top: 16px;
+            margin-top: -16px;
         }
     }
     .dashboardTable-searchForm-eventNameInput,
@@ -23,6 +24,9 @@
         border: none;
         border-bottom: 1px solid;
     }
+    .dashboardTable-searchForm-dataPicker-separator {
+        margin: 0 8px;
+    }
     .dashboardTable-searchForm-eventNameInput {
         width: 18%;
         font-family: 'Roboto', 'Noto Sans', sans-serif;
@@ -31,11 +35,13 @@
         }
     }
     .dashboardTable-searchForm-dataPicker {
+        width: 10.5%;
         font-family: 'Roboto', 'Noto Sans', sans-serif;
     }
     .dashboardTable-searchForm-searchInput {
         max-height: 300px;
-        min-width: 50%;
+        width: 85%;
+        min-width: 60%;
         height: 22px;
         min-height: 22px;
         line-height: 21px;

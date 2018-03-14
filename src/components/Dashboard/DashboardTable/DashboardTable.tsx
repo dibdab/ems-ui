@@ -10,15 +10,15 @@ import DashboardTableSearchForm from './DashboardTableSearchForm/DashboardTableS
 
 import { IRootState } from 'redux_';
 import { getTableData, getAllEventNames, getSubscribedEventNames } from 'services';
-import { tableDataTypes } from 'enums';
+import { tableTypes } from 'enums';
 
 export class DashboardTable extends React.Component<IDashboardTableProps, IRootState> {
 
   componentDidMount() {
 
-    if (this.props.tableName === tableDataTypes.Events) {
+    if (this.props.tableName === tableTypes.Events) {
       getAllEventNames('default');
-    } else if (this.props.tableName === tableDataTypes.Subscribers) {
+    } else if (this.props.tableName === tableTypes.Subscribers) {
       getSubscribedEventNames('default');
       getTableData(this.props.tableName, '', 10);
     }
@@ -27,7 +27,7 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
   render() {
     let eventNames;
     let eventNamesIsLoading;
-    if (this.props.tableName === tableDataTypes.Events) {
+    if (this.props.tableName === tableTypes.Events) {
       eventNames = this.props.allEventNames;
       eventNamesIsLoading = this.props.allEventNamesIsLoading;
     } else {

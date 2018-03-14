@@ -1,4 +1,4 @@
-export enum tableDataTypes {
+export enum tableTypes {
   Subscribers = 'subscribers',
   Events = 'events',
   Test = 'test',

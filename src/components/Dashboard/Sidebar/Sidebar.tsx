@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom';
 import { ISidebarProps } from './ISidebarProps';
 import './Sidebar.css';
 
-import { tableDataTypes } from 'enums';
+import { tableTypes } from 'enums';
 import store from 'store';
 import { TableDataActionCreators } from 'redux_';
 
 export const Sidebar = (props: ISidebarProps) => {
   const tables = [
-    { sidebarName: 'Subscribers', urlName: tableDataTypes.Subscribers },
-    { sidebarName: 'Events', urlName: tableDataTypes.Events },
+    { sidebarName: 'Subscribers', urlName: tableTypes.Subscribers },
+    { sidebarName: 'Events', urlName: tableTypes.Events },
   ];
   const tableList = tables.map((table, index) => (
     <NavLink

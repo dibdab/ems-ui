@@ -9,7 +9,7 @@ import { DashboardTableEventCells } from './DashboardTableEventCells/DashboardTa
 import { ISubscriber, IEvent } from 'types';
 import { AccordionTableRow } from 'components/shared/AccordionTableRow/AccordionTableRow';
 import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
-import { tableDataTypes } from 'enums';
+import { tableTypes } from 'enums';
 
 export default class DashboardTableRows extends React.Component<
     IDashboardTableRowsProps,
@@ -52,7 +52,7 @@ export default class DashboardTableRows extends React.Component<
         const objectWithoutId = Object.assign({}, object);
         delete objectWithoutId._id;
         let tableCells;
-        if (this.props.tableName === tableDataTypes.Subscribers) {
+        if (this.props.tableName === tableTypes.Subscribers) {
             tableCells = (
                 <DashboardTableSubscriberCells
                     columnKeyNames={this.props.columnKeyNames}
@@ -110,7 +110,7 @@ export default class DashboardTableRows extends React.Component<
             );
         }
         const tableRows: JSX.Element[] = [];
-        if (this.props.tableName === tableDataTypes.Subscribers) {
+        if (this.props.tableName === tableTypes.Subscribers) {
             (this.props.tableData as ISubscriber[]).map((object: ISubscriber, index) => { tableRows.push(this.constructTableRows(object)); });
         }
         else {

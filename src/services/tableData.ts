@@ -3,7 +3,7 @@ import store from 'store';
 import { appendAuthHeader } from './serviceHelpers';
 import { TableDataActionCreators } from 'redux_';
 import { ISubscriber, IEvent } from 'types';
-import { tableDataTypes } from 'enums';
+import { tableTypes } from 'enums';
 import Config from 'config';
 
 export function getSubscribers(
@@ -78,10 +78,10 @@ export function getTableData(
   responseLimit?: number,
 ) {
   switch (tableName) {
-    case (tableDataTypes.Subscribers):
+    case (tableTypes.Subscribers):
       getSubscribers(tableName, Config.SUBSCRIBER_API_URL, messageBody, !responseLimit ? 10 : responseLimit);
       break;
-    case (tableDataTypes.Events):
+    case (tableTypes.Events):
       getEvents(tableName, Config.EVENTS_API_URL, messageBody, !responseLimit ? 10 : responseLimit);
       break;
     default:

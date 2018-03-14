@@ -11,7 +11,7 @@ import { IDashboardProps } from './IDashboardProps';
 import { IRootState } from 'redux_';
 import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes';
 import { IRoute } from 'types';
-import { tableDataTypes } from 'enums';
+import { tableTypes } from 'enums';
 import { SidebarCreators } from 'redux_';
 
 class Dashboard extends React.Component<
@@ -52,7 +52,7 @@ class Dashboard extends React.Component<
             'connector',
             'filter',
           ],
-          tableName: tableDataTypes.Subscribers,
+          tableName: tableTypes.Subscribers,
         },
       },
       {
@@ -71,7 +71,7 @@ class Dashboard extends React.Component<
             'connector',
             'filter',
           ],
-          tableName: tableDataTypes.Events,
+          tableName: tableTypes.Events,
         },
       },
       {

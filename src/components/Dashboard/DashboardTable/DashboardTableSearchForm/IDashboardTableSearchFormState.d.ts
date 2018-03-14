@@ -3,5 +3,6 @@ export default interface IDashboardTableSearchFormProps {
     limit: string;
     isFilterInvalid: boolean;
     selectedEventName: string;
-    selectedReceivedDate: string;
+    selectedFromDate: string;
+    selectedToDate: string;
 }

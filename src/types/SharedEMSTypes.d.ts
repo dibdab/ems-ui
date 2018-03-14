@@ -8,6 +8,16 @@ export interface IId {
     timeSecond: number;
 }
 
+export interface IIdFilter {
+    timestamp?: string;
+    machineIdentifier?: number;
+    processIdentifier?: number;
+    counter?: number;
+    time?: number;
+    date?: number;
+    timeSecond?: number;
+}
+
 export interface IConnector {
     host: string;
     port: string;
