@@ -1,1 +1,1 @@
-export const textcosnt = 'e';
+export const testcosnt = 'e';

@@ -8,12 +8,18 @@ export default function FilterCell(props: IFilterTdProps) {
     let tdTextHead = '';
     if (props.filters) {
         props.filters.map((filter, index) => {
-            if (typeof filter.value === 'string' || typeof filter.value === 'boolean') {
+            if (!filter.value) {
+                tdTextHead = `${filter.name}: `;
+                tdText = `${filter.value}`;
+            } else if (typeof filter.value === 'string' || typeof filter.value === 'boolean') {
                 tdTextHead = `${filter.name}: `;
                 tdText = `${filter.value}`;
             } else if (typeof filter.value === 'object') {
                 const filterObjectKey: string = Object.keys(filter.value)[0];
-                if (typeof filter.value[filterObjectKey] === 'object') {
+                if (!filter.value[filterObjectKey]) {
+                    tdTextHead = `${filter.name}: `;
+                    tdText = `${filter.value}`;
+                } else if (typeof filter.value[filterObjectKey] === 'object') {
                     tdTextHead = `${filter.name} (${filterObjectKey}): `;
                     tdText = `${filter.value[filterObjectKey].join(', ')}`;
                 } else if (typeof filter.value[filterObjectKey] === 'string') {

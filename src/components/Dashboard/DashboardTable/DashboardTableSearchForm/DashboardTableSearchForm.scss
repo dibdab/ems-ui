@@ -39,14 +39,12 @@ margin-top 200ms $mat-anim-curve;
         margin: 0 8px;
     }
     .dashboardTable-searchForm-eventNameInput {
-        width: 18%;
         font-family: 'Roboto', 'Noto Sans', sans-serif;
         &.loading {
             background: url('../../../../assets/images/input-loading.gif') no-repeat center center;
         }
     }
     .dashboardTable-searchForm-dataPicker {
-        width: 10.5%;
         font-family: 'Roboto', 'Noto Sans', sans-serif;
     }
     .dashboardTable-searchForm-searchInput {

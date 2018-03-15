@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import FilterTd from 'components/shared/FilterTd/FilterTd';
+
 import IDashboardTableEventCellsProps from './IDashboardTableEventCellsProps';
 
 export const DashboardTableEventCells = (props: IDashboardTableEventCellsProps) => {
@@ -13,12 +15,21 @@ export const DashboardTableEventCells = (props: IDashboardTableEventCellsProps) 
                 {props.event.event}
             </td>
             <td
-                title="listenerSystem"
+                title="sourceSystem"
                 data-filter={props.event.sourceSystem}
                 data-filterjsonlocation="sourceSystem"
             >
+
                 {props.event.sourceSystem}
             </td>
+            <td
+                title="receivedDate"
+                data-filter={props.event.receivedDate}
+                data-filterjsonlocation="receivedDate"
+            >
+                {props.event.receivedDate}
+            </td>
+            <FilterTd filters={props.event.filter} />
         </React.Fragment>
     );
 };

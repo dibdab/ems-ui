@@ -1,4 +1,5 @@
 @import 'styles/variables.scss';
+$json-viewer-height: 600px;
 tr.accordionTableRow {
   width: 100%;
   &.hidden {
@@ -22,17 +23,17 @@ tr.accordionTableRow {
   }
   &.visible {
     transition: height 200ms $mat-anim-curve;
-    height: 400px;
+    height: $json-viewer-height;
     td.accordionTd {
       overflow-y: auto;
       div.json-view-container {
-        height: 400px;
+        height: $json-viewer-height;
         transition: max-height 200ms $mat-anim-curve;
-        max-height: 400px;
+        max-height: $json-viewer-height;
       }
       div.react-json-view {
         transition: max-height 200ms $mat-anim-curve;
-        max-height: 400px;
+        max-height: $json-viewer-height;
         max-width: 1656px;
         white-space: pre;
       }
