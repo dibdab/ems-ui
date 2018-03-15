@@ -4,8 +4,8 @@ import { Switch } from 'react-router-dom';
 import store from 'store';
 
 import './Dashboard.css';
-import { Topbar } from './Topbar/Topbar';
-import { Sidebar } from './Sidebar/Sidebar';
+import { Topbar } from 'components/shared/Topbar/Topbar';
+import { Sidebar } from 'components/shared/Sidebar/Sidebar';
 import DashboardTable from './DashboardTable/DashboardTable';
 import { IDashboardProps } from './IDashboardProps';
 import { IRootState } from 'redux_';

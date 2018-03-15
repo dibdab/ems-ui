@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { IMinimizeButtonProps } from './IMinimizeButtonProps';
 
-export default function MinimizeButton(props: IMinimizeButtonProps): JSX.Element {
+export default function MinimizeButton(props: IMinimizeButtonProps) {
   return (
     // Needs to be 2 different buttons because font-awesome icons don't recreate with reacts virtual dom
     <React.Fragment>

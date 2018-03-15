@@ -53,10 +53,10 @@ export default class DashboardTableSearchForm extends React.Component<
     componentWillReceiveProps(nextProps: IDashboardTableSearchFormProps) {
         const filter = JSON.stringify(nextProps.filter, null, 2);
         if (
-            this.state.filter !== filter ||
-            this.state.selectedEventName !== nextProps.filter.event ||
-            this.state.selectedFromDate !== (nextProps.filter as IEventFilter).timeStamp.$gte.$date ||
-            this.state.selectedToDate !== (nextProps.filter as IEventFilter).timeStamp.$lte.$date
+            this.state.filter !== filter
+            || this.state.selectedEventName !== nextProps.filter.event
+            || this.state.selectedFromDate !== (nextProps.filter as IEventFilter).timeStamp.$gte.$date
+            || this.state.selectedToDate !== (nextProps.filter as IEventFilter).timeStamp.$lte.$date
         ) {
             if ((this.props.filter as IEventFilter).timeStamp) {
                 if ((nextProps.filter as IEventFilter).timeStamp.$gte) {
@@ -72,16 +72,18 @@ export default class DashboardTableSearchForm extends React.Component<
             }
             this.setState({
                 filter,
-                selectedEventName: nextProps.filter.event !== undefined ?
-                    nextProps.filter.event as string :
-                    '',
+                selectedEventName: nextProps.filter.event !== undefined
+                    ? nextProps.filter.event as string
+                    : '',
             });
         }
     }
 
     componentDidUpdate(prevProps: IDashboardTableSearchFormProps, prevState: IDashboardTableSearchFormState) {
-        if (this.state.filter !== prevState.filter ||
-            this.props.filter !== prevProps.filter) {
+        if (
+            this.state.filter !== prevState.filter
+            || this.props.filter !== prevProps.filter
+        ) {
             this.resizeTextArea(this.textArea);
         }
     }
@@ -97,7 +99,11 @@ export default class DashboardTableSearchForm extends React.Component<
                     $lte: { $date: '' },
                 },
             };
-            this.setState({ filter: event.target.value ? event.target.value : JSON.stringify(eventsDefaultFilter, null, 2) });
+            this.setState({
+                filter: event.target.value
+                    ? event.target.value
+                    : JSON.stringify(eventsDefaultFilter, null, 2),
+            });
         }
         this.resizeTextArea(event.target);
     }
@@ -196,7 +202,7 @@ export default class DashboardTableSearchForm extends React.Component<
     }
 
     handleMinimize = () => {
-        this.setState({ isMinimized: !this.state.isMinimized })
+        this.setState({ isMinimized: !this.state.isMinimized });
     }
 
     render() {

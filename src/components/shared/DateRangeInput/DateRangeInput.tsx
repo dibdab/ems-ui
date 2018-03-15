@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import IDateRangeInputProps from './IDateRangeInputProps';
-import './DateRangeInput.css';
 
 export default class DateRangeInput extends React.Component<
     IDateRangeInputProps
