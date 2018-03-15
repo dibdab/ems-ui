@@ -21,6 +21,12 @@
         &.active {
             background-color: $background-colour-dark;
         }
+        &.minimize-button {
+            &>[class*="fa-"] {
+                background-color: transparent;
+            }
+            background-color: transparent;
+        }
     }
     .button-group {
         .button {

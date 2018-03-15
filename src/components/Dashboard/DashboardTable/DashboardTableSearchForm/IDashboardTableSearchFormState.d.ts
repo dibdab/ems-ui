@@ -5,4 +5,5 @@ export default interface IDashboardTableSearchFormProps {
     selectedEventName: string;
     selectedFromDate: string;
     selectedToDate: string;
+    isMinimized: boolean;
 }

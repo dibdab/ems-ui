@@ -1,16 +1,25 @@
+@import 'styles/variables.scss';
+$minimize-transistion: height 200ms $mat-anim-curve,
+opacity 200ms $mat-anim-curve,
+margin-top 200ms $mat-anim-curve;
 .dashboardTable-searchForm-container {
     width: 95%;
     margin: 16px auto 0 auto;
+    transition: border-bottom 200ms $mat-anim-curve;
     form {
+        transition: $minimize-transistion;
         white-space: nowrap;
     }
     .dashboardTable-searchForm-inputGroupContainer {
+        transition: $minimize-transistion;
         margin-top: 32px;
     }
     .dashboardTable-searchForm-inputContainer {
+        transition: $minimize-transistion;
         display: inline;
         margin-right: 16px;
         & label {
+            transition: $minimize-transistion;
             position: absolute;
             margin-top: -16px;
         }
@@ -19,12 +28,14 @@
     .dashboardTable-searchForm-dataPicker,
     .dashboardTable-searchForm-searchInput,
     .dashboardTable-searchForm-limitInput {
+        transition: $minimize-transistion;
         font-size: 18px;
         padding: 8px 4px 8px 0;
         border: none;
         border-bottom: 1px solid;
     }
     .dashboardTable-searchForm-dataPicker-separator {
+        transition: $minimize-transistion;
         margin: 0 8px;
     }
     .dashboardTable-searchForm-eventNameInput {
@@ -53,6 +64,7 @@
         font-family: 'Roboto', 'Noto Sans', sans-serif;
     }
     .dashboardTable-searchForm-searchIcon {
+        transition: $minimize-transistion;
         padding: 4px;
         margin-bottom: -14px;
         min-width: 38px;
@@ -72,5 +84,17 @@
         padding-left: 8px;
         padding-top: 16px;
         display: block;
+    }
+}
+
+.dashboardTable-searchForm-container-minimized {
+    border-bottom: 1px solid grey;
+    .dashboardTable-searchForm-inputGroupContainer {
+        margin-top: 0;
+    }
+    & form * {
+        pointer-events: none;
+        height: 0 !important;
+        opacity: 0;
     }
 }

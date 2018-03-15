@@ -5,6 +5,7 @@ import IDashboardTableSearchFormProps from './IDashboardTableSearchFormProps';
 import IDashboardTableSearchFormState from './IDashboardTableSearchFormState';
 import './DashboardTableSearchForm.css';
 
+import MinimizeButton from 'components/shared/MinimizeButton/MinimizeButton';
 import DateRangeInput from 'components/shared/DateRangeInput/DateRangeInput';
 import store from 'store';
 import { TableDataActionCreators } from 'redux_';
@@ -41,6 +42,7 @@ export default class DashboardTableSearchForm extends React.Component<
             selectedEventName: '',
             selectedFromDate: '',
             selectedToDate: '',
+            isMinimized: false,
         };
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleSelectEventName = this.handleSelectEventName.bind(this);
@@ -85,7 +87,18 @@ export default class DashboardTableSearchForm extends React.Component<
     }
 
     handleSearchChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        this.setState({ filter: event.target.value ? event.target.value : '{}' });
+        if (this.props.tableName === tableTypes.Subscribers) {
+            this.setState({ filter: event.target.value ? event.target.value : '{}' });
+        } else {
+            const eventsDefaultFilter: IEventFilter = {
+                event: '',
+                timeStamp: {
+                    $gte: { $date: '' },
+                    $lte: { $date: '' },
+                },
+            };
+            this.setState({ filter: event.target.value ? event.target.value : JSON.stringify(eventsDefaultFilter, null, 2) });
+        }
         this.resizeTextArea(event.target);
     }
 
@@ -182,6 +195,10 @@ export default class DashboardTableSearchForm extends React.Component<
         store.dispatch(TableDataActionCreators.tableDataFilterChange(filter));
     }
 
+    handleMinimize = () => {
+        this.setState({ isMinimized: !this.state.isMinimized })
+    }
+
     render() {
         const isFilterInvalidClass = this.state.isFilterInvalid
             ? 'error'
@@ -189,6 +206,10 @@ export default class DashboardTableSearchForm extends React.Component<
         const eventNamesInputLoadingClass = this.props.eventNamesIsLoading
             ? 'loading'
             : '';
+        const isMinimized = this.state.isMinimized
+            ? 'dashboardTable-searchForm-container-minimized'
+            : '';
+
         let eventNamesList;
         let datePicker;
         if (this.props.eventNames.events.length <= 0 && !this.props.eventNamesIsLoading) {
@@ -218,7 +239,7 @@ export default class DashboardTableSearchForm extends React.Component<
             );
         }
         return (
-            <div className="dashboardTable-searchForm-container" >
+            <div className={`dashboardTable-searchForm-container ${isMinimized}`} >
                 <form action="submit" onSubmit={this.handleSubmit}>
                     <div className="dashboardTable-searchForm-inputGroupContainer">
                         <div className="dashboardTable-searchForm-inputContainer">
@@ -286,7 +307,7 @@ export default class DashboardTableSearchForm extends React.Component<
                     </div>
                     <span className="dashboardTable-requiredKey">* Required</span>
                 </form>
-
+                <MinimizeButton isMinimized={this.state.isMinimized} onMinimize={this.handleMinimize} />
             </div>
         );
     }
