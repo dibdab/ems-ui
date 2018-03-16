@@ -14,6 +14,7 @@ export default function MinimizeButton(props: IMinimizeButtonProps) {
           title="Hide form"
           className="fas fa-angle-up"
         />
+        <span />
       </button>
       <button
         onClick={props.onMinimize}
@@ -23,6 +24,7 @@ export default function MinimizeButton(props: IMinimizeButtonProps) {
           title="Show form"
           className="fas fa-angle-down"
         />
+        <span />
       </button>
     </React.Fragment>
   );
