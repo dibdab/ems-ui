@@ -1,7 +1,7 @@
 import { ISubscriber, ISubscriberFilter, IEvent, IEventFilter } from 'types';
 import { Component } from 'react';
 
-export interface IDashboardTableRowsProps {
+export interface ITableRowsProps {
     tableData: ISubscriber[] | IEvent[];
     columnKeyNames: string[];
     isLoading: boolean;

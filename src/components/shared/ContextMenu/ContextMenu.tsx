@@ -126,7 +126,7 @@ export default class ContextMenu extends React.Component<
         let disabled = '';
         let title = '';
         let onClick = this.handleContextMenuClick;
-        if (contextMenuTarget.hasAttribute('data-filterNegative')) {
+        if (contextMenuTarget.hasAttribute('data-filternegative')) {
             disabled = 'disabled';
             title = `Negative filter not allowed.`;
             onClick = () => (false);

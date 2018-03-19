@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { IDashboardTableBodyProps } from './IDashboardTableBodyProps';
+import { ITableBodyProps } from './ITableBodyProps';
 
-import DashboardTableRows from './DashboardTableRows/DashboardTableRows';
+import TableRows from './TableRows/TableRows';
 
-export const DashboardTableBody = (props: IDashboardTableBodyProps) => {
+export const TableBody = (props: ITableBodyProps) => {
   return (
     <tbody>
-      <DashboardTableRows
+      <TableRows
         tableData={props.tableData}
         columnKeyNames={props.columnKeyNames}
         isLoading={props.isLoading}

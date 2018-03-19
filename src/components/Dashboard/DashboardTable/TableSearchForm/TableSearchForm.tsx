@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ChangeEvent, FormEvent } from 'react';
 
-import IDashboardTableSearchFormProps from './IDashboardTableSearchFormProps';
-import IDashboardTableSearchFormState from './IDashboardTableSearchFormState';
-import './DashboardTableSearchForm.css';
+import ITableSearchFormProps from './ITableSearchFormProps';
+import ITableSearchFormState from './ITableSearchFormState';
+import './TableSearchForm.css';
 
 import MinimizeButton from 'components/shared/MinimizeButton/MinimizeButton';
 import DateRangeInput from 'components/shared/DateRangeInput/DateRangeInput';
@@ -14,12 +14,12 @@ import { getTableData } from 'services';
 import { tableTypes } from 'enums';
 import { IEventFilter } from 'types';
 
-export default class DashboardTableSearchForm extends React.Component<
-    IDashboardTableSearchFormProps,
-    IDashboardTableSearchFormState
+export default class TableSearchForm extends React.Component<
+    ITableSearchFormProps,
+    ITableSearchFormState
     > {
     private textArea: HTMLTextAreaElement;
-    constructor(props: IDashboardTableSearchFormProps) {
+    constructor(props: ITableSearchFormProps) {
         super(props);
         let filter: string;
         if (this.props.tableName === tableTypes.Subscribers) {
@@ -50,7 +50,7 @@ export default class DashboardTableSearchForm extends React.Component<
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps: IDashboardTableSearchFormProps) {
+    componentWillReceiveProps(nextProps: ITableSearchFormProps) {
         const filter = JSON.stringify(nextProps.filter, null, 2);
         if (
             this.state.filter !== filter
@@ -84,7 +84,7 @@ export default class DashboardTableSearchForm extends React.Component<
         }
     }
 
-    componentDidUpdate(prevProps: IDashboardTableSearchFormProps, prevState: IDashboardTableSearchFormState) {
+    componentDidUpdate(prevProps: ITableSearchFormProps, prevState: ITableSearchFormState) {
         if (
             this.state.filter !== prevState.filter
             || this.props.filter !== prevProps.filter

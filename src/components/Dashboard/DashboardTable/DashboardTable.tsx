@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { IDashboardTableProps } from './IDashboardTableProps';
 import './DashboardTable.css';
 
-import { DashboardTableHead } from './DashboardTableHead/DashboardTableHead';
-import { DashboardTableBody } from './DashboardTableBody/DashboardTableBody';
-import DashboardTableSearchForm from './DashboardTableSearchForm/DashboardTableSearchForm';
+import { TableHead } from './TableHead/TableHead';
+import { TableBody } from './TableBody/TableBody';
+import TableSearchForm from './TableSearchForm/TableSearchForm';
 
 import { IRootState } from 'redux_';
 import { getTableData, getAllEventNames, getSubscribedEventNames } from 'services';
@@ -42,7 +42,7 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
     }
     return (
       <React.Fragment>
-        <DashboardTableSearchForm
+        <TableSearchForm
           tableName={this.props.tableName}
           filter={this.props.tableDataFilter}
           eventNames={eventNames}
@@ -53,8 +53,8 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
           {this.props.tableData.length} {this.props.tableName} found.
         </div>
         <table className="dashboardTable">
-          <DashboardTableHead columnHeadings={this.props.columnHeadings} />
-          <DashboardTableBody
+          <TableHead columnHeadings={this.props.columnHeadings} />
+          <TableBody
             columnKeyNames={this.props.columnKeyNames}
             tableName={this.props.tableName}
             tableData={this.props.tableData}

@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
 
-import { IDashboardTableRowsProps } from './IDashboardTableRowsProps';
-import { IDashboardTableRowsState } from './IDashboardTableRowsState';
+import { ITableRowsProps } from './ITableRowsProps';
+import { ITableRowsState } from './ITableRowsState';
 
-import { DashboardTableSubscriberCells } from './DashboardTableSubscriberCells/DashboardTableSubscriberCells';
-import { DashboardTableEventCells } from './DashboardTableEventCells/DashboardTableEventCells';
+import { SubscriberCells } from './SubscriberCells/SubscriberCells';
+import { EventCells } from './EventCells/EventCells';
 import { ISubscriber, IEvent } from 'types';
 import { AccordionTableRow } from 'components/shared/AccordionTableRow/AccordionTableRow';
 import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
 import { tableTypes } from 'enums';
 
-export default class DashboardTableRows extends React.Component<
-    IDashboardTableRowsProps,
-    IDashboardTableRowsState
+export default class TableRows extends React.Component<
+    ITableRowsProps,
+    ITableRowsState
     > {
     private contextMenu: ContextMenu;
-    constructor(props: IDashboardTableRowsProps) {
+    constructor(props: ITableRowsProps) {
         super(props);
         this.state = {
             visibleAccordion: {},
@@ -54,14 +54,14 @@ export default class DashboardTableRows extends React.Component<
         let tableCells;
         if (this.props.tableName === tableTypes.Subscribers) {
             tableCells = (
-                <DashboardTableSubscriberCells
+                <SubscriberCells
                     columnKeyNames={this.props.columnKeyNames}
                     subscriber={object as ISubscriber}
                 />
             );
         } else {
             tableCells = (
-                <DashboardTableEventCells
+                <EventCells
                     columnKeyNames={this.props.columnKeyNames}
                     event={object as IEvent}
                 />

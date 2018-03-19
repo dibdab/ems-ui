@@ -7,4 +7,4 @@ export enum tableTypes {
 export enum tableBodyRowKeyName {
   ViewRow = 'ViewRow',
   AccordionRow = 'AccordionRow',
-} // Used by any DashboardTableBody element that implements accordionDashboardTableRows
+} // Used by any TableBody element that implements accordionTableRows

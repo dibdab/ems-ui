@@ -1,6 +1,6 @@
 import { IEvent } from 'types';
 
-export default interface IDashboardTableEventCellsProps {
+export default interface IEventCellsProps {
     columnKeyNames: any;
     event: IEvent;
 }

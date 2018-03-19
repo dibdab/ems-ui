@@ -2,16 +2,16 @@ import * as React from 'react';
 
 import FilterTd from 'components/shared/FilterTd/FilterTd';
 
-import IDashboardTableEventCellsProps from './IDashboardTableEventCellsProps';
+import IEventCellsProps from './IEventCellsProps';
 
-export const DashboardTableEventCells = (props: IDashboardTableEventCellsProps) => {
+export const EventCells = (props: IEventCellsProps) => {
     return (
         <React.Fragment>
             <td
                 title="event"
                 data-filter={props.event.event}
                 data-filterjsonlocation="event"
-                data-filterNegative="false"
+                data-filternegative="false"
             >
                 {props.event.event}
             </td>

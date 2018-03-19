@@ -1,6 +1,6 @@
 import { ISubscriber, ISubscriberFilter, IEvent, IEventFilter } from 'types/';
 
-export interface IDashboardTableBodyProps {
+export interface ITableBodyProps {
   columnKeyNames: string[];
   tableName: string;
   tableData: ISubscriber[] | IEvent[];

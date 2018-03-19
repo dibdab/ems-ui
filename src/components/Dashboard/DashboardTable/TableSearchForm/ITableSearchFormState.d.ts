@@ -1,4 +1,4 @@
-export default interface IDashboardTableSearchFormProps {
+export default interface ITableSearchFormProps {
     filter: string;
     limit: string;
     isFilterInvalid: boolean;

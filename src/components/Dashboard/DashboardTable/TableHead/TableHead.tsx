@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { IDashboardTableHeadProps } from './IDashboardTableHeadProps';
+import { ITableHeadProps } from './ITableHeadProps';
 
-export const DashboardTableHead = (props: IDashboardTableHeadProps) => {
+export const TableHead = (props: ITableHeadProps) => {
   const columnHeadings = props.columnHeadings.map(
     columnHeading => (
       <th key={columnHeading}>{columnHeading}</th>

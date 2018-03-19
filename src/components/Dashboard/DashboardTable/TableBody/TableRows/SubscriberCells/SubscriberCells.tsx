@@ -3,9 +3,9 @@ import * as React from 'react';
 import ConnectorTd from 'components/shared/ConnectorTd/ConnectorTd';
 import FilterTd from 'components/shared/FilterTd/FilterTd';
 
-import IDashboardTableSubscriberCellsProps from './IDashboardTableSubscriberCellsProps';
+import ISubscriberCellsProps from './ISubscriberCellsProps';
 
-export const DashboardTableSubscriberCells = (props: IDashboardTableSubscriberCellsProps) => {
+export const SubscriberCells = (props: ISubscriberCellsProps) => {
     return (
         <React.Fragment>
             <td
