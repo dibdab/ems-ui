@@ -121,24 +121,35 @@ export default class ContextMenu extends React.Component<
     }
 
     createContent(e: MouseEvent<HTMLElement>) {
-        const filterString = `Filter on ${(e.target as HTMLElement).innerText}`;
+        const contextMenuTarget = e.target as HTMLElement;
+        const filterString = `Filter on ${contextMenuTarget.innerText}`;
+        let disabled = '';
+        let title = '';
+        let onClick = this.handleContextMenuClick;
+        if (contextMenuTarget.hasAttribute('data-filterNegative')) {
+            disabled = 'disabled';
+            title = `Negative filter not allowed.`;
+            onClick = () => (false);
+        }
         return (
             <React.Fragment>
                 <td
                     className="contextMenu-td"
+                    title={title}
                     data-filterispositive={true}
                     onMouseEnter={this.onMouseEnter}
                     onMouseLeave={this.onMouseLeave}
-                    onClick={this.handleContextMenuClick}
+                    onClick={onClick}
                 >
                     <i className="fas fa-plus" /> {filterString}
                 </td>
                 <td
-                    className="contextMenu-td"
+                    className={`contextMenu-td ${disabled}`}
+                    title={title}
                     data-filterispositive={false}
                     onMouseEnter={this.onMouseEnter}
                     onMouseLeave={this.onMouseLeave}
-                    onClick={this.handleContextMenuClick}
+                    onClick={onClick}
                 >
                     <i className="fas fa-minus" /> {filterString}
                 </td>
@@ -146,7 +157,7 @@ export default class ContextMenu extends React.Component<
         );
     }
 
-    showContextMenu = (e: MouseEvent<HTMLElement>) => {
+    showContextMenu = (e: MouseEvent<HTMLElement>, allowNegativeFilter?: boolean, allowPositiveFilter?: boolean) => {
         if ((e.target as HTMLElement).hasAttribute('data-filter')) {
             e.stopPropagation();
             e.preventDefault();

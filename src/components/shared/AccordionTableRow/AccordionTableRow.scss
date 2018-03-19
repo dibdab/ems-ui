@@ -36,6 +36,7 @@ tr.accordionTableRow {
         max-height: $json-viewer-height;
         max-width: 1656px;
         white-space: pre;
+        z-index: -1;
       }
     }
   }

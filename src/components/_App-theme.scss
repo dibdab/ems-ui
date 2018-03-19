@@ -22,10 +22,13 @@
             background-color: $background-colour-dark;
         }
         &.minimize-button {
+            background-color: transparent;
+            span {
+                border-bottom-color: $divider-colour;
+            }
             &>[class*="fa-"] {
                 background-color: transparent;
             }
-            background-color: transparent;
         }
     }
     .button-group {
@@ -35,6 +38,10 @@
         .button:not(:last-child) {
             border-right: 1px solid $divider-colour;
         }
+    }
+    .disabled {
+        color: $divider-colour !important;
+        background-color: $background-colour-dark !important;
     }
     .loader,
     .loader:before,

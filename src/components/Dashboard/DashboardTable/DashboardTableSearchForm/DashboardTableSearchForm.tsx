@@ -55,19 +55,24 @@ export default class DashboardTableSearchForm extends React.Component<
         if (
             this.state.filter !== filter
             || this.state.selectedEventName !== nextProps.filter.event
-            || this.state.selectedFromDate !== (nextProps.filter as IEventFilter).timeStamp.$gte.$date
-            || this.state.selectedToDate !== (nextProps.filter as IEventFilter).timeStamp.$lte.$date
         ) {
-            if ((this.props.filter as IEventFilter).timeStamp) {
-                if ((nextProps.filter as IEventFilter).timeStamp.$gte) {
-                    this.setState({
-                        selectedFromDate: (nextProps.filter as IEventFilter).timeStamp.$gte.$date.substring(0, 10),
-                    });
-                }
-                if ((nextProps.filter as IEventFilter).timeStamp.$lte) {
-                    this.setState({
-                        selectedToDate: (nextProps.filter as IEventFilter).timeStamp.$lte.$date.substring(0, 10),
-                    });
+            if (this.props.tableName === tableTypes.Events) {
+                if (this.state.selectedFromDate !== (nextProps.filter as IEventFilter).timeStamp.$gte.$date
+                    || this.state.selectedToDate !== (nextProps.filter as IEventFilter).timeStamp.$lte.$date) {
+                    if ((this.props.filter as IEventFilter).timeStamp) {
+                        if ((nextProps.filter as IEventFilter).timeStamp.$gte) {
+                            this.setState({
+                                selectedFromDate:
+                                    (nextProps.filter as IEventFilter).timeStamp.$gte.$date.substring(0, 10),
+                            });
+                        }
+                        if ((nextProps.filter as IEventFilter).timeStamp.$lte) {
+                            this.setState({
+                                selectedToDate:
+                                    (nextProps.filter as IEventFilter).timeStamp.$lte.$date.substring(0, 10),
+                            });
+                        }
+                    }
                 }
             }
             this.setState({

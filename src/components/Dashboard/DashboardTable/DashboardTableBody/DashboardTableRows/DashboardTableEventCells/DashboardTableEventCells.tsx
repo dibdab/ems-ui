@@ -11,6 +11,7 @@ export const DashboardTableEventCells = (props: IDashboardTableEventCellsProps) 
                 title="event"
                 data-filter={props.event.event}
                 data-filterjsonlocation="event"
+                data-filterNegative="false"
             >
                 {props.event.event}
             </td>
