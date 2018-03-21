@@ -1,4 +1,4 @@
-@mixin dashboardTable-theme($theme) {
+@mixin dashboard-theme($theme) {
     $divider-colour: map-get($theme, divider-colour);
     $text-colour-secondary: map-get($theme, text-colour-secondary);
     $background-colour-dark: map-get($theme, background-colour-dark);

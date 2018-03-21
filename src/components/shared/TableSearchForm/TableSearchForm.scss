@@ -41,7 +41,7 @@ margin-top 200ms $mat-anim-curve;
         min-width: 17%;
         font-family: 'Roboto', 'Noto Sans', sans-serif;
         &.loading {
-            background: url('../../../../assets/images/input-loading.gif') no-repeat center center;
+            background: url('../../../assets/images/input-loading.gif') no-repeat center center;
         }
     }
     .dashboardTable-searchForm-dataPicker {
@@ -51,11 +51,16 @@ margin-top 200ms $mat-anim-curve;
         max-height: 300px;
         width: 85%;
         min-width: 60%;
-        height: 22px;
         min-height: 22px;
         line-height: 21px;
         vertical-align: bottom;
         resize: none;
+        &.subscribers-height {
+            height: 22px;
+        }
+        &.events-height {
+            height: 255px;
+        }
     }
     .dashboardTable-searchForm-limitInput {
         min-width: 7%;

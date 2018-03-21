@@ -6,7 +6,8 @@ import store from 'store';
 import './Dashboard.css';
 import { Topbar } from 'components/shared/Topbar/Topbar';
 import { Sidebar } from 'components/shared/Sidebar/Sidebar';
-import DashboardTable from './DashboardTable/DashboardTable';
+import EventsTable from './EventsTable/EventsTable';
+import SubscribersTable from './SubscribersTable/SubscribersTable';
 import { IDashboardProps } from './IDashboardProps';
 import { IRootState } from 'redux_';
 import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes';
@@ -37,7 +38,7 @@ class Dashboard extends React.Component<
   render() {
     const routes: IRoute[] = [
       {
-        component: DashboardTable,
+        component: SubscribersTable,
         path: '/dashboard/subscribers',
         routeProps: {
           columnHeadings: [
@@ -56,7 +57,7 @@ class Dashboard extends React.Component<
         },
       },
       {
-        component: DashboardTable,
+        component: EventsTable,
         path: '/dashboard/events',
         routeProps: {
           columnHeadings: [

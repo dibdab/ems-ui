@@ -30,3 +30,72 @@ $doc-viwer-padding: 16px;
   padding-left: calc((#{$sidebar-width}) + (#{$doc-viwer-padding}));
   width: calc((#{$document-view-width} - #{$sidebar-width}) - (#{$doc-viwer-padding}*2));
 }
+
+.dashboardTable {
+  border-collapse: collapse;
+  width: 100%;
+  th.dashboardTable-checkbox-td,
+  td.dashboardTable-checkbox-td {
+    width: 19px;
+  }
+  tr {
+    width: 100%;
+    max-height: 35px;
+  }
+  thead {
+    width: 100%;
+    th {
+      text-align: left;
+      max-width: 240px;
+      padding: 8px;
+    }
+  }
+  tbody {
+    width: 100%;
+    .dashboardTable-no-interact-tr {
+      & td {
+        font-weight: bold;
+      }
+    }
+    tr {
+      border-bottom: solid 1px;
+    }
+    & tr:not(.dashboardTable-no-interact-tr):hover {
+      cursor: pointer;
+    }
+    td {
+      padding: 8px;
+      white-space: nowrap;
+    }
+    td {
+      &.dashboardTable-connector-td {
+        div {
+          pointer-events: none;
+        }
+      }
+      & div:not(.json-view-container) {
+        word-wrap: break-word;
+        white-space: pre-line;
+        padding: 2px;
+        b {
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
+
+.dashboardTable-results-count {
+  margin-top: 32px;
+  margin-left: 10px;
+}
+
+.loader {
+  position: fixed;
+  left: 50%;
+}
+
+.error {
+  color: red;
+  border-color: red;
+}

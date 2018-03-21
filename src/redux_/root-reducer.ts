@@ -1,9 +1,14 @@
 import { combineReducers } from 'redux';
 
 import {
-  reducer as tableData,
-  State as TableDataState,
-} from './tableData';
+  reducer as events,
+  State as EventsState,
+} from './events';
+
+import {
+  reducer as subscribers,
+  State as SubscribersState,
+} from './subscribers';
 
 import {
   reducer as eventNames,
@@ -19,13 +24,15 @@ interface IStoreEnhancerState { }
 
 // Reducer alias and property key in IRootState need to match
 export interface IRootState extends IStoreEnhancerState {
-  tableData: TableDataState;
+  events: EventsState;
+  subscribers: SubscribersState;
   eventNames: EventNamesState;
   sidebar: SidebarState;
 }
 
 export const rootReducer = combineReducers<IRootState>({
-  tableData,
+  events,
+  subscribers,
   eventNames,
   sidebar,
 });

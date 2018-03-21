@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { IDashboardTableProps } from './IDashboardTableProps';
-import './DashboardTable.css';
+import { ISubscribersTableProps } from './ISubscribersTableProps';
 
-import { TableHead } from './TableHead/TableHead';
-import { TableBody } from './TableBody/TableBody';
-import TableSearchForm from './TableSearchForm/TableSearchForm';
+import SubscribersTableBody from './SubscribersTableBody/SubscribersTableBody';
+import { TableHead } from 'components/shared/TableHead/TableHead';
+import TableSearchForm from 'components/shared/TableSearchForm/TableSearchForm';
 
 import { IRootState } from 'redux_';
 import { getTableData, getAllEventNames, getSubscribedEventNames } from 'services';
 import { tableTypes } from 'enums';
 
-export class DashboardTable extends React.Component<IDashboardTableProps, IRootState> {
+export class SubscribersTable extends React.Component<ISubscribersTableProps, IRootState> {
 
   componentDidMount() {
 
@@ -28,14 +27,14 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
     let eventNames;
     let eventNamesIsLoading;
     if (this.props.tableName === tableTypes.Events) {
-      eventNames = this.props.allEventNames;
-      eventNamesIsLoading = this.props.allEventNamesIsLoading;
+      eventNames = this.props.subscribedEventNames;
+      eventNamesIsLoading = this.props.subscribedEventNamesIsLoading;
     } else {
       eventNames = this.props.subscribedEventNames;
       eventNamesIsLoading = this.props.subscribedEventNamesIsLoading;
     }
     let loadingSpinner;
-    if (this.props.tableDataIsLoading) {
+    if (this.props.subscribersIsLoading) {
       loadingSpinner = <div className="loader">Loading...</div>;
     } else {
       loadingSpinner = null;
@@ -44,24 +43,21 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
       <React.Fragment>
         <TableSearchForm
           tableName={this.props.tableName}
-          filter={this.props.tableDataFilter}
+          filter={this.props.subscribersFilter}
           eventNames={eventNames}
           eventNamesIsLoading={eventNamesIsLoading}
         />
         {loadingSpinner}
         <div className="dashboardTable-results-count">
-          {this.props.tableData.length} {this.props.tableName} found.
+          {this.props.subscribers.length} {this.props.tableName} found.
         </div>
         <table className="dashboardTable">
           <TableHead columnHeadings={this.props.columnHeadings} />
-          <TableBody
-            columnKeyNames={this.props.columnKeyNames}
-            tableName={this.props.tableName}
-            tableData={this.props.tableData}
-            isLoading={this.props.tableDataIsLoading}
-            hasErrored={this.props.tableDataHasErrored}
-            filter={this.props.tableDataFilter}
-          />
+          <tbody>
+            <SubscribersTableBody
+              {...this.props}
+            />
+          </tbody>
         </table>
       </React.Fragment>
     );
@@ -70,17 +66,14 @@ export class DashboardTable extends React.Component<IDashboardTableProps, IRootS
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    tableData: state.tableData.tableData,
-    tableDataHasErrored: state.tableData.tableDataHasErrored,
-    tableDataIsLoading: state.tableData.tableDataIsLoading,
-    tableDataFilter: state.tableData.tableDataFilter,
-    allEventNames: state.eventNames.allEventNames,
-    allEventNamesIsLoading: state.eventNames.allEventNamesIsLoading,
-    allEventNamesHasErrored: state.eventNames.allEventNamesHasErrored,
+    subscribers: state.subscribers.subscribers,
+    subscribersHasErrored: state.subscribers.subscribersHasErrored,
+    subscribersIsLoading: state.subscribers.subscribersIsLoading,
+    subscribersFilter: state.subscribers.subscribersFilter,
     subscribedEventNames: state.eventNames.subscribedEventNames,
     subscribedEventNamesIsLoading: state.eventNames.subscribedEventNamesIsLoading,
     subscribedEventNamesHasErrored: state.eventNames.subscribedEventNamesHasErrored,
   };
 };
 
-export default connect(mapStateToProps, {})(DashboardTable);
+export default connect(mapStateToProps, {})(SubscribersTable);

@@ -3,9 +3,9 @@
 @import 'src/components/shared/Card/Card-theme.scss';
 @import 'src/components/shared/Topbar/Topbar-theme.scss';
 @import 'src/components/shared/Sidebar/Sidebar-theme.scss';
-@import 'src/components/Dashboard/DashboardTable/DashboardTable-theme.scss';
+@import 'src/components/Dashboard/Dashboard-theme.scss';
 @import 'src/components/shared/ContextMenu/ContextMenu-theme.scss';
-@import 'src/components/Dashboard/DashboardTable/TableSearchForm/TableSearchForm-theme.scss';
+@import 'src/components/shared/TableSearchForm/TableSearchForm-theme.scss';
 @function theme-setter($primary-colour-dark, $primary-colour, $primary-colour-light, $text-colour-light, $accent-colour, $text-colour-dark, $text-colour-secondary, $divider-colour, $background-colour-light, $background-colour, $background-colour-dark, $background-colour-darker) {
   @return (primary-colour-dark: $primary-colour-dark, primary-colour: $primary-colour, primary-colour-light: $primary-colour-light, text-colour-light: $text-colour-light, accent-colour: $accent-colour, text-colour-dark: $text-colour-dark, text-colour-secondary: $text-colour-secondary, divider-colour: $divider-colour, background-colour-light: $background-colour-light, background-colour: $background-colour, background-colour-dark: $background-colour-dark, background-colour-darker: $background-colour-darker);
 }
@@ -17,7 +17,7 @@ $light-theme: theme-setter( $primary-colour-dark: #303f9f, $primary-colour: #3f5
   @include card-theme($theme);
   @include topbar-theme($theme);
   @include sidebar-theme($theme);
-  @include dashboardTable-theme($theme);
+  @include dashboard-theme($theme);
   @include contextMenu-theme($theme);
   @include dashboardTableSearchForm-theme($theme);
 }

@@ -6,8 +6,9 @@ import { IContextMenuState } from './IContextMenuState';
 import { IContextMenuProps } from './IContextMenuProps';
 
 import { ISubscriberFilter, IEventFilter } from 'types';
+import { tableTypes } from 'enums';
 import store from 'store';
-import { TableDataActionCreators } from 'redux_';
+import { EventsActionCreators, SubscribersActionCreators } from 'redux_';
 
 export default class ContextMenu extends React.Component<
     IContextMenuProps,
@@ -16,7 +17,6 @@ export default class ContextMenu extends React.Component<
     constructor(props: IContextMenuProps) {
         super(props);
         this.state = {
-            isVisible: false,
             style: {},
             x: 0,
             y: 0,
@@ -25,6 +25,19 @@ export default class ContextMenu extends React.Component<
         };
 
         this.handleContextMenuClick = this.handleContextMenuClick.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps: IContextMenuProps) {
+        if (nextProps.isVisible && nextProps.target && nextProps.pos) {
+            this.bindWindowEvent();
+            const { x, y } = this.getMousePosition(nextProps.pos);
+            this.setState({
+                x,
+                y,
+                content: this.createContent(nextProps.target),
+                menuTarget: nextProps.target as HTMLElement,
+            });
+        }
     }
 
     unBindWindowEvent = () => {
@@ -47,20 +60,11 @@ export default class ContextMenu extends React.Component<
 
     onMouseLeave = () => window.addEventListener('mousedown', this.hideContextMenu);
 
-    getMousePosition = (e: any) => {
+    getMousePosition = (mousePos: { x: number, y: number }) => {
         const pos = {
-            x: e.clientX,
-            y: e.clientY,
+            x: mousePos.x,
+            y: mousePos.y,
         };
-
-        if (e.type === 'touchend' && (pos.x === null || pos.y === null)) {
-            const touches = e.changedTouches;
-
-            if (touches !== null && touches.length > 0) {
-                pos.x = touches[0].clientX;
-                pos.y = touches[0].clientY;
-            }
-        }
 
         if (pos.x === null || pos.x < 0) {
             pos.x = 0;
@@ -117,29 +121,34 @@ export default class ContextMenu extends React.Component<
                 }
             }
         }
-        store.dispatch(TableDataActionCreators.tableDataFilterChange(newFilter));
+        switch (this.props.dataType) {
+            case (tableTypes.Subscribers):
+                store.dispatch(SubscribersActionCreators.subscribersFilterChange(newFilter as ISubscriberFilter));
+                break;
+            case (tableTypes.Events):
+                store.dispatch(EventsActionCreators.eventsFilterChange(newFilter as IEventFilter));
+                break;
+            default:
+                break;
+        }
     }
 
-    createContent(e: MouseEvent<HTMLElement>) {
-        const contextMenuTarget = e.target as HTMLElement;
-        const filterString = `Filter on ${contextMenuTarget.innerText}`;
+    createContent(target: HTMLElement) {
+        const filterString = `Filter on ${target.innerText}`;
         let disabled = '';
         let title = '';
-        let onClick = this.handleContextMenuClick;
-        if (contextMenuTarget.hasAttribute('data-filternegative')) {
+        if (target.hasAttribute('data-filternegative')) {
             disabled = 'disabled';
             title = `Negative filter not allowed.`;
-            onClick = () => (false);
         }
         return (
             <React.Fragment>
                 <td
                     className="contextMenu-td"
-                    title={title}
                     data-filterispositive={true}
                     onMouseEnter={this.onMouseEnter}
                     onMouseLeave={this.onMouseLeave}
-                    onClick={onClick}
+                    onClick={this.handleContextMenuClick}
                 >
                     <i className="fas fa-plus" /> {filterString}
                 </td>
@@ -149,7 +158,7 @@ export default class ContextMenu extends React.Component<
                     data-filterispositive={false}
                     onMouseEnter={this.onMouseEnter}
                     onMouseLeave={this.onMouseLeave}
-                    onClick={onClick}
+                    onClick={target.hasAttribute('data-filternegative') ? () => (false) : this.handleContextMenuClick}
                 >
                     <i className="fas fa-minus" /> {filterString}
                 </td>
@@ -157,32 +166,16 @@ export default class ContextMenu extends React.Component<
         );
     }
 
-    showContextMenu = (e: MouseEvent<HTMLElement>, allowNegativeFilter?: boolean, allowPositiveFilter?: boolean) => {
-        if ((e.target as HTMLElement).hasAttribute('data-filter')) {
-            e.stopPropagation();
-            e.preventDefault();
-            this.bindWindowEvent();
-            const { x, y } = this.getMousePosition(e);
-            this.setState({
-                isVisible: true,
-                x,
-                y,
-                content: this.createContent(e),
-                menuTarget: e.target as HTMLElement,
-            });
-        }
-    }
-
     hideContextMenu = (e: any) => {
         if (typeof e !== 'undefined' && e.button === 2 && e.type !== 'contextmenu') {
             return;
         }
         this.unBindWindowEvent();
-        this.setState({ isVisible: false });
+        this.props.hide();
     }
 
     render() {
-        if (!this.state.isVisible) {
+        if (!this.props.isVisible) {
             return null;
         }
         const RenderTag = this.props.renderTag;

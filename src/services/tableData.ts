@@ -1,7 +1,7 @@
 import store from 'store';
 
 import { appendAuthHeader } from './serviceHelpers';
-import { TableDataActionCreators } from 'redux_';
+import { EventsActionCreators, SubscribersActionCreators } from 'redux_';
 import { ISubscriber, IEvent } from 'types';
 import { tableTypes } from 'enums';
 import Config from 'config';
@@ -13,8 +13,8 @@ export function getSubscribers(
   responseLimit?: number,
   skip?: number,
 ): void {
-  setErrored(false);
-  setLoading(true);
+  setErrored(false, dataType);
+  setLoading(true, dataType);
   let fullEndpoint: string;
   const headers = appendAuthHeader(new Headers());
   if (skip) {
@@ -29,12 +29,12 @@ export function getSubscribers(
   })
     .then(response => response.json())
     .then((responseData: ISubscriber[]) => {
-      SetResponseSuccess(responseData);
-      setLoading(false);
+      SetResponseSuccess(responseData, dataType);
+      setLoading(false, dataType);
     })
     .catch(() => {
-      setErrored(true);
-      setLoading(false);
+      setErrored(true, dataType);
+      setLoading(false, dataType);
     },
   );
 }
@@ -46,8 +46,8 @@ export function getEvents(
   responseLimit?: number,
   skip?: number,
 ): void {
-  setErrored(false);
-  setLoading(true);
+  setErrored(false, dataType);
+  setLoading(true, dataType);
   let fullEndpoint: string;
   const headers = appendAuthHeader(new Headers());
   if (skip) {
@@ -62,41 +62,69 @@ export function getEvents(
   })
     .then(response => response.json())
     .then((responseData: IEvent[]) => {
-      SetResponseSuccess(responseData);
-      setLoading(false);
+      SetResponseSuccess(responseData, dataType);
+      setLoading(false, dataType);
     })
     .catch(() => {
-      setErrored(true);
-      setLoading(false);
+      setErrored(true, dataType);
+      setLoading(false, dataType);
     },
   );
 }
 
 export function getTableData(
-  tableName: string,
+  dataType: string,
   messageBody: string,
   responseLimit?: number,
 ) {
-  switch (tableName) {
+  switch (dataType) {
     case (tableTypes.Subscribers):
-      getSubscribers(tableName, Config.SUBSCRIBER_API_URL, messageBody, !responseLimit ? 10 : responseLimit);
+      getSubscribers(dataType, Config.SUBSCRIBER_API_URL, messageBody, !responseLimit ? 10 : responseLimit);
       break;
     case (tableTypes.Events):
-      getEvents(tableName, Config.EVENTS_API_URL, messageBody, !responseLimit ? 10 : responseLimit);
+      getEvents(dataType, Config.EVENTS_API_URL, messageBody, !responseLimit ? 10 : responseLimit);
       break;
     default:
       break;
   }
 }
 
-function SetResponseSuccess(data: ISubscriber[] | IEvent[]) {
-  store.dispatch(TableDataActionCreators.tableDataFetchSuccess(data));
+function SetResponseSuccess(data: ISubscriber[] | IEvent[], dataType: string) {
+  switch (dataType) {
+    case (tableTypes.Subscribers):
+      store.dispatch(SubscribersActionCreators.subscribersFetchSuccess(data as ISubscriber[]));
+      break;
+    case (tableTypes.Events):
+      store.dispatch(EventsActionCreators.eventsFetchSuccess(data as IEvent[]));
+      break;
+    default:
+      break;
+  }
 }
 
-function setLoading(isLoading: boolean) {
-  store.dispatch(TableDataActionCreators.tableDataIsLoading(isLoading));
+function setLoading(isLoading: boolean, dataType: string) {
+  switch (dataType) {
+    case (tableTypes.Subscribers):
+      store.dispatch(SubscribersActionCreators.subscribersIsLoading(isLoading));
+      break;
+    case (tableTypes.Events):
+      store.dispatch(EventsActionCreators.eventsIsLoading(isLoading));
+      break;
+    default:
+      break;
+  }
+
 }
 
-function setErrored(hasErrored: boolean) {
-  store.dispatch(TableDataActionCreators.tableDataHasErrored(hasErrored));
+function setErrored(hasErrored: boolean, dataType: string) {
+  switch (dataType) {
+    case (tableTypes.Subscribers):
+      store.dispatch(SubscribersActionCreators.subscribersHasErrored(hasErrored));
+      break;
+    case (tableTypes.Events):
+      store.dispatch(EventsActionCreators.eventsHasErrored(hasErrored));
+      break;
+    default:
+      break;
+  }
 }

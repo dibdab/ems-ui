@@ -8,7 +8,7 @@ import './TableSearchForm.css';
 import MinimizeButton from 'components/shared/MinimizeButton/MinimizeButton';
 import DateRangeInput from 'components/shared/DateRangeInput/DateRangeInput';
 import store from 'store';
-import { TableDataActionCreators } from 'redux_';
+import { EventsActionCreators, SubscribersActionCreators } from 'redux_';
 import { getTableData } from 'services';
 
 import { tableTypes } from 'enums';
@@ -21,22 +21,8 @@ export default class TableSearchForm extends React.Component<
     private textArea: HTMLTextAreaElement;
     constructor(props: ITableSearchFormProps) {
         super(props);
-        let filter: string;
-        if (this.props.tableName === tableTypes.Subscribers) {
-            filter = JSON.stringify(this.props.filter, null, 2);
-        } else {
-            const eventsDefaultFilter: IEventFilter = {
-                event: '',
-                timeStamp: {
-                    $gte: { $date: '' },
-                    $lte: { $date: '' },
-                },
-            };
-            store.dispatch(TableDataActionCreators.tableDataFilterChange(eventsDefaultFilter));
-            filter = JSON.stringify(eventsDefaultFilter, null, 2);
-        }
         this.state = {
-            filter,
+            filter: JSON.stringify(this.props.filter, null, 2),
             limit: '10',
             isFilterInvalid: false,
             selectedEventName: '',
@@ -51,32 +37,28 @@ export default class TableSearchForm extends React.Component<
     }
 
     componentWillReceiveProps(nextProps: ITableSearchFormProps) {
-        const filter = JSON.stringify(nextProps.filter, null, 2);
+        const nextFilterString = JSON.stringify(nextProps.filter, null, 2);
+        const nextFilter = nextProps.filter as IEventFilter;
         if (
-            this.state.filter !== filter
+            this.state.filter !== nextFilterString
             || this.state.selectedEventName !== nextProps.filter.event
         ) {
             if (this.props.tableName === tableTypes.Events) {
-                if (this.state.selectedFromDate !== (nextProps.filter as IEventFilter).timeStamp.$gte.$date
-                    || this.state.selectedToDate !== (nextProps.filter as IEventFilter).timeStamp.$lte.$date) {
-                    if ((this.props.filter as IEventFilter).timeStamp) {
-                        if ((nextProps.filter as IEventFilter).timeStamp.$gte) {
-                            this.setState({
-                                selectedFromDate:
-                                    (nextProps.filter as IEventFilter).timeStamp.$gte.$date.substring(0, 10),
-                            });
-                        }
-                        if ((nextProps.filter as IEventFilter).timeStamp.$lte) {
-                            this.setState({
-                                selectedToDate:
-                                    (nextProps.filter as IEventFilter).timeStamp.$lte.$date.substring(0, 10),
-                            });
-                        }
-                    }
+                if (this.state.selectedFromDate !== nextFilter.timeStamp.$gte.$date) {
+                    this.setState({
+                        selectedFromDate:
+                            nextFilter.timeStamp.$gte.$date.substring(0, 10),
+                    });
+                }
+                if (this.state.selectedToDate !== nextFilter.timeStamp.$lte.$date) {
+                    this.setState({
+                        selectedToDate:
+                            nextFilter.timeStamp.$lte.$date.substring(0, 10),
+                    });
                 }
             }
             this.setState({
-                filter,
+                filter: nextFilterString,
                 selectedEventName: nextProps.filter.event !== undefined
                     ? nextProps.filter.event as string
                     : '',
@@ -114,7 +96,9 @@ export default class TableSearchForm extends React.Component<
     }
 
     resizeTextArea(element: HTMLTextAreaElement) {
-        element.style.height = '1px';
+        console.log(element.style.height, element.scrollHeight, element.value)
+        element.style.height = 'auto';
+        console.log(element.style.height, element.scrollHeight, element.value)
         element.style.height = (element.scrollHeight - 22) + 'px';
     }
 
@@ -122,7 +106,7 @@ export default class TableSearchForm extends React.Component<
         try {
             const filter = JSON.parse(this.state.filter);
             this.setState({ isFilterInvalid: false });
-            store.dispatch(TableDataActionCreators.tableDataFilterChange(filter));
+            store.dispatch(EventsActionCreators.eventsFilterChange(filter));
         } catch (error) {
             this.setState({ isFilterInvalid: true });
         }
@@ -172,7 +156,7 @@ export default class TableSearchForm extends React.Component<
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
         try {
-            store.dispatch(TableDataActionCreators.tableDataFilterChange(JSON.parse(this.state.filter)));
+            store.dispatch(EventsActionCreators.eventsFilterChange(JSON.parse(this.state.filter)));
             this.setState({ isFilterInvalid: false });
             getTableData(
                 this.props.tableName,
@@ -187,31 +171,44 @@ export default class TableSearchForm extends React.Component<
     }
 
     handleReset = () => {
-        let filter = {};
+        let initFilter;
         if (this.props.tableName === tableTypes.Events) {
-            filter = {
+            initFilter = {
                 event: '',
                 timeStamp: {
                     $gte: { $date: '' },
                     $lte: { $date: '' },
                 },
             };
+        } else {
+            initFilter = {};
         }
+        this.dispatchFilter(initFilter);
         this.setState({
-            filter: JSON.stringify(filter, null, 2),
+            filter: JSON.stringify(initFilter, null, 2),
             selectedEventName: '',
             selectedFromDate: '',
             selectedToDate: '',
         });
-        store.dispatch(TableDataActionCreators.tableDataFilterChange(filter));
     }
 
     handleMinimize = () => {
         this.setState({ isMinimized: !this.state.isMinimized });
     }
 
+    dispatchFilter(filter: any) {
+        switch (this.props.tableName) {
+            case (tableTypes.Events):
+                store.dispatch(EventsActionCreators.eventsFilterChange(filter));
+                break;
+            case (tableTypes.Subscribers):
+                store.dispatch(SubscribersActionCreators.subscribersFilterChange(filter));
+                break;
+        }
+    }
+
     render() {
-        const isFilterInvalidClass = this.state.isFilterInvalid
+        const filterInvalidClass = this.state.isFilterInvalid
             ? 'error'
             : '';
         const eventNamesInputLoadingClass = this.props.eventNamesIsLoading
@@ -220,7 +217,9 @@ export default class TableSearchForm extends React.Component<
         const isMinimized = this.state.isMinimized
             ? 'dashboardTable-searchForm-container-minimized'
             : '';
-
+        const heightClass = this.props.tableName === tableTypes.Subscribers
+            ? 'subscribers-height'
+            : 'events-height';
         let eventNamesList;
         let datePicker;
         if (this.props.eventNames.events.length <= 0 && !this.props.eventNamesIsLoading) {
@@ -274,7 +273,7 @@ export default class TableSearchForm extends React.Component<
                             <label>Filter</label>
                             <textarea
                                 ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
-                                className={`dashboardTable-searchForm-searchInput ${isFilterInvalidClass}`}
+                                className={`dashboardTable-searchForm-searchInput ${filterInvalidClass}${heightClass}`}
                                 value={this.state.filter}
                                 onChange={this.handleSearchChange}
                                 onBlur={this.handleSearchBlur}

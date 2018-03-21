@@ -1,1 +1,7 @@
-export const testcosnt = 'e';
+export const initEventFilter = {
+    event: '',
+    timeStamp: {
+        $gte: { $date: '' },
+        $lte: { $date: '' },
+    },
+};

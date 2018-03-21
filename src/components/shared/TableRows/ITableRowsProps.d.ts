@@ -1,11 +1,13 @@
+import { MouseEvent } from 'react';
 import { ISubscriber, ISubscriberFilter, IEvent, IEventFilter } from 'types';
-import { Component } from 'react';
 
 export interface ITableRowsProps {
-    tableData: ISubscriber[] | IEvent[];
+    tableData: any;
     columnKeyNames: string[];
     isLoading: boolean;
     hasErrored: boolean;
     filter: ISubscriberFilter | IEventFilter;
     tableName: string;
+    defaultTableText?: string;
+    children: {};
 }
