@@ -67,12 +67,7 @@ export default class TableSearchForm extends React.Component<
     }
 
     componentDidUpdate(prevProps: ITableSearchFormProps, prevState: ITableSearchFormState) {
-        if (
-            this.state.filter !== prevState.filter
-            || this.props.filter !== prevProps.filter
-        ) {
-            this.resizeTextArea(this.textArea);
-        }
+        this.resizeTextArea(this.textArea);
     }
 
     handleSearchChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
