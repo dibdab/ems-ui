@@ -104,7 +104,7 @@ export default class TableSearchForm extends React.Component<
         try {
             const filter = JSON.parse(this.state.filter);
             this.setState({ isFilterInvalid: false });
-            store.dispatch(EventsActionCreators.eventsFilterChange(filter));
+            this.dispatchFilter(JSON.parse(filter));
         } catch (error) {
             this.setState({ isFilterInvalid: true });
         }
@@ -154,7 +154,7 @@ export default class TableSearchForm extends React.Component<
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
         try {
-            store.dispatch(EventsActionCreators.eventsFilterChange(JSON.parse(this.state.filter)));
+            this.dispatchFilter(JSON.parse(this.state.filter));
             this.setState({ isFilterInvalid: false });
             getTableData(
                 this.props.tableName,

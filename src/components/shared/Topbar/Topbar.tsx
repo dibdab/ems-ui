@@ -1,12 +1,12 @@
 import * as React from 'react';
 import store from 'store';
 
+import { SidebarCreators } from 'redux_';
+
 import './Topbar.css';
 import { ITopbarProps } from './ITopbarProps';
 
-import { SidebarCreators } from 'redux_';
-
-export const Topbar = (props: ITopbarProps) => {
+export default function Topbar(props: ITopbarProps) {
   const isSidebarToggleActive = props.isSidebarOpen
     ? 'active'
     : '';
@@ -26,4 +26,4 @@ export const Topbar = (props: ITopbarProps) => {
       {/* <Searchlist databaseNames={databaseArray} /> */}
     </div>
   );
-};
+}

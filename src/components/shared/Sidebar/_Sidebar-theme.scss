@@ -1,11 +1,8 @@
 @mixin sidebar-theme ($theme) {
     $background-colour: map-get($theme, background-colour);
     $background-colour-dark: map-get($theme, background-colour-dark);
-    $primary-colour: map-get($theme, primary-colour);
-    $accent-colour: map-get($theme, accent-colour);
     $text-colour-dark: map-get($theme, text-colour-dark);
     $divider-colour: map-get($theme, divider-colour);
-    $primary-colour-dark: map-get($theme, primary-colour-dark);
     .sidebar {
         background-color: $background-colour;
         color: $text-colour-dark;
@@ -15,6 +12,12 @@
                 &.active {
                     background-color: $background-colour-dark;
                 }
+            }
+            div {
+                color: $divider-colour;
+            }
+            div:not(:first-child) {
+                border-top-color: $divider-colour;
             }
         }
     }

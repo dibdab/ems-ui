@@ -1,14 +1,13 @@
 import * as React from 'react';
 
-import { ISubscribersTableBodyProps } from './ISubscribersTableBodyProps';
-import { ISubscribersTableBodyState } from './ISubscribersTableBodyState';
-
-import { SubscriberCells } from './SubscriberCells/SubscriberCells';
+import { ISubscriber } from 'types';
+import { tableTypes } from 'enums';
 import TableRow from 'components/shared/TableRow/TableRow';
 import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
 
-import { ISubscriber } from 'types';
-import { tableTypes } from 'enums';
+import { ISubscribersTableBodyProps } from './ISubscribersTableBodyProps';
+import { ISubscribersTableBodyState } from './ISubscribersTableBodyState';
+import { SubscriberCells } from './SubscriberCells/SubscriberCells';
 
 export default class SubscribersTableBody extends React.Component<ISubscribersTableBodyProps, ISubscribersTableBodyState> {
     constructor(props: ISubscribersTableBodyProps) {
@@ -68,7 +67,7 @@ export default class SubscribersTableBody extends React.Component<ISubscribersTa
             const tableRows: JSX.Element[] = [];
             (this.props.subscribers).map((object, index) => { tableRows.push(this.constructTableRows(object)); });
             tableBody = (
-                <tbody>
+                <React.Fragment>
                     <ContextMenu
                         dataType={tableTypes.Subscribers}
                         renderTag={'tr'}
@@ -79,11 +78,13 @@ export default class SubscribersTableBody extends React.Component<ISubscribersTa
                         pos={this.state.contextMenuPos}
                     />
                     {tableRows}
-                </tbody>
+                </React.Fragment>
             );
         }
         return (
-            tableBody
+            <tbody>
+                {tableBody}
+            </tbody>
         );
     }
 }

@@ -18,15 +18,22 @@
   }
   nav {
     height: 80%;
-    margin: 8px 16px 8px 0;
+    margin: 8px 0;
     display: flex;
     flex-flow: column nowrap;
     align-items: flex-start;
     position: relative;
-    a {
-      margin: 8px 0;
+    a,
+    div {
+      width: 100%;
       text-align: left;
       border-radius: 0 2px 2px 0;
+    }
+    div {
+      padding: 16px 0 16px 16px;
+    }
+    div:not(:first-child) {
+      border-top: solid 1px;
     }
   }
 }

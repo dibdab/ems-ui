@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Switch } from 'react-router-dom';
-import store from 'store';
 
-import './Dashboard.css';
-import { Topbar } from 'components/shared/Topbar/Topbar';
-import { Sidebar } from 'components/shared/Sidebar/Sidebar';
-import EventsTable from './EventsTable/EventsTable';
-import SubscribersTable from './SubscribersTable/SubscribersTable';
-import { IDashboardProps } from './IDashboardProps';
-import { IRootState } from 'redux_';
+import store from 'store';
+import Topbar from 'components/shared/Topbar/Topbar';
+import Sidebar from 'components/shared/Sidebar/Sidebar';
+import { IRootState, SidebarCreators } from 'redux_';
 import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes';
 import { IRoute } from 'types';
 import { tableTypes } from 'enums';
-import { SidebarCreators } from 'redux_';
+
+import './Dashboard.css';
+import { IDashboardProps } from './IDashboardProps';
+import EventsTable from './EventsTable/EventsTable';
+import SubscribersTable from './SubscribersTable/SubscribersTable';
 
 class Dashboard extends React.Component<
   IDashboardProps,

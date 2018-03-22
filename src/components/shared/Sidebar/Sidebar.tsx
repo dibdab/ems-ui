@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { tableTypes } from 'enums';
+
 import { ISidebarProps } from './ISidebarProps';
 import './Sidebar.css';
 
-import { tableTypes } from 'enums';
-
-export const Sidebar = (props: ISidebarProps) => {
+export default function Sidebar(props: ISidebarProps) {
   const tables = [
     { sidebarName: 'Subscribers', urlName: tableTypes.Subscribers },
     { sidebarName: 'Events', urlName: tableTypes.Events },
@@ -15,7 +15,7 @@ export const Sidebar = (props: ISidebarProps) => {
     <NavLink
       to={`/dashboard/${table.urlName}`}
       key={table.urlName}
-      className="button button-simplelink"
+      className="button"
       activeClassName="active"
     >
       {table.sidebarName}
@@ -27,7 +27,11 @@ export const Sidebar = (props: ISidebarProps) => {
 
   return (
     <div className={`sidebar ${isSidebarOpenClass}`}>
-      <nav>{tableList}</nav>
+      <nav>
+        <div>Tables</div>
+        {tableList}
+        <div>DLQ Tools</div>
+      </nav>
     </div>
   );
-};
+}

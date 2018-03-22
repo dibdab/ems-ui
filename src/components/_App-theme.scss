@@ -11,11 +11,11 @@
     }
     .button {
         color: $text-colour-dark;
+        background-color: $background-colour;
         &:hover,
         &:focus,
         &:focus>[class*="fa-"],
         &:hover>[class*="fa-"] {
-            background-color: $background-colour-dark;
             color: $accent-colour;
         }
         &.active {

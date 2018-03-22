@@ -1,5 +1,6 @@
 @import 'src/styles/elevation-mixin';
 @import 'src/styles/mixins';
+@import 'src/styles/variables';
 .main-body {
   height: 100%;
   width: 100%;
@@ -27,6 +28,8 @@
   padding: 0 16px;
   border-radius: 2px;
   font-size: 16px;
+  background-position: center;
+  transition: background-color $mat-anim-curve 200ms;
   &.minimize-button {
     margin-top: 8px;
     padding: 8px;
@@ -41,8 +44,6 @@
     }
   }
   &.active {
-    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.12) inset;
-    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: bold;
   }
 }

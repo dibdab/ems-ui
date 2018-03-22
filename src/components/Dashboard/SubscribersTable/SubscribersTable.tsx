@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { ISubscribersTableProps } from './ISubscribersTableProps';
-
-import SubscribersTableBody from './SubscribersTableBody/SubscribersTableBody';
+import { IRootState } from 'redux_';
+import { getTableData, getSubscribedEventNames } from 'services';
 import TableHead from 'components/shared/TableHead/TableHead';
 import TableSearchForm from 'components/shared/TableSearchForm/TableSearchForm';
 import LoadingSpinner from 'components/shared/LoadingSpinner/LoadingSpinner';
 import ResultsCount from 'components/shared/ResultsCount/ResultsCount';
 
-import { IRootState } from 'redux_';
-import { getTableData, getSubscribedEventNames } from 'services';
+import { ISubscribersTableProps } from './ISubscribersTableProps';
+import SubscribersTableBody from './SubscribersTableBody/SubscribersTableBody';
 
 export class SubscribersTable extends React.Component<ISubscribersTableProps, IRootState> {
 

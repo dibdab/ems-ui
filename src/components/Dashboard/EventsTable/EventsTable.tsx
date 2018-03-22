@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { IEventsTableProps } from './IEventsTableProps';
-
-import EventsTableBody from './EventsTableBody/EventsTableBody';
+import { IRootState } from 'redux_';
+import { getAllEventNames } from 'services';
 import TableHead from 'components/shared/TableHead/TableHead';
 import TableSearchForm from 'components/shared/TableSearchForm/TableSearchForm';
 import LoadingSpinner from 'components/shared/LoadingSpinner/LoadingSpinner';
 import ResultsCount from 'components/shared/ResultsCount/ResultsCount';
 
-import { IRootState } from 'redux_';
-import { getAllEventNames } from 'services';
+import { IEventsTableProps } from './IEventsTableProps';
+import EventsTableBody from './EventsTableBody/EventsTableBody';
 
 export class EventsTable extends React.Component<IEventsTableProps, IRootState> {
 

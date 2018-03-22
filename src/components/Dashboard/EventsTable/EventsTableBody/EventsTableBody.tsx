@@ -1,14 +1,13 @@
 import * as React from 'react';
 
-import { IEventsTableBodyProps } from './IEventsTableBodyProps';
-import { IEventsTableBodyState } from './IEventsTableBodyState';
-
-import { EventCells } from './EventCells/EventCells';
+import { IEvent } from 'types';
+import { tableTypes } from 'enums';
 import TableRow from 'components/shared/TableRow/TableRow';
 import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
 
-import { IEvent } from 'types';
-import { tableTypes } from 'enums';
+import { EventCells } from './EventCells/EventCells';
+import { IEventsTableBodyProps } from './IEventsTableBodyProps';
+import { IEventsTableBodyState } from './IEventsTableBodyState';
 
 export default class EventsTableBody extends React.Component<IEventsTableBodyProps, IEventsTableBodyState> {
     constructor(props: IEventsTableBodyProps) {
@@ -73,7 +72,7 @@ export default class EventsTableBody extends React.Component<IEventsTableBodyPro
             const tableRows: JSX.Element[] = [];
             (this.props.events).map((object, index) => { tableRows.push(this.constructTableRows(object)); });
             tableBody = (
-                <tbody>
+                <React.Fragment>
                     <ContextMenu
                         dataType={tableTypes.Events}
                         renderTag={'tr'}
@@ -84,11 +83,13 @@ export default class EventsTableBody extends React.Component<IEventsTableBodyPro
                         pos={this.state.contextMenuPos}
                     />
                     {tableRows}
-                </tbody>
+                </React.Fragment>
             );
         }
         return (
-            tableBody
+            <tbody>
+                {tableBody}
+            </tbody>
         );
     }
 }
