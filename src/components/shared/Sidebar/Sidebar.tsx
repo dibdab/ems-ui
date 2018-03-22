@@ -31,6 +31,13 @@ export default function Sidebar(props: ISidebarProps) {
         <div>Tables</div>
         {tableList}
         <div>DLQ Tools</div>
+        <NavLink
+          to={`/dashboard/${tableTypes.Events}/replay`}
+          className="button"
+          activeClassName="active"
+        >
+          Replay Events
+        </NavLink>
       </nav>
     </div>
   );

@@ -2,6 +2,7 @@
     $background-colour: map-get($theme, background-colour);
     $background-colour-dark: map-get($theme, background-colour-dark);
     $text-colour-dark: map-get($theme, text-colour-dark);
+    $text-colour-secondary: map-get($theme, text-colour-secondary);
     $divider-colour: map-get($theme, divider-colour);
     .sidebar {
         background-color: $background-colour;
@@ -14,7 +15,7 @@
                 }
             }
             div {
-                color: $divider-colour;
+                color: $text-colour-secondary;
             }
             div:not(:first-child) {
                 border-top-color: $divider-colour;
