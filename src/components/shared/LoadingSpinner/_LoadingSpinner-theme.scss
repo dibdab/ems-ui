@@ -1,0 +1,11 @@
+@mixin loadingSpinner-theme($theme) {
+    $accent-colour: map-get($theme, accent-colour);
+    .loader,
+    .loader:before,
+    .loader:after {
+        background: $accent-colour;
+    }
+    .loader {
+        color: $accent-colour;
+    }
+}

@@ -4,62 +4,39 @@ import { connect } from 'react-redux';
 import { ISubscribersTableProps } from './ISubscribersTableProps';
 
 import SubscribersTableBody from './SubscribersTableBody/SubscribersTableBody';
-import { TableHead } from 'components/shared/TableHead/TableHead';
+import TableHead from 'components/shared/TableHead/TableHead';
 import TableSearchForm from 'components/shared/TableSearchForm/TableSearchForm';
+import LoadingSpinner from 'components/shared/LoadingSpinner/LoadingSpinner';
+import ResultsCount from 'components/shared/ResultsCount/ResultsCount';
 
 import { IRootState } from 'redux_';
-import { getTableData, getAllEventNames, getSubscribedEventNames } from 'services';
-import { tableTypes } from 'enums';
+import { getTableData, getSubscribedEventNames } from 'services';
 
 export class SubscribersTable extends React.Component<ISubscribersTableProps, IRootState> {
 
   componentDidMount() {
-
-    if (this.props.tableName === tableTypes.Events) {
-      getAllEventNames('default');
-    } else if (this.props.tableName === tableTypes.Subscribers) {
-      getSubscribedEventNames('default');
-      getTableData(this.props.tableName, '', 10);
-    }
+    getSubscribedEventNames('default');
+    getTableData(this.props.tableName, '', 10);
   }
 
   render() {
-    let eventNames;
-    let eventNamesIsLoading;
-    if (this.props.tableName === tableTypes.Events) {
-      eventNames = this.props.subscribedEventNames;
-      eventNamesIsLoading = this.props.subscribedEventNamesIsLoading;
-    } else {
-      eventNames = this.props.subscribedEventNames;
-      eventNamesIsLoading = this.props.subscribedEventNamesIsLoading;
-    }
-    let loadingSpinner;
-    if (this.props.subscribersIsLoading) {
-      loadingSpinner = <div className="loader">Loading...</div>;
-    } else {
-      loadingSpinner = null;
-    }
     return (
       <React.Fragment>
         <TableSearchForm
           tableName={this.props.tableName}
           filter={this.props.subscribersFilter}
-          eventNames={eventNames}
-          eventNamesIsLoading={eventNamesIsLoading}
+          eventNames={this.props.subscribedEventNames}
+          eventNamesIsLoading={this.props.subscribedEventNamesIsLoading}
         />
-        {loadingSpinner}
-        <div className="dashboardTable-results-count">
-          {this.props.subscribers.length} {this.props.tableName} found.
-        </div>
+        <LoadingSpinner isLoading={this.props.subscribersIsLoading} />
+        <ResultsCount resultsLength={this.props.subscribers.length} resultsName={this.props.tableName} />
         <table className="dashboardTable">
           <TableHead columnHeadings={this.props.columnHeadings} />
-          <tbody>
-            <SubscribersTableBody
-              {...this.props}
-            />
-          </tbody>
+          <SubscribersTableBody
+            {...this.props}
+          />
         </table>
-      </React.Fragment>
+      </React.Fragment >
     );
   }
 }

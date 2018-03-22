@@ -43,12 +43,4 @@
         color: $divider-colour !important;
         background-color: $background-colour-dark !important;
     }
-    .loader,
-    .loader:before,
-    .loader:after {
-        background: $accent-colour;
-    }
-    .loader {
-        color: $accent-colour;
-    }
 }

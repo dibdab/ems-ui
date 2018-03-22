@@ -96,9 +96,7 @@ export default class TableSearchForm extends React.Component<
     }
 
     resizeTextArea(element: HTMLTextAreaElement) {
-        console.log(element.style.height, element.scrollHeight, element.value)
         element.style.height = 'auto';
-        console.log(element.style.height, element.scrollHeight, element.value)
         element.style.height = (element.scrollHeight - 22) + 'px';
     }
 

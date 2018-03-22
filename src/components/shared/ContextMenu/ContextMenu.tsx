@@ -10,10 +10,7 @@ import { tableTypes } from 'enums';
 import store from 'store';
 import { EventsActionCreators, SubscribersActionCreators } from 'redux_';
 
-export default class ContextMenu extends React.Component<
-    IContextMenuProps,
-    IContextMenuState
-    > {
+export default class ContextMenu extends React.Component<IContextMenuProps, IContextMenuState> {
     constructor(props: IContextMenuProps) {
         super(props);
         this.state = {

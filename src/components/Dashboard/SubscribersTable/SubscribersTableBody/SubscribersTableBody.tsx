@@ -10,9 +10,7 @@ import ContextMenu from 'components/shared/ContextMenu/ContextMenu';
 import { ISubscriber } from 'types';
 import { tableTypes } from 'enums';
 
-export default class SubscribersTableBody extends React.Component<
-    ISubscribersTableBodyProps,
-    ISubscribersTableBodyState> {
+export default class SubscribersTableBody extends React.Component<ISubscribersTableBodyProps, ISubscribersTableBodyState> {
     constructor(props: ISubscribersTableBodyProps) {
         super(props);
         this.state = {
@@ -56,12 +54,7 @@ export default class SubscribersTableBody extends React.Component<
         let tableBody;
         if (this.props.subscribers.length <= 0) {
             let message;
-            if (!this.props.subscribersHasErrored &&
-                !this.props.subscribersFilter.event &&
-                !this.props.subscribersFilter.receivedDate
-            ) {
-                message = 'Submit event name and date range filters to view events.';
-            } else if (this.props.subscribersHasErrored) {
+            if (this.props.subscribersHasErrored) {
                 message = 'Error unable to retrieve data.';
             } else {
                 message = 'No results found.';
@@ -75,7 +68,7 @@ export default class SubscribersTableBody extends React.Component<
             const tableRows: JSX.Element[] = [];
             (this.props.subscribers).map((object, index) => { tableRows.push(this.constructTableRows(object)); });
             tableBody = (
-                <React.Fragment>
+                <tbody>
                     <ContextMenu
                         dataType={tableTypes.Subscribers}
                         renderTag={'tr'}
@@ -86,7 +79,7 @@ export default class SubscribersTableBody extends React.Component<
                         pos={this.state.contextMenuPos}
                     />
                     {tableRows}
-                </React.Fragment>
+                </tbody>
             );
         }
         return (

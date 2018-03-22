@@ -73,7 +73,7 @@ export default class EventsTableBody extends React.Component<IEventsTableBodyPro
             const tableRows: JSX.Element[] = [];
             (this.props.events).map((object, index) => { tableRows.push(this.constructTableRows(object)); });
             tableBody = (
-                <React.Fragment>
+                <tbody>
                     <ContextMenu
                         dataType={tableTypes.Events}
                         renderTag={'tr'}
@@ -84,7 +84,7 @@ export default class EventsTableBody extends React.Component<IEventsTableBodyPro
                         pos={this.state.contextMenuPos}
                     />
                     {tableRows}
-                </React.Fragment>
+                </tbody>
             );
         }
         return (

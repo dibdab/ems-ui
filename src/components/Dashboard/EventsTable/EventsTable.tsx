@@ -4,53 +4,36 @@ import { connect } from 'react-redux';
 import { IEventsTableProps } from './IEventsTableProps';
 
 import EventsTableBody from './EventsTableBody/EventsTableBody';
-import { TableHead } from 'components/shared/TableHead/TableHead';
+import TableHead from 'components/shared/TableHead/TableHead';
 import TableSearchForm from 'components/shared/TableSearchForm/TableSearchForm';
+import LoadingSpinner from 'components/shared/LoadingSpinner/LoadingSpinner';
+import ResultsCount from 'components/shared/ResultsCount/ResultsCount';
 
 import { IRootState } from 'redux_';
-import { getTableData, getAllEventNames, getSubscribedEventNames } from 'services';
-import { tableTypes } from 'enums';
+import { getAllEventNames } from 'services';
 
 export class EventsTable extends React.Component<IEventsTableProps, IRootState> {
 
   componentDidMount() {
-
-    if (this.props.tableName === tableTypes.Events) {
-      getAllEventNames('default');
-    } else if (this.props.tableName === tableTypes.Subscribers) {
-      getSubscribedEventNames('default');
-      getTableData(this.props.tableName, '', 10);
-    }
+    getAllEventNames('default');
   }
 
   render() {
-    const eventNames = this.props.allEventNames;
-    const eventNamesIsLoading = this.props.allEventNamesIsLoading;
-    let loadingSpinner;
-    if (this.props.eventsIsLoading) {
-      loadingSpinner = <div className="loader">Loading...</div>;
-    } else {
-      loadingSpinner = null;
-    }
     return (
       <React.Fragment>
         <TableSearchForm
           tableName={this.props.tableName}
           filter={this.props.eventsFilter}
-          eventNames={eventNames}
-          eventNamesIsLoading={eventNamesIsLoading}
+          eventNames={this.props.allEventNames}
+          eventNamesIsLoading={this.props.allEventNamesIsLoading}
         />
-        {loadingSpinner}
-        <div className="dashboardTable-results-count">
-          {this.props.events.length} {this.props.tableName} found.
-        </div>
+        <LoadingSpinner isLoading={this.props.eventsIsLoading} />
+        <ResultsCount resultsLength={this.props.events.length} resultsName={this.props.tableName} />
         <table className="dashboardTable">
           <TableHead columnHeadings={this.props.columnHeadings} />
-          <tbody>
-            <EventsTableBody
-              {...this.props}
-            />
-          </tbody>
+          <EventsTableBody
+            {...this.props}
+          />
         </table>
       </React.Fragment>
     );

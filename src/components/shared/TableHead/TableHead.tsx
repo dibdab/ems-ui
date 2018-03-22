@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { ITableHeadProps } from './ITableHeadProps';
 
-export const TableHead = (props: ITableHeadProps) => {
+export default function TableHead(props: ITableHeadProps) {
   const columnHeadings = props.columnHeadings.map(
     columnHeading => (
       <th key={columnHeading}>{columnHeading}</th>
@@ -18,4 +18,4 @@ export const TableHead = (props: ITableHeadProps) => {
       </tr>
     </thead>
   );
-};
+}

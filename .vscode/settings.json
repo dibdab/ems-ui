@@ -15,6 +15,7 @@
         "filterispositive",
         "filterjsonlocation",
         "filterlocation",
+        "filternegative",
         "set",
         "subscribedeventnames",
         "subscribedevents",
