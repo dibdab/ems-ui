@@ -26,7 +26,7 @@ export default function Sidebar(props: ISidebarProps) {
     : 'hidden';
 
   return (
-    <div className={`sidebar ${isSidebarOpenClass}`}>
+    <div className={`sidebar elevation-8 ${isSidebarOpenClass}`}>
       <nav>
         <div>Tables</div>
         {tableList}

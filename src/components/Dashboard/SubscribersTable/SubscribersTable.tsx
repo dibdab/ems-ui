@@ -15,7 +15,9 @@ export class SubscribersTable extends React.Component<ISubscribersTableProps, IR
 
   componentDidMount() {
     getSubscribedEventNames('default');
-    getTableData(this.props.tableName, '', 10);
+    if (this.props.subscribers.length <= 0) {
+      getTableData(this.props.tableName, '', 10);
+    }
   }
 
   render() {
