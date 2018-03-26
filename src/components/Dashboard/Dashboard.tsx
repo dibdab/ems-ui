@@ -14,6 +14,7 @@ import './Dashboard.css';
 import { IDashboardProps } from './IDashboardProps';
 import EventsTable from './EventsTable/EventsTable';
 import SubscribersTable from './SubscribersTable/SubscribersTable';
+import EventReplayForm from './EventReplayForm/EventReplayForm';
 
 class Dashboard extends React.Component<
   IDashboardProps,
@@ -74,6 +75,10 @@ class Dashboard extends React.Component<
           ],
           tableName: tableTypes.Events,
         },
+      },
+      {
+        component: EventReplayForm,
+        path: '/dashboard/eventreplay',
       },
       {
         component: NoTableRoute,
