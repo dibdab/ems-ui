@@ -8,6 +8,14 @@ export const EventCells = (props: IEventCellsProps) => {
     return (
         <React.Fragment>
             <td
+                title="messageID"
+                data-filter={props.event.messageID}
+                data-filterjsonlocation="messageID"
+                data-filternegative="false"
+            >
+                {props.event.messageID}
+            </td>
+            <td
                 title="event"
                 data-filter={props.event.event}
                 data-filterjsonlocation="event"

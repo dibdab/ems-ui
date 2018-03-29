@@ -62,12 +62,14 @@ class Dashboard extends React.Component<
         path: '/dashboard/events',
         routeProps: {
           columnHeadings: [
+            'Message ID',
             'Event Name',
             'Source System',
             'Received Date',
             'Filters',
           ],
           columnKeyNames: [
+            'messageID',
             'event',
             'sourceSystem',
             'receivedDate',

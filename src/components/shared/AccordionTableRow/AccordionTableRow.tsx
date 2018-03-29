@@ -33,6 +33,6 @@ const ReactJsonViewer = (props: IReactJsonViewerProps) => {
     return null;
   }
   return (
-    <ReactJson src={props.src} collapseStringsAfterLength={100} displayDataTypes={false} />
+    <ReactJson src={props.src} collapseStringsAfterLength={100} displayDataTypes={false} enableClipboard={true} />
   );
 };
