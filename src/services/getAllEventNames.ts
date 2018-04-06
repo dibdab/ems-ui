@@ -1,7 +1,7 @@
 import store from 'store';
 
 import { appendAuthHeader, caseInsensitiveStringSort } from './serviceHelpers';
-import { EventNameCreators } from 'redux_';
+import { EventNameActionCreators } from 'redux_';
 import { IEventNames } from 'types';
 import Config from 'config';
 
@@ -29,13 +29,13 @@ export function getAllEventNames(cacheControl: RequestCache): void {
 }
 
 function SetResponseSuccess(data: IEventNames) {
-    store.dispatch(EventNameCreators.getAllEventNamesFetchSuccess(data));
+    store.dispatch(EventNameActionCreators.getAllEventNamesFetchSuccess(data));
 }
 
 function setLoading(isLoading: boolean) {
-    store.dispatch(EventNameCreators.getAllEventNamesIsLoading(isLoading));
+    store.dispatch(EventNameActionCreators.getAllEventNamesIsLoading(isLoading));
 }
 
 function setErrored(hasErrored: boolean) {
-    store.dispatch(EventNameCreators.getAllEventNamesHasErrored(hasErrored));
+    store.dispatch(EventNameActionCreators.getAllEventNamesHasErrored(hasErrored));
 }

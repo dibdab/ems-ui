@@ -41,7 +41,7 @@ export default class DateRangeInput extends React.Component<
                 <input
                     onChange={this.handleFromChange}
                     value={this.props.selectedFromDate}
-                    className="dashboardTable-searchForm-dataPicker"
+                    className="input dashboardTable-searchForm-dataPicker"
                     type="date"
                     required={true}
                     title="Filter from this date."
@@ -50,7 +50,7 @@ export default class DateRangeInput extends React.Component<
                 <input
                     onChange={this.handleToChange}
                     value={this.props.selectedToDate}
-                    className="dashboardTable-searchForm-dataPicker"
+                    className="input dashboardTable-searchForm-dataPicker"
                     type="date"
                     required={true}
                     title="Filter to this date."

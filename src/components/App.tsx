@@ -25,7 +25,7 @@ export default class App extends React.Component {
         </Helmet>
         <Switch>
           <Route path="/login" component={Login} />
-          <Redirect exact={true} from="/" to="/login" />
+          <Redirect exact={true} from="/" to="/dashboard" />
           <Route path="/dashboard" component={Dashboard} />
           <Route component={NoRoute} />
         </Switch>

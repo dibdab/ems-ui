@@ -1,7 +1,7 @@
 import * as React from 'react';
 import store from 'store';
 
-import { SidebarCreators } from 'redux_';
+import { SidebarActionCreators } from 'redux_';
 
 import './Topbar.css';
 import { ITopbarProps } from './ITopbarProps';
@@ -12,7 +12,7 @@ export default function Topbar(props: ITopbarProps) {
     : '';
 
   function handleClick() {
-    store.dispatch(SidebarCreators.isOpen(!props.isSidebarOpen));
+    store.dispatch(SidebarActionCreators.isOpen(!props.isSidebarOpen));
   }
 
   return (

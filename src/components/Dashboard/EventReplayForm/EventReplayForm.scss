@@ -1,0 +1,15 @@
+@import 'src/styles/mixins';
+.replay-form-container {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    & .input-container {
+        display: inline-block;
+    }
+    & input {
+        width: 100%;
+    }
+    & button {
+        margin-top: 16px;
+    }
+}

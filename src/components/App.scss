@@ -13,6 +13,29 @@
   font-size: 14px;
 }
 
+.input-container-group {
+  transition: $minimize-transition;
+  margin-top: 32px;
+}
+
+.input-container {
+  transition: $minimize-transition;
+  display: inline;
+  margin-right: 16px;
+  & label {
+    transition: $minimize-transition;
+    position: absolute;
+    margin-top: -16px;
+  }
+  .input {
+    transition: $minimize-transition;
+    font-size: 18px;
+    padding: 8px 4px;
+    border: none;
+    border-bottom: 1px solid;
+  }
+}
+
 .button {
   box-sizing: border-box;
   position: relative;
@@ -24,7 +47,7 @@
   vertical-align: baseline;
   text-align: center;
   margin: 0;
-  line-height: 36px;
+  line-height: 32px;
   padding: 0 16px;
   border-radius: 2px;
   font-size: 16px;
@@ -45,6 +68,28 @@
   }
   &.active {
     font-weight: 700;
+  }
+  &.button-bordered {
+    width: auto;
+    height: auto;
+    padding: 0;
+    border: none;
+    border: solid 1px;
+    border-radius: 4px;
+  }
+  &>.button-icon {
+    transition: $minimize-transition;
+    padding: 4px;
+    margin-bottom: -8px;
+    min-width: 38px;
+    height: 38px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+  }
+  &.button-text {
+    padding: 2px 8px;
+    font-weight: bold;
   }
 }
 
@@ -74,4 +119,22 @@ input[type='checkbox'] {
 
 .display-none {
   display: none !important;
+}
+
+.success {
+  color: green;
+  border-color: green;
+  &>input {
+    color: green;
+    border-color: green;
+  }
+}
+
+.error {
+  color: red;
+  border-color: red;
+  &>input {
+    color: red;
+    border-color: red;
+  }
 }

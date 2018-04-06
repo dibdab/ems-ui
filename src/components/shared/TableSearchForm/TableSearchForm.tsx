@@ -232,7 +232,7 @@ export default class TableSearchForm extends React.Component<
         }
         if (this.props.tableName === tableTypes.Events) {
             datePicker = (
-                <div className="dashboardTable-searchForm-inputContainer">
+                <div className="input-container">
                     <DateRangeInput
                         onSelectDateRange={this.handleSelectDateRange}
                         selectedFromDate={this.state.selectedFromDate}
@@ -244,14 +244,14 @@ export default class TableSearchForm extends React.Component<
         return (
             <div className={`dashboardTable-searchForm-container ${isMinimized}`} >
                 <form action="submit" onSubmit={this.handleSubmit}>
-                    <div className="dashboardTable-searchForm-inputGroupContainer">
-                        <div className="dashboardTable-searchForm-inputContainer">
+                    <div className="input-container-group">
+                        <div className="input-container">
                             <label>
                                 {this.props.tableName === tableTypes.Events ? 'Event name*' : 'Event name'}
                             </label>
                             <select
                                 onChange={this.handleSelectEventName}
-                                className={`dashboardTable-searchForm-eventNameInput ${eventNamesInputLoadingClass}`}
+                                className={`input dashboardTable-searchForm-eventNameInput ${eventNamesInputLoadingClass}`}
                                 title="Event name"
                                 required={this.props.tableName === tableTypes.Events ? true : false}
                                 value={this.state.selectedEventName}
@@ -261,12 +261,12 @@ export default class TableSearchForm extends React.Component<
                         </div>
                         {datePicker}
                     </div>
-                    <div className="dashboardTable-searchForm-inputGroupContainer">
-                        <div className="dashboardTable-searchForm-inputContainer">
+                    <div className="input-container-group">
+                        <div className="input-container">
                             <label>Filter</label>
                             <textarea
                                 ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
-                                className={`dashboardTable-searchForm-searchInput ${filterInvalidClass}${heightClass}`}
+                                className={`input dashboardTable-searchForm-searchInput ${filterInvalidClass}${heightClass}`}
                                 value={this.state.filter}
                                 onChange={this.handleSearchChange}
                                 onBlur={this.handleSearchBlur}
@@ -274,10 +274,10 @@ export default class TableSearchForm extends React.Component<
                                 title="Json string to filter on."
                             />
                         </div>
-                        <div className="dashboardTable-searchForm-inputContainer">
+                        <div className="input-container">
                             <label>Result limit*</label>
                             <input
-                                className="dashboardTable-searchForm-limitInput"
+                                className="input dashboardTable-searchForm-limitInput"
                                 type="number"
                                 value={this.state.limit}
                                 onChange={this.handleLimitChange}
@@ -289,22 +289,22 @@ export default class TableSearchForm extends React.Component<
                                 title="No. of Results to Return."
                             />
                         </div>
-                        <div className="dashboardTable-searchForm-inputContainer">
-                            <button title="Submit" className="dashboardTable-searchForm-button button" type="submit">
+                        <div className="input-container">
+                            <button title="Submit" className="button button-bordered elevation-2" type="submit">
                                 <i
                                     title="Submit"
-                                    className="fas fa-search dashboardTable-searchForm-searchIcon button"
+                                    className="fas fa-search button-icon"
                                 />
                             </button>
                         </div>
-                        <div className="dashboardTable-searchForm-inputContainer">
+                        <div className="input-container">
                             <button
                                 title="Reset"
-                                className="dashboardTable-searchForm-button button"
+                                className="button button-bordered elevation-2"
                                 type="button"
                                 onClick={this.handleReset}
                             >
-                                <i className="fas fa-eraser dashboardTable-searchForm-searchIcon button" />
+                                <i className="fas fa-eraser button-icon" />
                             </button>
                         </div>
                     </div>

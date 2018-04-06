@@ -5,18 +5,6 @@
     $background-colour-dark: map-get($theme, background-colour-dark);
     $text-colour-secondary: map-get($theme, text-colour-secondary);
     .dashboardTable-searchForm-container {
-        .dashboardTable-searchForm-searchIcon {
-            border-color: $divider-colour;
-            background-color: $background-colour;
-            color: $text-colour-dark;
-        }
-        .dashboardTable-searchForm-eventNameInput,
-        .dashboardTable-searchForm-dataPicker,
-        .dashboardTable-searchForm-searchInput,
-        .dashboardTable-searchForm-limitInput {
-            border-bottom-color: $text-colour-secondary;
-            background-color: $background-colour;
-        }
         .dashboardTable-searchForm-results-count {
             color: $text-colour-secondary;
         }

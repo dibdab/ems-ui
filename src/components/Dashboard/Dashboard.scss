@@ -1,9 +1,9 @@
 @import 'src/styles/mixins.scss';
 @import 'src/styles/variables.scss';
-$doc-viwer-padding: 16px;
+$doc-viwer-padding: 32px;
 .dashboard-container {
   position: fixed;
-  padding: $doc-viwer-padding;
+  padding: 16px $doc-viwer-padding;
   height: calc(#{$document-view-height} - (#{$doc-viwer-padding}*2));
   width: calc(#{$document-view-width} - (#{$doc-viwer-padding}*2));
   top: $topbar-height;
@@ -83,9 +83,4 @@ $doc-viwer-padding: 16px;
       }
     }
   }
-}
-
-.error {
-  color: red;
-  border-color: red;
 }

@@ -5,7 +5,7 @@ import { Switch } from 'react-router-dom';
 import store from 'store';
 import Topbar from 'components/shared/Topbar/Topbar';
 import Sidebar from 'components/shared/Sidebar/Sidebar';
-import { IRootState, SidebarCreators } from 'redux_';
+import { IRootState, SidebarActionCreators } from 'redux_';
 import { RouteWithSubRoutes } from 'components/shared/RouteWithSubRoutes/RouteWithSubRoutes';
 import { IRoute } from 'types';
 import { tableTypes } from 'enums';
@@ -30,9 +30,9 @@ class Dashboard extends React.Component<
 
   onWindowResize() {
     if (window.innerWidth >= 1480) {
-      store.dispatch(SidebarCreators.isOpen(true));
+      store.dispatch(SidebarActionCreators.isOpen(true));
     } else if (window.innerWidth < 1480) {
-      store.dispatch(SidebarCreators.isOpen(false));
+      store.dispatch(SidebarActionCreators.isOpen(false));
     }
   }
 

@@ -20,6 +20,11 @@ import {
   State as SidebarState,
 } from './sidebar';
 
+import {
+  reducer as eventReplay,
+  State as EventReplayState,
+} from './eventReplay';
+
 interface IStoreEnhancerState { }
 
 // Reducer alias and property key in IRootState need to match
@@ -28,6 +33,7 @@ export interface IRootState extends IStoreEnhancerState {
   subscribers: SubscribersState;
   eventNames: EventNamesState;
   sidebar: SidebarState;
+  eventReplay: EventReplayState;
 }
 
 export const rootReducer = combineReducers<IRootState>({
@@ -35,4 +41,5 @@ export const rootReducer = combineReducers<IRootState>({
   subscribers,
   eventNames,
   sidebar,
+  eventReplay,
 });

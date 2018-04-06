@@ -12,6 +12,7 @@
         "contextmenufilter",
         "errored",
         "eventnames",
+        "eventreplay",
         "filterispositive",
         "filterjsonlocation",
         "filterlocation",

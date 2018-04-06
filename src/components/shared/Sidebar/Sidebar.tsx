@@ -11,6 +11,9 @@ export default function Sidebar(props: ISidebarProps) {
     { sidebarName: 'Subscribers', urlName: tableTypes.Subscribers },
     { sidebarName: 'Events', urlName: tableTypes.Events },
   ];
+  const tools = [
+    { sidebarName: 'Replay Event', urlName: 'eventreplay' },
+  ];
   const tableList = tables.map((table, index) => (
     <NavLink
       to={`/dashboard/${table.urlName}`}
@@ -21,23 +24,26 @@ export default function Sidebar(props: ISidebarProps) {
       {table.sidebarName}
     </NavLink>
   ));
+  const toolList = tools.map((tool, index) => (
+    <NavLink
+      to={`/dashboard/${tool.urlName}`}
+      key={tool.urlName}
+      className="button"
+      activeClassName="active"
+    >
+      {tool.sidebarName}
+    </NavLink>
+  ));
   const isSidebarOpenClass = props.isSidebarOpen
     ? 'visible'
     : 'hidden';
-
   return (
     <div className={`sidebar elevation-8 ${isSidebarOpenClass}`}>
       <nav>
         <div>Tables</div>
         {tableList}
         <div>DLQ Tools</div>
-        <NavLink
-          to={`/dashboard/eventreplay`}
-          className="button"
-          activeClassName="active"
-        >
-          Replay Events
-        </NavLink>
+        {toolList}
       </nav>
     </div>
   );

@@ -1,5 +1,6 @@
 @mixin app-theme($theme) {
     $text-colour-dark: map-get($theme, text-colour-dark);
+    $text-colour-secondary: map-get($theme, text-colour-secondary);
     $background-colour: map-get($theme, background-colour);
     $background-colour-dark: map-get($theme, background-colour-dark);
     $background-colour-light: map-get($theme, background-colour-light);
@@ -34,6 +35,11 @@
     .button-group {
         .button {
             background-color: $background-colour-light;
+            .button-bordered {
+                border-color: $divider-colour;
+                background-color: $background-colour;
+                color: $text-colour-dark;
+            }
         }
         .button:not(:last-child) {
             border-right: 1px solid $divider-colour;
@@ -42,5 +48,9 @@
     .disabled {
         color: $divider-colour !important;
         background-color: $background-colour-dark !important;
+    }
+    .input {
+        border-bottom-color: $text-colour-secondary;
+        background-color: $background-colour;
     }
 }

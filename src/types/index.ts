@@ -7,3 +7,4 @@ export * from './IRoute';
 export * from './IDivTable';
 export * from './ITableFilter';
 export * from './IEventNames';
+export * from './IGenericResponse';
