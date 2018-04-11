@@ -1,0 +1,15 @@
+.dashboardTable-header {
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    display: flex;
+    margin-top: 32px;
+    width: 100%;
+}
+
+.dashboardTable-help {
+    margin-left: 20px;
+}
+
+.dashboardTable-results-count {
+    margin-right: 20px;
+}

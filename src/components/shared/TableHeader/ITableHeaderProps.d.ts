@@ -1,4 +1,4 @@
-export default interface IResultsCountProps {
+export default interface ITableHeaderProps {
     resultsLength: number;
     resultsName: string;
 }

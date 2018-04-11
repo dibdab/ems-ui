@@ -23,19 +23,19 @@ export type Actions = {
 
 // Create the actions
 export const actionCreators = {
-  getAllEventNamesIsLoading: (
+  eventReplayIsLoading: (
     payload: boolean,
   ): Actions[typeof EVENT_REPLAY_IS_LOADING] => ({
     type: EVENT_REPLAY_IS_LOADING,
     payload,
   }),
-  getAllEventNamesHasErrored: (
+  eventReplayHasErrored: (
     payload: boolean,
   ): Actions[typeof EVENT_REPLAY_HAS_ERRORED] => ({
     type: EVENT_REPLAY_HAS_ERRORED,
     payload,
   }),
-  getAllEventNamesFetchSuccess: (
+  eventReplayResponse: (
     payload: IGenericResponse,
   ): Actions[typeof EVENT_REPLAY_RESPONSE] => ({
     type: EVENT_REPLAY_RESPONSE,

@@ -6,7 +6,7 @@ import { getTableData, getSubscribedEventNames } from 'services';
 import TableHead from 'components/shared/TableHead/TableHead';
 import TableSearchForm from 'components/shared/TableSearchForm/TableSearchForm';
 import LoadingSpinner from 'components/shared/LoadingSpinner/LoadingSpinner';
-import ResultsCount from 'components/shared/ResultsCount/ResultsCount';
+import TableHeader from 'components/shared/TableHeader/TableHeader';
 
 import { ISubscribersTableProps } from './ISubscribersTableProps';
 import SubscribersTableBody from './SubscribersTableBody/SubscribersTableBody';
@@ -30,7 +30,7 @@ export class SubscribersTable extends React.Component<ISubscribersTableProps, IR
           eventNamesIsLoading={this.props.subscribedEventNamesIsLoading}
         />
         <LoadingSpinner isLoading={this.props.subscribersIsLoading} />
-        <ResultsCount resultsLength={this.props.subscribers.length} resultsName={this.props.tableName} />
+        <TableHeader resultsLength={this.props.subscribers.length} resultsName={this.props.tableName} />
         <table className="dashboardTable">
           <TableHead columnHeadings={this.props.columnHeadings} />
           <SubscribersTableBody

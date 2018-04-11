@@ -96,10 +96,11 @@ export default class TableSearchForm extends React.Component<
     }
 
     handleSearchBlur = () => {
+        // TODO: Investigate a way to cause filter error if json is incorrect type
         try {
             const filter = JSON.parse(this.state.filter);
             this.setState({ isFilterInvalid: false });
-            this.dispatchFilter(JSON.parse(filter));
+            this.dispatchFilter(filter);
         } catch (error) {
             this.setState({ isFilterInvalid: true });
         }
@@ -147,7 +148,7 @@ export default class TableSearchForm extends React.Component<
         });
     }
 
-    handleSubmit(event: FormEvent<HTMLFormElement>) {
+    handleSubmit(e: FormEvent<HTMLFormElement>) {
         try {
             this.dispatchFilter(JSON.parse(this.state.filter));
             this.setState({ isFilterInvalid: false });
@@ -160,7 +161,7 @@ export default class TableSearchForm extends React.Component<
             this.setState({ isFilterInvalid: true });
         }
 
-        event.preventDefault();
+        e.preventDefault();
     }
 
     handleReset = () => {
@@ -266,7 +267,7 @@ export default class TableSearchForm extends React.Component<
                             <label>Filter</label>
                             <textarea
                                 ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
-                                className={`input dashboardTable-searchForm-searchInput ${filterInvalidClass}${heightClass}`}
+                                className={`input dashboardTable-searchForm-searchInput ${filterInvalidClass} ${heightClass}`}
                                 value={this.state.filter}
                                 onChange={this.handleSearchChange}
                                 onBlur={this.handleSearchBlur}

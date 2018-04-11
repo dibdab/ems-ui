@@ -11,7 +11,11 @@ export default function FilterCell(props: IFilterTdProps) {
             if (!filter.value) {
                 tdTextHead = `${filter.name}: `;
                 tdText = `${filter.value}`;
-            } else if (typeof filter.value === 'string' || typeof filter.value === 'boolean') {
+            } else if (
+                typeof filter.value === 'string'
+                || typeof filter.value === 'number'
+                || typeof filter.value === 'boolean'
+            ) {
                 tdTextHead = `${filter.name}: `;
                 tdText = `${filter.value}`;
             } else if (typeof filter.value === 'object') {
@@ -22,7 +26,11 @@ export default function FilterCell(props: IFilterTdProps) {
                 } else if (typeof filter.value[filterObjectKey] === 'object') {
                     tdTextHead = `${filter.name} (${filterObjectKey}): `;
                     tdText = `${filter.value[filterObjectKey].join(', ')}`;
-                } else if (typeof filter.value[filterObjectKey] === 'string') {
+                } else if (
+                    typeof filter.value[filterObjectKey] === 'string'
+                    || typeof filter.value[filterObjectKey] === 'number'
+                    || typeof filter.value[filterObjectKey] === 'boolean'
+                ) {
                     tdTextHead = `${filter.name} (${filterObjectKey}): `;
                     tdText = `${filter.value[filterObjectKey][0]}`;
                 } else {

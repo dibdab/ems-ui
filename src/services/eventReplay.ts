@@ -2,38 +2,33 @@ import store from 'store';
 
 import { appendAuthHeader } from './serviceHelpers';
 import { EventReplayActionCreators } from 'redux_';
-import { IEventNames } from 'types';
+import { IGenericResponse } from 'types';
 import Config from 'config';
 
-export function getAllEventNames(cacheControl: RequestCache): void {
+export function replayEvent(messageID: string): void {
     setErrored(false);
     setLoading(true);
     const headers = appendAuthHeader(new Headers());
-    fetch(Config.ALL_EVENT_NAMES_API_URL, {
+    fetch(Config.EVENT_REPLAY_API_URL + `?messageID=${messageID}`, {
         method: 'GET',
         headers: headers,
-        cache: cacheControl,
+        cache: 'reload',
     })
         .then(response => response.json())
-        .then((responseData: IEventNames) => {
-            SetResponseSuccess(responseData);
+        .then((responseMessage: IGenericResponse) => {
+            SetResponse(responseMessage);
             setLoading(false);
-        })
-        .catch(() => {
-            setErrored(true);
-            setLoading(false);
-        },
-    );
+        });
 }
 
-function SetResponseSuccess(data: IEventNames) {
-    store.dispatch(EventReplayActionCreators.getAllEventNamesFetchSuccess(data));
+function SetResponse(data: IGenericResponse) {
+    store.dispatch(EventReplayActionCreators.eventReplayResponse(data));
 }
 
 function setLoading(isLoading: boolean) {
-    store.dispatch(EventReplayActionCreators.getAllEventNamesIsLoading(isLoading));
+    store.dispatch(EventReplayActionCreators.eventReplayIsLoading(isLoading));
 }
 
 function setErrored(hasErrored: boolean) {
-    store.dispatch(EventReplayActionCreators.getAllEventNamesHasErrored(hasErrored));
+    store.dispatch(EventReplayActionCreators.eventReplayHasErrored(hasErrored));
 }

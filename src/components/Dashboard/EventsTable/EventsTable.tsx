@@ -6,7 +6,7 @@ import { getAllEventNames } from 'services';
 import TableHead from 'components/shared/TableHead/TableHead';
 import TableSearchForm from 'components/shared/TableSearchForm/TableSearchForm';
 import LoadingSpinner from 'components/shared/LoadingSpinner/LoadingSpinner';
-import ResultsCount from 'components/shared/ResultsCount/ResultsCount';
+import TableHeader from 'components/shared/TableHeader/TableHeader';
 
 import { IEventsTableProps } from './IEventsTableProps';
 import EventsTableBody from './EventsTableBody/EventsTableBody';
@@ -27,7 +27,7 @@ export class EventsTable extends React.Component<IEventsTableProps, IRootState> 
           eventNamesIsLoading={this.props.allEventNamesIsLoading}
         />
         <LoadingSpinner isLoading={this.props.eventsIsLoading} />
-        <ResultsCount resultsLength={this.props.events.length} resultsName={this.props.tableName} />
+        <TableHeader resultsLength={this.props.events.length} resultsName={this.props.tableName} />
         <table className="dashboardTable">
           <TableHead columnHeadings={this.props.columnHeadings} />
           <EventsTableBody
