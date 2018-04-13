@@ -15,6 +15,7 @@ import { IDashboardProps } from './IDashboardProps';
 import EventsTable from './EventsTable/EventsTable';
 import SubscribersTable from './SubscribersTable/SubscribersTable';
 import EventReplayForm from './EventReplayForm/EventReplayForm';
+import MuleAppStatus from './MuleAppStatus/MuleAppStatus';
 
 class Dashboard extends React.Component<
   IDashboardProps,
@@ -87,6 +88,10 @@ class Dashboard extends React.Component<
           hasErrored: this.props.eventReplayHasErrored,
           messageID: this.props.eventReplayMessageID,
         },
+      },
+      {
+        component: MuleAppStatus,
+        path: '/dashboard/muleappstatus',
       },
       {
         component: NoTableRoute,

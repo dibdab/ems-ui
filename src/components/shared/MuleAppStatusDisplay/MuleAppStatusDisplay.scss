@@ -1,0 +1,45 @@
+@import 'styles/variables.scss';
+$json-viewer-height: 600px;
+tr.accordionTableRow {
+  width: 100%;
+  &.hidden {
+    transition: height 200ms $mat-anim-curve, border-bottom-color 1ms linear 200ms;
+    border-bottom: solid 0px transparent !important;
+    height: 0;
+    td.accordionTd {
+      transition: padding-bottom 200ms $mat-anim-curve, padding-top 200ms $mat-anim-curve;
+      padding-top: 0;
+      padding-bottom: 0;
+      div:first-of-type {
+        transition: max-height 200ms $mat-anim-curve;
+        max-height: 0;
+      }
+      div.react-json-view {
+        transition: max-height 200ms $mat-anim-curve;
+        max-height: 0;
+        white-space: pre;
+      }
+    }
+  }
+  &.visible {
+    transition: height 200ms $mat-anim-curve;
+    height: $json-viewer-height;
+    td.accordionTd {
+      overflow-y: auto;
+      div.json-view-container {
+        height: $json-viewer-height;
+        transition: max-height 200ms $mat-anim-curve;
+        max-height: $json-viewer-height;
+      }
+      div.react-json-view {
+        transition: max-height 200ms $mat-anim-curve;
+        max-height: $json-viewer-height;
+        max-width: 1656px;
+        white-space: pre;
+      }
+    }
+  }
+  & td.accordionTd>div {
+    max-width: 1688px;
+  }
+}

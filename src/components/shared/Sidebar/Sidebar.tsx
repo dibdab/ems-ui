@@ -13,6 +13,7 @@ export default function Sidebar(props: ISidebarProps) {
   ];
   const tools = [
     { sidebarName: 'Replay Event', urlName: 'eventreplay' },
+    { sidebarName: 'Mule App Status', urlName: 'muleappstatus' },
   ];
   const tableList = tables.map((table, index) => (
     <NavLink

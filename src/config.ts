@@ -5,5 +5,6 @@ export default class Config {
   // tslint:disable-next-line
   public static SUBSCRIBED_EVENT_NAMES_API_URL = 'https://canecsamapm01test.azure-api.net/ems/events/distinct/subscriber';
   public static EVENT_REPLAY_API_URL = 'https://canecsamapm01test.azure-api.net/ems/event/retry';
+  public static MULE_APP_STATUS_API_URL = 'https://canecsamapm01test.azure-api.net/support/';
 
 }

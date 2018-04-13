@@ -25,6 +25,11 @@ import {
   State as EventReplayState,
 } from './eventReplay';
 
+import {
+  reducer as muleAppStatus,
+  State as MuleAppStatusState,
+} from './muleAppStatus';
+
 interface IStoreEnhancerState { }
 
 // Reducer alias and property key in IRootState need to match
@@ -34,6 +39,7 @@ export interface IRootState extends IStoreEnhancerState {
   eventNames: EventNamesState;
   sidebar: SidebarState;
   eventReplay: EventReplayState;
+  muleAppStatus: MuleAppStatusState;
 }
 
 export const rootReducer = combineReducers<IRootState>({
@@ -42,4 +48,5 @@ export const rootReducer = combineReducers<IRootState>({
   eventNames,
   sidebar,
   eventReplay,
+  muleAppStatus,
 });

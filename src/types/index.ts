@@ -8,3 +8,4 @@ export * from './IDivTable';
 export * from './ITableFilter';
 export * from './IEventNames';
 export * from './IGenericResponse';
+export * from './IMuleAppStatus';
