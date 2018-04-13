@@ -4,13 +4,16 @@ import { IMuleAppStatusDisplayProps } from './IMuleAppStatusDisplayProps';
 import './MuleAppStatusDisplay.css';
 
 export const MuleAppStatusDisplay = (props: IMuleAppStatusDisplayProps) => {
+  if (props.isLoading) {
+    return null;
+  }
   return (
     <div>
-      <div>{props.muleAppStatus.application}</div>
-      <div>{props.muleAppStatus.message}</div>
-      <div>{props.muleAppStatus.port}</div>
-      <div>{props.muleAppStatus.version}</div>
+      <strong>
+        {props.muleAppStatus.application} {props.muleAppStatus.version} is up and running on port {props.muleAppStatus.port}
+      </strong>
+      <br />
+      <small>{props.muleAppStatus.message}</small>
     </div>
   );
 };
-

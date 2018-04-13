@@ -17,7 +17,7 @@ export class MuleAppStatus extends React.Component<IMuleAppStatusProps, IRootSta
     return (
       <React.Fragment>
         <LoadingSpinner isLoading={this.props.isLoading} />
-        <MuleAppStatusDisplay muleAppStatus={this.props.muleAppStatus} />
+        <MuleAppStatusDisplay muleAppStatus={this.props.muleAppStatus} isLoading={this.props.isLoading} />
       </React.Fragment>
     );
   }
