@@ -4,7 +4,7 @@ $doc-viwer-padding: 32px;
 .dashboard-container {
   position: fixed;
   padding: 16px $doc-viwer-padding;
-  height: calc(#{$document-view-height} - (#{$doc-viwer-padding}*2));
+  height: calc(#{$document-view-height} - (#{$doc-viwer-padding}));
   width: calc(#{$document-view-width} - (#{$doc-viwer-padding}*2));
   top: $topbar-height;
   overflow: auto;
