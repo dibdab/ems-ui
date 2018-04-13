@@ -1,0 +1,9 @@
+.eventreplay-result-message {
+    margin-top: 16px;
+    &.eventreplay-result-success {
+        color: green;
+    }
+    &.eventreplay-result-error {
+        color: red;
+    }
+}

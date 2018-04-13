@@ -6,6 +6,7 @@ import { IGenericResponse } from 'types';
 import Config from 'config';
 
 export function replayEvent(messageID: string): void {
+    store.dispatch(EventReplayActionCreators.eventReplaySetMessageID(messageID));
     setErrored(false);
     setLoading(true);
     const headers = appendAuthHeader(new Headers());

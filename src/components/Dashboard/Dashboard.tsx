@@ -81,6 +81,12 @@ class Dashboard extends React.Component<
       {
         component: EventReplayForm,
         path: '/dashboard/eventreplay',
+        routeProps: {
+          response: this.props.eventReplayResponse,
+          isLoading: this.props.eventReplayIsLoading,
+          hasErrored: this.props.eventReplayHasErrored,
+          messageID: this.props.eventReplayMessageID,
+        },
       },
       {
         component: NoTableRoute,
@@ -110,6 +116,10 @@ function NoTableRoute(): JSX.Element {
 const mapStateToProps = (state: IRootState) => {
   return {
     isSidebarOpen: state.sidebar.isOpen,
+    eventReplayResponse: state.eventReplay.eventReplayResponse,
+    eventReplayIsLoading: state.eventReplay.eventReplayIsLoading,
+    eventReplayHasErrored: state.eventReplay.eventReplayHasErrored,
+    eventReplayMessageID: state.eventReplay.eventReplayMessageID,
   };
 };
 

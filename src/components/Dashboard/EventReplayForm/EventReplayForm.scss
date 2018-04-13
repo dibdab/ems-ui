@@ -1,12 +1,13 @@
 @import 'src/styles/mixins';
 .replay-form-container {
-    width: 400px;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     & .input-container {
         display: inline-block;
     }
     & input {
+        min-width: 360px;
         width: 100%;
     }
     & button {

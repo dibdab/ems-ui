@@ -4,6 +4,7 @@ import { IGenericResponse } from 'types';
 export const EVENT_REPLAY_IS_LOADING = 'EVENT_REPLAY_IS_LOADING';
 export const EVENT_REPLAY_HAS_ERRORED = 'EVENT_REPLAY_HAS_ERRORED';
 export const EVENT_REPLAY_RESPONSE = 'EVENT_REPLAY_RESPONSE';
+export const EVENT_REPLAY_SET_MESSAGE_ID = 'EVENT_REPLAY_SET_MESSAGE_ID';
 
 // Define types for actions
 export type Actions = {
@@ -18,6 +19,10 @@ export type Actions = {
   EVENT_REPLAY_RESPONSE: {
     type: typeof EVENT_REPLAY_RESPONSE;
     payload: IGenericResponse;
+  };
+  EVENT_REPLAY_SET_MESSAGE_ID: {
+    type: typeof EVENT_REPLAY_SET_MESSAGE_ID;
+    payload: string;
   };
 };
 
@@ -39,6 +44,12 @@ export const actionCreators = {
     payload: IGenericResponse,
   ): Actions[typeof EVENT_REPLAY_RESPONSE] => ({
     type: EVENT_REPLAY_RESPONSE,
+    payload,
+  }),
+  eventReplaySetMessageID: (
+    payload: string,
+  ): Actions[typeof EVENT_REPLAY_SET_MESSAGE_ID] => ({
+    type: EVENT_REPLAY_SET_MESSAGE_ID,
     payload,
   }),
 };

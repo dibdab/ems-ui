@@ -4,6 +4,7 @@ import {
   EVENT_REPLAY_IS_LOADING,
   EVENT_REPLAY_HAS_ERRORED,
   EVENT_REPLAY_RESPONSE,
+  EVENT_REPLAY_SET_MESSAGE_ID,
 } from './';
 import { combineReducers } from 'redux';
 
@@ -12,10 +13,11 @@ export type State = Readonly<{
   eventReplayResponse: IGenericResponse;
   eventReplayIsLoading: boolean;
   eventReplayHasErrored: boolean;
+  eventReplayMessageID: string;
 }>;
 
 export const reducer = combineReducers<State>({
-  eventReplayResponse: (state: IGenericResponse = { success: true }, action) => {
+  eventReplayResponse: (state = {}, action) => {
     switch (action.type) {
       case EVENT_REPLAY_RESPONSE:
         return action.payload;
@@ -36,6 +38,15 @@ export const reducer = combineReducers<State>({
   eventReplayHasErrored: (state = false, action) => {
     switch (action.type) {
       case EVENT_REPLAY_HAS_ERRORED:
+        return action.payload;
+
+      default:
+        return state;
+    }
+  },
+  eventReplayMessageID: (state = '', action) => {
+    switch (action.type) {
+      case EVENT_REPLAY_SET_MESSAGE_ID:
         return action.payload;
 
       default:
