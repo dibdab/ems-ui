@@ -53,7 +53,8 @@
       true,
       "rxjs",
       "components",
-      "constants"
+      "constants",
+      "functions"
     ],
     "no-trailing-whitespace": true,
     "no-this-assignment": [

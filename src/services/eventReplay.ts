@@ -1,6 +1,6 @@
 import store from 'store';
 
-import { appendAuthHeader } from './serviceHelpers';
+import { appendAuthHeader } from 'functions/serviceHelpers';
 import { EventReplayActionCreators } from 'redux_';
 import { IGenericResponse } from 'types';
 import Config from 'config';

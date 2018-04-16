@@ -1,6 +1,6 @@
 import store from 'store';
 
-import { appendAuthHeader } from './serviceHelpers';
+import { appendAuthHeader } from 'functions/serviceHelpers';
 import { EventsActionCreators, SubscribersActionCreators } from 'redux_';
 import { ISubscriber, IEvent } from 'types';
 import { tableTypes } from 'enums';

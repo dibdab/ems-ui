@@ -1,6 +1,6 @@
 import store from 'store';
 
-import { appendAuthHeader, caseInsensitiveStringSort } from './serviceHelpers';
+import { appendAuthHeader, caseInsensitiveStringSort } from 'functions/serviceHelpers';
 import { EventNameActionCreators } from 'redux_';
 import { IEventNames } from 'types';
 import Config from 'config';

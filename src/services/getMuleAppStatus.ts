@@ -1,6 +1,6 @@
 import store from 'store';
 
-import { appendAuthHeader } from './serviceHelpers';
+import { appendAuthHeader } from 'functions/serviceHelpers';
 import { MuleAppStatusActionCreators } from 'redux_';
 import { IMuleAppStatus } from 'types';
 import Config from 'config';
