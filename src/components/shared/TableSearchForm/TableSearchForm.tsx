@@ -261,20 +261,6 @@ export default class TableSearchForm extends React.Component<
                             </select>
                         </div>
                         {datePicker}
-                    </div>
-                    <div className="input-container-group">
-                        <div className="input-container">
-                            <label>Filter</label>
-                            <textarea
-                                ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
-                                className={`input dashboardTable-searchForm-searchInput ${filterInvalidClass} ${heightClass}`}
-                                value={this.state.filter}
-                                onChange={this.handleSearchChange}
-                                onBlur={this.handleSearchBlur}
-                                placeholder="keyName: value, event: image_event..."
-                                title="Json string to filter on."
-                            />
-                        </div>
                         <div className="input-container">
                             <label>Result limit*</label>
                             <input
@@ -290,6 +276,21 @@ export default class TableSearchForm extends React.Component<
                                 title="No. of Results to Return."
                             />
                         </div>
+                    </div>
+                    <div className="input-container-group">
+                        <div className="input-container">
+                            <label>Filter</label>
+                            <textarea
+                                ref={textArea => { this.textArea = textArea as HTMLTextAreaElement; }}
+                                className={`input dashboardTable-searchForm-searchInput ${filterInvalidClass} ${heightClass}`}
+                                value={this.state.filter}
+                                onChange={this.handleSearchChange}
+                                onBlur={this.handleSearchBlur}
+                                placeholder="keyName: value, event: image_event..."
+                                title="Json string to filter on."
+                            />
+                        </div>
+
                         <div className="input-container">
                             <button title="Submit" className="button button-bordered elevation-2" type="submit">
                                 <i
